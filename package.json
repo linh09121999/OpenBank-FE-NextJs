@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@mui/material": "^7.3.5",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.6",
     "@vercel/analytics": "^1.6.1",
     "aos": "^2.3.4",
     "axios": "^1.13.1",
@@ -30,14 +32,14 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "babel-plugin-react-compiler": "1.0.0",
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "eslint-config-next": "16.0.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
