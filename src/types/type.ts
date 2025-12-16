@@ -217,7 +217,7 @@ export interface CorporateLocation {
     longitude: number;
 }
 
-export interface Location extends CorporateLocation {
+export interface LocationUser extends CorporateLocation {
     date: string; // ISO 8601 date string
     user: Owners;
 }
@@ -435,4 +435,18 @@ export interface Fee {
         frequency: string;
         type: string;
     };
+}
+
+export interface When {
+    frequency: string;
+    detail: string;
+}
+
+export interface LabelURL {
+    label: string;
+    URL: string
+}
+
+export interface Narrative {
+    narrative: string
 }

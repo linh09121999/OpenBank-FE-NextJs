@@ -1,4 +1,4 @@
-import { AccountHolder, AccountMetadata, AccountRouting, BespokeAttribute, Location } from "../type";
+import { AccountHolder, AccountMetadata, AccountRouting, BespokeAttribute, LocationUser } from "../type";
 
 interface CounterpartyMetadata {
     public_alias: string;
@@ -6,8 +6,8 @@ interface CounterpartyMetadata {
     url: string;
     image_url: string;
     open_corporates_url: string;
-    corporate_location: Location;
-    physical_location: Location;
+    corporate_location: LocationUser;
+    physical_location: LocationUser;
     private_alias: string;
 }
 

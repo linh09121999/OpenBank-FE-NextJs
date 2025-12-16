@@ -1,4 +1,4 @@
-import { TimeOpenClose } from "../type";
+import { CorporateLocation, TimeOpenClose } from "../type";
 
 export interface ResATMAttribute {
     bank_id: string;
@@ -21,10 +21,6 @@ interface Address {
     country_code: string;
 }
 
-interface Location {
-    latitude: number;
-    longitude: number;
-}
 
 interface Meta {
     license: {
@@ -38,7 +34,7 @@ export interface ResATM {
     bank_id: string;
     name: string;
     address: Address;
-    location: Location;
+    location: CorporateLocation;
     meta: Meta;
     monday: TimeOpenClose;
     tuesday: TimeOpenClose;

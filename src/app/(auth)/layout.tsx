@@ -34,7 +34,7 @@ export default function RootLayout({
       >
         <BackToTop />
         <Loading />
-        <img src="/footer-bg.png" alt="bg" className="absolute w-full cover z-0"/>
+        <img src="/footer-bg.png" alt="bg" className="fixed top-0 left-0 w-full h-screen object-cover -z-10"/>
         <main className="min-h-screen content-center ">
           {children}
         </main>
