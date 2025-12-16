@@ -1,4 +1,4 @@
-import { AccountAttribute, AccountBalance, AccountRouting, CreditRating, Customer, CustomerHandle, FaceImage } from "../type";
+import { AccountAttribute, AccountBalance, AccountRouting, CreditRating, Customer, CustomerHandle, CustomerMinimal, FaceImage } from "../type";
 
 export interface ResAddress {
     customer_address_id: string;
@@ -66,6 +66,10 @@ export interface ResUserCustomerLink {
     user_id: string;
     date_inserted: string; // ISO 8601 date string
     is_active: boolean;
+}
+
+export interface ResUserCustomerLinks {
+    user_customer_links: ResUserCustomerLink[]
 }
 
 export interface ResCustomerAttributeDefinition {
@@ -205,4 +209,20 @@ export interface ResCustomerBy {
     branch_id: string;
     name_suffix: string;
     customer_attributes: ResCustomerAttribute[];
+}
+
+export interface ResCustomerMinimal {
+    customers: CustomerMinimal[]
+}
+
+export interface ResCustomers {
+    customers: Customer[]
+}
+
+export interface ResCustomersForCurrent {
+    customers: ResCustomerBy[]
+}
+
+export interface ResTaxResidences {
+    tax_residence: ResTaxResidence[];
 }

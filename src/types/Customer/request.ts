@@ -20,6 +20,13 @@ export interface ReqAgent {
     currency: string;
 }
 
+export interface ReqTheIdentityData {
+    legal_name: string;
+    date_of_birth: string; // ISO 8601 date string
+    title: string;
+    name_suffix: string;
+}
+
 export interface ReqCustomer {
     legal_name: string;
     customer_number: string;
@@ -80,4 +87,26 @@ export interface ReqCustomerAttributeDefinition {
     alias: string;
     can_be_seen_on_views: string[];
     is_active: boolean;
+}
+
+export interface ReqAgentStatus {
+    is_pending_agent: boolean;
+    is_confirmed_agent: boolean
+}
+
+export interface ReqTheCreditLimit {
+    credit_limit: AccountBalance
+}
+
+export interface ReqTheCreditRatingAndSource {
+    credit_rating: string
+    credit_source: string
+}
+
+export interface ReqTheOtherData {
+    face_image: FaceImage;
+    relationship_status: string;
+    dependants: number;
+    highest_education_attained: string;
+    employment_status: string;
 }

@@ -67,6 +67,11 @@ export interface User {
     username: string;
 }
 
+export interface CustomerMinimal {
+    bank_id: string;
+    customer_id: string;
+}
+
 export interface Customer {
     bank_id: string;
     customer_id: string;
@@ -85,9 +90,9 @@ export interface Customer {
     employment_status: string;
     kyc_status: boolean;
     last_ok_date: string;
-    title: string;
-    branch_id: string;
-    name_suffix: string;
+    title?: string;
+    branch_id?: string;
+    name_suffix?: string;
 }
 
 export interface FaceImage {
@@ -264,4 +269,87 @@ export interface CustomerHandle {
     handle: string;
     date_added: string; // ISO 8601 date string
     date_activated: string; // ISO 8601 date string
+}
+
+export interface LegalName {
+    legal_name: string
+}
+
+export interface MobilePhoneNumber {
+    mobile_phone_number: string
+}
+
+export interface RelationshipType {
+    relationship_type: string
+}
+
+export interface BranchId {
+    branch_id: string
+}
+
+export interface Email {
+    email: string
+}
+
+export interface Creator {
+    name: string;
+    mobile_phone: string;
+    email_address: string;
+}
+
+export interface Invitee {
+    contact_details: Creator;
+    status: string;
+}
+
+export interface Present {
+    staff_user_id: string;
+    customer_user_id: string;
+}
+
+export interface Keys {
+    session_id: string;
+    staff_token: string;
+    customer_token: string;
+}
+
+export interface Query {
+    query: {
+        match_all: {};
+    };
+}
+
+export interface ServiceRegulated {
+    CY: string[];
+}
+
+export interface AttributeRegulated {
+    attribute_type: string;
+    name: string;
+    value: string;
+}
+
+export interface Jwt {
+    jwt: string
+}
+
+export interface JsonString {
+    jsonString: string;
+}
+
+export interface AdapterImplementation {
+    group: string;
+    suggested_order: number;
+}
+
+export interface DependentEndpoint {
+    name: string;
+    version: string;
+}
+
+export interface ScannedAPIVersion {
+    urlPrefix: string;
+    apiStandard: string;
+    apiShortVersion: string;
+    API_VERSION: string;
 }
