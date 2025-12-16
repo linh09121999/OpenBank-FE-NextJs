@@ -1,54 +1,50 @@
 import { AxiosResponse } from "axios"
 import api from "../apiOpenBankProject"
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const CreateBankLevelDynamicEndpoint = (bank_id: string): Promise<AxiosResponse> => {
+    return api.post(`/obp/v4.0.0/management/banks/${bank_id}/dynamic-endpoints`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const CreateDynamicEndpoint = (): Promise<AxiosResponse> => {
+    return api.post(`/obp/v4.0.0/management/dynamic-endpoints`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const DeleteBankLevelDynamicEndpoint = (bank_id: string, dynamic_endpoint_id: string): Promise<AxiosResponse> => {
+    return api.delete(`/obp/v4.0.0/management/banks/${bank_id}/dynamic-endpoints/${dynamic_endpoint_id}`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const DeleteDynamicEndpoint = (dynamic_endpoint_id: string): Promise<AxiosResponse> => {
+    return api.delete(`/obp/v4.0.0/management/dynamic-endpoints/${dynamic_endpoint_id}`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const DeleteMyDynamicEndpoint = (dynamic_endpoint_id: string) => {
+    return api.delete(`/obp/v4.0.0/my/dynamic-endpoints/${dynamic_endpoint_id}`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const GetBankLevelDynamicEndpoint = (bank_id: string, dynamic_endpoint_id: string): Promise<AxiosResponse> => {
+    return api.get(`/obp/v4.0.0/management/banks/${bank_id}/dynamic-endpoints/${dynamic_endpoint_id}`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const GetBankLevelDynamicEndpoints = (bank_id: string): Promise<AxiosResponse> => {
+    return api.get(`/obp/v4.0.0/management/banks/${bank_id}/dynamic-endpoints`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const GetDynamicEndpoint = (dynamic_endpoint_id: string): Promise<AxiosResponse> => {
+    return api.get(`/obp/v4.0.0/management/dynamic-endpoints/${dynamic_endpoint_id}`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const GetDynamicEndpoints = (): Promise<AxiosResponse> => {
+    return api.get(`/obp/v4.0.0/management/dynamic-endpoints`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const GetMyDynamicEndpoints = () => {
+    return api.get(`/obp/v4.0.0/my/dynamic-endpoints`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const UpdateBankLevelDynamicEndpointHost = (bank_id: string, dynamic_endpoint_id: string) => {
+    return api.put(`/obp/v4.0.0/management/banks/${bank_id}/dynamic-endpoints/${dynamic_endpoint_id}/host`)
 }
 
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
-}
-
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
+export const UpdateDynamicEndpointHost = (dynamic_endpoint_id: string) => {
+    return api.put(`/obp/v4.0.0/management/dynamic-endpoints/${dynamic_endpoint_id}/host`)
 }

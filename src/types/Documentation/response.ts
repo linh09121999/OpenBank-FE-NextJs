@@ -22,7 +22,7 @@ export interface ResGlossary {
 }
 
 interface RequiredFieldInfo {
-    [key: string]: string[];
+    'data.bankId': string[];
 }
 
 interface MessageDoc {

@@ -12,11 +12,3 @@ export const  = (): Promise<AxiosResponse> => {
 export const  = (): Promise<AxiosResponse> => {
     return api.(``)
 }
-
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
-}
-
-export const  = (): Promise<AxiosResponse> => {
-    return api.(``)
-}

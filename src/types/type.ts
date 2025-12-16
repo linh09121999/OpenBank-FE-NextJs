@@ -24,7 +24,7 @@ export interface AccountAttribute {
     name: string;
     type: 'DATE_WITH_DAY' | 'STRING' | 'NUMBER' | 'BOOLEAN' | 'CURRENCY' | string;
     value: string;
-    product_instance_code: string;
+    product_instance_code?: string;
 }
 
 export interface Owners {
@@ -135,7 +135,6 @@ export interface UserID {
 export interface Answer {
     answer: string
 }
-
 
 export interface Entitlement {
     bank_id: string;
@@ -352,4 +351,88 @@ export interface ScannedAPIVersion {
     apiStandard: string;
     apiShortVersion: string;
     API_VERSION: string;
+}
+
+export interface InfoVersion {
+    title: string;
+    version: string;
+}
+
+export interface Property {
+    type: string;
+    minLength?: number;
+    maxLength?: number;
+    example?: string[];
+    format?: string;
+}
+
+export interface Host {
+    host: string
+}
+
+export interface FooBar {
+    description: string;
+    required: string[];
+    properties: {
+        name: Property;
+        number: Property
+    }
+}
+
+export interface RequestBody {
+    'my_user_id'?: string;
+    name: string;
+    age: number;
+    hobby: string[];
+    '_optional_fields_': string[]
+}
+
+export interface Code {
+    code: string
+}
+
+export interface RequestMapping {
+    entity: string;
+    field: string;
+    query: string;
+}
+
+export interface AlphanumericCode {
+    alphanumeric_code: string
+}
+
+export interface ResponseBody {
+    code: number;
+    message: string;
+}
+
+export interface TopApi {
+    count: number;
+    Implemented_by_partial_function: string;
+    implemented_in_version: string;
+}
+
+export interface TopConsumer {
+    count: number;
+    consumer_id: string;
+    app_name: string;
+    developer_email: string;
+}
+
+export interface License {
+    id: string;
+    name: string
+}
+
+export interface Fee {
+    productFeeId: string;
+    name: string;
+    is_active: boolean;
+    more_info: string;
+    value: {
+        currency: string;
+        amount: string;
+        frequency: string;
+        type: string;
+    };
 }
