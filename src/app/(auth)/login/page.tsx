@@ -1,8 +1,31 @@
+'use client'
+
+import LiquidGlass from 'liquid-glass-react'
+import { useState } from 'react'
+
 const Login: React.FC = () => {
     return (
-        <div className="relative max-w-[600px] mx-auto w-full backdrop-blur-md bg-white/5 border border-white/10 rounded-3xl lg:p-10 md:p-5 p-3 shadow-2xl overflow-hidden
-                    before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-br before:from-emerald-500/20 before:via-transparent before:to-cyan-500/20 before:blur-2xl before:-z-10">
-
+        <div className="relative max-w-[600px] mx-auto w-full ">
+            <LiquidGlass
+                displacementScale={100}
+                blurAmount={0.1}
+                saturation={140}
+                aberrationIntensity={2}
+                elasticity={0}
+                cornerRadius={32}
+                overLight={false}
+                mode='standard'
+                style={{
+                    position: "fixed",
+                    top: "50%",
+                    left: "50%",
+                }}
+            >
+                <div className="p-6">
+                    <h2>Your content here</h2>
+                    <p>This will have the liquid glass effect</p>
+                </div>
+            </LiquidGlass>
         </div>
     )
 }
