@@ -48,6 +48,7 @@ export interface Address {
 export interface Attribute {
     name: string;
     value: string;
+    type?: string;
 }
 
 export interface RequestHeader {
@@ -70,6 +71,23 @@ export interface User {
 export interface CustomerMinimal {
     bank_id: string;
     customer_id: string;
+}
+
+export interface AccountMinimal {
+    bank_id: string;
+    account_id: string;
+}
+
+
+export interface ToSimple {
+    otherBankRoutingScheme: string;
+    otherBankRoutingAddress: string;
+    otherBranchRoutingScheme: string;
+    otherBranchRoutingAddress: string;
+    otherAccountRoutingScheme: string;
+    otherAccountRoutingAddress: string;
+    otherAccountSecondaryRoutingScheme: string;
+    otherAccountSecondaryRoutingAddress: string;
 }
 
 export interface Customer {
@@ -275,7 +293,8 @@ export interface LegalName {
 }
 
 export interface MobilePhoneNumber {
-    mobile_phone_number: string
+    mobile_phone_number: string;
+    nickname?: string;
 }
 
 export interface RelationshipType {
@@ -449,4 +468,59 @@ export interface LabelURL {
 
 export interface Narrative {
     narrative: string
+}
+
+export interface Refund {
+    transaction_id: string;
+    reason_code: string;
+}
+
+export interface Reason {
+    code: string;
+    document_number: string;
+    amount: string;
+    currency: string;
+    description: string;
+}
+
+export interface TransactionRequestTypeBank {
+    transaction_request_type: string
+}
+
+export interface TransactionRequestTypeAccount {
+    value: string;
+    charge: {
+        summary: string;
+        value: AccountBalance
+    }
+}
+
+export interface TransactionFromTo {
+    bank_id: string;
+    account_id: string;
+    counterparty_id: string;
+}
+
+export interface ResetPasswordUrl {
+    reset_password_url: string
+}
+
+export interface Link {
+    link: string
+}
+
+export interface BankIds {
+    bank_ids: string[]
+}
+
+export interface DurationTime {
+    duration_time: string
+}
+
+export interface SecretKey {
+    secret_key: string
+}
+
+export interface ID {
+    id: string
 }
