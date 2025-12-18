@@ -33,7 +33,7 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
         >
             <div className={`p-5 ${isDark ? "border-b border-white/10" : "border-b border-gray-200"}`}>
                 <div className="relative shrink-0">
-                    {isCollapsed ? <img src="../logo-2.png" alt="logo" className="h-[34px] w-[34px] mx-auto" /> : <img src={`../logofull_white.png`} alt="logo full" className="h-[34px] mx-auto" />}
+                    {isCollapsed ? <img src="../logo-2.png" alt="logo" className="h-[50px] w-[50px] mx-auto" /> : <img src={`${isDark? "../logofull_green.png":'../logofull_white.png'}`} alt="logo full" className="h-[34px] mx-auto" />}
                 </div>
             </div>
 
@@ -193,7 +193,7 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
             <button
                 onClick={onToggle}
                 className={`absolute z-99 -right-3 top-1/2 -translate-y-1/2 w-6 h-6 backdrop-blur-xl rounded-full flex items-center justify-center transition-all group ${isDark
-                    ? "bg-white/10 border border-white/20 hover:bg-white/20"
+                    ? "bg-green-950 border border-white/20 hover:bg-bg-green-950"
                     : "bg-white border border-gray-200 hover:border-green-500/30 hover:bg-gray-50 shadow-md"
                     }`}
             >

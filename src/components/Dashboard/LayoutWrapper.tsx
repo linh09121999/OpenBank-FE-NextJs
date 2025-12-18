@@ -10,14 +10,16 @@ type LayoutWrapperProps = {
 };
 
 const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
-    const { sidebarOpen, setSidbarOpen } = useStateGeneral()
-    const [activeSection, setActiveSection] = useState("overview");
-    const [isDark, setIsDark] = useState(false);
+    const {
+        sidebarOpen, setSidbarOpen,
+        activeSection, setActiveSection,
+        isDark, setIsDark
+    } = useStateGeneral()
 
     return (
         <div className={`min-h-screen relative overflow-hidden ${isDark
-            ? "bg-black/60"
-            : "bg-white/90"
+            ? "bg-black/40"
+            : "bg-white/85"
             }`}>
             <img src="../footer-bg.png" alt="bg" className="fixed top-0 left-0 w-full h-screen object-cover -z-10" />
 

@@ -25,6 +25,38 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+*.Mui-focused .MuiOutlinedInput-notchedOutline,
+*.Mui-focused .MuiPickersOutlinedInput-notchedOutline {
+  outline: none;
+  background: transparent !important;
+  box-shadow: var(--shadow-xl) !important;
+  border: 1px solid var(--color-green-500) !important
+}
+
+.MuiInputLabel-root.Mui-focused,
+.MuiInputLabel-shrink {
+  font-weight: 600 !important;
+  font-size: var(--text-xl) !important;
+  background-color: transparent !important;
+  font-family: inherit !important;
+  top: -2rem !important;
+  left: -14px !important;
+  transition: all 0.3s;
+  color: white !important;
+}
+
+*.Mui-error {
+  color: var(--color-red-500) !important;
+}
+
+*.Mui-selected {
+  color: var(--color-green-600) !important
+}
+
+*.Mui-error {
+  margin-left: 0 !important;
+}
+
 .scroll-x {
   scroll-behavior: smooth;
 }
@@ -74,4 +106,61 @@ body {
 
 .scroll-y-all::-webkit-scrollbar {
   width: 3px;
+}
+
+.css-icon:hover {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+*:disabled {
+  color: var(--color-gray-200);
+  cursor: not-allowed;
+  border-color: var(--color-gray-200);
+  box-shadow: none;
+}
+
+@keyframes fly-1 {
+    from {
+        transform: translateY(0.1em);
+    }
+
+    to {
+        transform: translateY(-0.1em);
+    }
+}
+
+.css-next:hover span {
+    animation: next-1 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes next-1 {
+    from {
+        transform: translateX(0.1em);
+    }
+
+    to {
+        transform: translateX(-0.1em);
+    }
+}
+
+@keyframes paw-1 {
+    from {
+        transform: translateX(-0.1em);
+    }
+
+    to {
+        transform: translateX(0.1em);
+    }
+}
+
+@keyframes uploading {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
 }

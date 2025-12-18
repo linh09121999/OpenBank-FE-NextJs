@@ -39,9 +39,13 @@ interface State {
     loading: boolean;
     setLoading: (isCheck: boolean) => void;
     sidebarOpen: boolean;
-    setSidbarOpen: (sidebarOpen: boolean) => void;
+    setSidbarOpen: (isCheck: boolean) => void;
     navItems: Page[];
     bottomNavItems: Page[];
+    activeSection: string;
+    setActiveSection: (section: string) => void;
+    isDark: boolean;
+    setIsDark: (isCheck: boolean) => void;
 }
 
 export const useStateGeneral = create<State>((set) => ({
@@ -186,5 +190,9 @@ export const useStateGeneral = create<State>((set) => ({
             label: 'Logout',
             icon: BiLogOut
         }
-    ]
+    ],
+    activeSection: 'overview',
+    setActiveSection: (section) => set({ activeSection: section }),
+    isDark: false,
+    setIsDark: (isCheck) => set({ isDark: isCheck })
 }))

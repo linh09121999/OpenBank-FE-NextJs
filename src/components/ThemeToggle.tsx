@@ -11,19 +11,21 @@ export function ThemeToggle({ isDark, onToggle }: ThemeToggleProps) {
     return (
         <button
             onClick={onToggle}
-            className={`relative w-16 h-8 rounded-full transition-all ${isDark
-                ? "bg-gradient-to-r from-black to-indigo-500"
-                : "bg-gradient-to-r from-green-500 to-teal-500"
-                } p-1 shadow-lg hover:shadow-xl`}
+            className={`relative w-16 h-10 rounded-full transition-all 
+                ${isDark
+                    ? "bg-white/10"
+                    : "bg-black/10"
+                } 
+                p-1 shadow-lg hover:shadow-xl`}
         >
             <motion.div
                 layout
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className={`w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center ${isDark ? "ml-auto" : "mr-auto"
+                className={`w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center ${isDark ? "ml-auto" : "mr-auto"
                     }`}
             >
                 {isDark ? (
-                    <FaRegMoon className="w-3.5 h-3.5 mx-auto text-indigo-600" />
+                    <FaRegMoon className="w-3.5 h-3.5 mx-auto text-green-800" />
                 ) : (
                     <FaRegSun className="w-3.5 h-3.5 mx-auto text-green-600" />
                 )}
