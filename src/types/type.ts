@@ -1,3 +1,5 @@
+import React, { ComponentType, JSX, SVGProps } from "react";
+
 export interface TimeOpenClose {
     opening_time: string;
     closing_time: string;
@@ -523,4 +525,12 @@ export interface SecretKey {
 
 export interface ID {
     id: string
+}
+
+export interface Page {
+    id: string;
+    label: string;
+    path?: string;
+    badge?: string | null;
+    icon: ComponentType<SVGProps<SVGSVGElement>>
 }

@@ -12,15 +12,66 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.scroll-x {
+  scroll-behavior: smooth;
+}
+
+.scroll-x::-webkit-scrollbar {
+  height: 7px;
+}
+
+.scroll-x::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.scroll-x::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255, 0.5);
+  border-radius: 3px;
+}
+
+.scroll-x::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 255, 255, 0.7);
+}
+
+.scroll-y {
+  scroll-behavior: smooth;
+}
+
+.scroll-y::-webkit-scrollbar {
+  width: 3px;
+}
+
+.scroll-y::-webkit-scrollbar-track {
+  border-radius: 3px;
+}
+
+.scroll-y::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255, 0.5);
+  border-radius: 3px;
+}
+
+.scroll-y::-webkit-scrollbar-thumb:hover {
+  background: var(--color-green-300);
+}
+
+.scroll-y-all {
+  scroll-behavior: smooth;
+}
+
+.scroll-y-all::-webkit-scrollbar {
+  width: 3px;
 }
