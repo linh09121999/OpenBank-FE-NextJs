@@ -1,6 +1,7 @@
 
 import { motion, AnimatePresence } from "motion/react";
-import { FaRegMoon, FaRegSun } from "react-icons/fa";
+import { FaRegMoon } from "react-icons/fa";
+import { LuSun } from "react-icons/lu";
 
 interface ThemeToggleProps {
     isDark: boolean;
@@ -27,7 +28,7 @@ export function ThemeToggle({ isDark, onToggle }: ThemeToggleProps) {
                 {isDark ? (
                     <FaRegMoon className="w-3.5 h-3.5 mx-auto text-green-800" />
                 ) : (
-                    <FaRegSun className="w-3.5 h-3.5 mx-auto text-green-600" />
+                    <LuSun className="w-4.5 h-4.5 mx-auto text-green-600" />
                 )}
             </motion.div>
         </button>

@@ -69,40 +69,16 @@ export const useStateGeneral = create<State>((set) => ({
             icon: AiTwotoneBank
         },
         {
-            id: 'branches',
-            label: 'Branches',
-            path: '/branches',
-            icon: PiGitBranch
-        },
-        {
-            id: 'atms',
-            label: 'ATMs',
-            path: '/atms',
-            icon: GrAtm
+            id: 'system-admin',
+            label: 'System Admin',
+            path: '/system-admin',
+            icon: GrSystem
         },
         {
             id: 'accounts',
             label: 'Accounts',
             path: '/accounts',
             icon: MdOutlineManageAccounts
-        },
-        {
-            id: 'account-access',
-            label: 'Account Access',
-            path: '/account-access',
-            icon: IoAccessibilityOutline
-        },
-        {
-            id: 'customers',
-            label: 'Customers',
-            path: '/customers',
-            icon: RiCustomerService2Line
-        },
-        {
-            id: 'cards',
-            label: 'Cards',
-            path: '/cards',
-            icon: FaRegAddressCard
         },
         {
             id: 'transactions',
@@ -117,10 +93,34 @@ export const useStateGeneral = create<State>((set) => ({
             icon: LuGitPullRequestDraft
         },
         {
-            id: 'counterparties',
-            label: 'Counterparties',
-            path: '/counterparties',
-            icon: FaUsersViewfinder
+            id: 'customers',
+            label: 'Customers',
+            path: '/customers',
+            icon: RiCustomerService2Line
+        },
+        {
+            id: 'products',
+            label: 'Products',
+            path: '/products',
+            icon: LuPackage2
+        },
+        {
+            id: 'cards',
+            label: 'Cards',
+            path: '/cards',
+            icon: FaRegAddressCard
+        },
+        {
+            id: 'atms',
+            label: 'ATMs',
+            path: '/atms',
+            icon: GrAtm
+        },
+        {
+            id: 'branches',
+            label: 'Branches',
+            path: '/branches',
+            icon: PiGitBranch
         },
         {
             id: 'consents',
@@ -129,10 +129,23 @@ export const useStateGeneral = create<State>((set) => ({
             icon: BsJournalCheck
         },
         {
-            id: 'products',
-            label: 'Products',
-            path: '/products',
-            icon: LuPackage2
+            id: 'account-access',
+            label: 'Account Access',
+            path: '/account-access',
+            icon: IoAccessibilityOutline
+        },
+        {
+            id: 'counterparties',
+            label: 'Counterparties',
+            path: '/counterparties',
+            icon: FaUsersViewfinder
+        },
+        {
+            id: 'api-collections',
+            label: 'API Collections',
+            path: '/api-collections',
+            icon: TbApi,
+            badge: 'New'
         },
         {
             id: 'users',
@@ -151,19 +164,6 @@ export const useStateGeneral = create<State>((set) => ({
             label: 'Webhooks',
             path: '/webhooks',
             icon: MdWebhook
-        },
-        {
-            id: 'api-collections',
-            label: 'API Collections',
-            path: '/api-collections',
-            icon: TbApi,
-            badge: 'New'
-        },
-        {
-            id: 'system-admin',
-            label: 'System Admin',
-            path: '/system-admin',
-            icon: GrSystem
         },
         {
             id: 'directory',

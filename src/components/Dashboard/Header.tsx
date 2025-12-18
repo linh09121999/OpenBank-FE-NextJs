@@ -92,8 +92,8 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
                 <div className="flex items-center gap-3 w-fit">
                     {/* search */}
                     <ThemeToggle isDark={isDark} onToggle={onToggle} />
-                    <button className=' css-icon text-white bg-gradient-to-r from-emerald-500/10 to-teal-500/10 w-10 h-10 rounded-full ' aria-label='setting'>
-                        <span><IoSettingsOutline className="mx-auto"/></span>
+                    <button className={`css-icon ${isDark ? 'text-white ' : 'text-green-500'} bg-gradient-to-r from-emerald-500/10 to-teal-500/10 w-10 h-10 rounded-full`} aria-label='setting'>
+                        <span><IoSettingsOutline className="mx-auto w-5 h-5" /></span>
                     </button>
                     <button className=' css-icon ' aria-label='user'>
                         <Stack direction="row" spacing={2}>
