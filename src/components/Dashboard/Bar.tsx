@@ -126,8 +126,10 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                                 <span className={`px-2 z-10 py-0.5 rounded-full text-xs shrink-0 
                                                     ${item.badge === "New"
                                                         ? isDark
-                                                            ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                                                            : "bg-white/20 text-white border border-white/30"
+                                                            ? 'bg-green-500/10 text-green-400 border border-green-500/30'
+                                                            : isActive
+                                                                ? "bg-white/20 text-white border border-white/30"
+                                                                : "bg-green-500/10 text-green-500 border border-green-500/30"
                                                         : "bg-red-500/20 text-red-400 border border-red-500/30"
                                                     }`}>
                                                     {item.badge}
