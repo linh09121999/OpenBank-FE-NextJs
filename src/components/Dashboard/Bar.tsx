@@ -33,7 +33,7 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
         >
             <div className={`p-5 ${isDark ? "border-b border-white/10" : "border-b border-gray-200"}`}>
                 <div className="relative shrink-0">
-                    {isCollapsed ? <img src="../logo-2.png" alt="logo" className="h-[50px] w-[50px] mx-auto" /> : <img src={`${isDark? "../logofull_green.png":'../logofull_white.png'}`} alt="logo full" className="h-[34px] mx-auto" />}
+                    {isCollapsed ? <img src="../logo-2.png" alt="logo" className="h-[50px] w-[50px] mx-auto" /> : <img src={`${isDark ? "../logofull_green.png" : '../logofull_white.png'}`} alt="logo full" className="h-[34px] mx-auto" />}
                 </div>
             </div>
 
@@ -54,22 +54,35 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                     router.push(`${item.path}`)
                                 }}
                                 title={`${isCollapsed ? `${item.label}` : ""}`}
-                                className={`w-full flex items-center gap-3 p-3 rounded-tr-xl rounded-br-xl transition-all group relative `}
+                                className={`w-full flex items-center gap-3 p-3 rounded-xl  transition-all group relative `}
                             >
                                 {isActive && (
                                     <motion.div
                                         layoutId="activeTab"
-                                        className={`absolute inset-0 rounded-xl ${isDark
-                                            ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10"
-                                            : "bg-gradient-to-r from-emerald-50 to-teal-50"
+                                        className={`absolute inset-0 rounded-xl 
+                                            ${isDark
+                                                ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10"
+                                                : "bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 overflow-hidden group"
                                             }`}
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
+
                                 )}
+
+                                {(isActive && !isDark) &&
+                                    <>
+                                        <div className="absolute inset-0 overflow-hidden">
+                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                        </div>
+                                        <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    </>
+                                }
 
                                 <div className={`relative shrink-0 p-2 rounded-lg transition-all 
                                 ${isActive
-                                        ? "bg-gradient-to-r from-emerald-500 to-teal-500"
+                                        ? isDark
+                                            ? "bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group"
+                                            : "bg-white/20"
                                         : isDark
                                             ? "bg-white/5 group-hover:bg-white/10"
                                             : "bg-gray-100 group-hover:bg-gray-200"
@@ -82,6 +95,14 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                             ? "text-gray-400 group-hover:text-white"
                                             : "text-gray-600 group-hover:text-gray-900"
                                         }`} />
+                                    {(isActive && isDark) &&
+                                        <>
+                                            <div className="absolute inset-0 overflow-hidden">
+                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                            </div>
+                                            <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                        </>
+                                    }
                                 </div>
 
                                 <AnimatePresence>
@@ -94,7 +115,7 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                         >
                                             <span className={`text-sm whitespace-nowrap z-10 
                                                 ${isActive
-                                                    ? isDark ? "text-white" : "text-green-600"
+                                                    ? "text-white"
                                                     : isDark
                                                         ? "text-gray-400 group-hover:text-white"
                                                         : "text-gray-600 group-hover:text-gray-800"
@@ -102,9 +123,12 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                                 {item.label}
                                             </span>
                                             {item.badge && (
-                                                <span className={`px-2 z-10 py-0.5 rounded-full text-xs shrink-0 ${item.badge === "New"
-                                                    ? isDark ? 'bg-green-500/20 text-green-400 border border-green-500/30' : "bg-green-300/10 text-green-600 border border-green-500/30"
-                                                    : "bg-red-500/20 text-red-400 border border-red-500/30"
+                                                <span className={`px-2 z-10 py-0.5 rounded-full text-xs shrink-0 
+                                                    ${item.badge === "New"
+                                                        ? isDark
+                                                            ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                                                            : "bg-white/20 text-white border border-white/30"
+                                                        : "bg-red-500/20 text-red-400 border border-red-500/30"
                                                     }`}>
                                                     {item.badge}
                                                 </span>
@@ -114,8 +138,12 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                 </AnimatePresence>
 
                                 {isCollapsed && item.badge && (
-                                    <div className={`absolute z-10 top-0 -right-1 py-0.5 px-2 ${item.badge === "New" ? "bg-green-600" : "bg-red-500"} rounded-full flex items-center justify-center`}>
-                                        <span className="text-white text-[10px]">{item.badge}</span>
+                                    <div className={`absolute z-10 top-0 -right-1 py-0.5 px-2 
+                                    ${item.badge === "New"
+                                            ? 'bg-white text-green-700 border border-green-500'
+                                            : "bg-red-500 text-white"
+                                        } rounded-full flex items-center justify-center`}>
+                                        <span className=" text-[10px]">{item.badge}</span>
                                     </div>
                                 )}
                             </motion.button>
@@ -142,16 +170,30 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                             {isActive && (
                                 <motion.div
                                     layoutId="activeTab"
-                                    className={`absolute inset-0 rounded-xl ${isDark
-                                        ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10"
-                                        : "bg-gradient-to-r from-emerald-50 to-teal-50"
+                                    className={`absolute inset-0 rounded-xl 
+                                            ${isDark
+                                            ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10"
+                                            : "bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 overflow-hidden group"
                                         }`}
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                 />
+
                             )}
+
+                            {(isActive && !isDark) &&
+                                <>
+                                    <div className="absolute inset-0 overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                    </div>
+                                    <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                </>
+                            }
+
                             <div className={`relative shrink-0 p-2 rounded-lg transition-all 
                                 ${isActive
-                                    ? "bg-gradient-to-r from-emerald-500 to-teal-500"
+                                    ? isDark
+                                        ? "bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group"
+                                        : "bg-white/20"
                                     : isDark
                                         ? "bg-white/5 group-hover:bg-white/10"
                                         : "bg-gray-100 group-hover:bg-gray-200"
@@ -164,6 +206,14 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                         ? "text-gray-400 group-hover:text-white"
                                         : "text-gray-600 group-hover:text-gray-900"
                                     }`} />
+                                {(isActive && isDark) &&
+                                    <>
+                                        <div className="absolute inset-0 overflow-hidden">
+                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                        </div>
+                                        <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    </>
+                                }
                             </div>
                             <AnimatePresence>
                                 {!isCollapsed && (
@@ -175,7 +225,7 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                     >
                                         <span className={`text-sm whitespace-nowrap z-10 
                                                 ${isActive
-                                                ? isDark ? "text-white" : "text-green-600"
+                                                ? "text-white"
                                                 : isDark
                                                     ? "text-gray-400 group-hover:text-white"
                                                     : "text-gray-600 group-hover:text-gray-800"
