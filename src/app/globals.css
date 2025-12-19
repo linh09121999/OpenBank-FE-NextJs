@@ -120,47 +120,57 @@ body {
 }
 
 @keyframes fly-1 {
-    from {
-        transform: translateY(0.1em);
-    }
+  from {
+    transform: translateY(0.1em);
+  }
 
-    to {
-        transform: translateY(-0.1em);
-    }
+  to {
+    transform: translateY(-0.1em);
+  }
 }
 
 .css-next:hover span {
-    animation: next-1 0.6s ease-in-out infinite alternate;
+  animation: next-1 0.6s ease-in-out infinite alternate;
 }
 
 @keyframes next-1 {
-    from {
-        transform: translateX(0.1em);
-    }
+  from {
+    transform: translateX(0.1em);
+  }
 
-    to {
-        transform: translateX(-0.1em);
-    }
+  to {
+    transform: translateX(-0.1em);
+  }
 }
 
 @keyframes paw-1 {
-    from {
-        transform: translateX(-0.1em);
-    }
+  from {
+    transform: translateX(-0.1em);
+  }
 
-    to {
-        transform: translateX(0.1em);
-    }
+  to {
+    transform: translateX(0.1em);
+  }
 }
 
 @keyframes uploading {
 
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
 
-    50% {
-        transform: translateY(-3px);
-    }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #24332d inset !important;
+  -webkit-text-fill-color: var(--color-green-500) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
