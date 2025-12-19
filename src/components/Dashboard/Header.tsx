@@ -8,6 +8,7 @@ import { Avatar, Badge, Stack, styled } from "@mui/material";
 import { FaRegUser } from "react-icons/fa6";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { IoSettingsOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
     isDark: boolean;
@@ -46,6 +47,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
+    const router = useRouter()
+
     const sxAvata: SxProps<Theme> = {
         width: "100%",
         height: "100%",
@@ -95,7 +98,11 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
                     <button className={`css-icon ${isDark ? 'text-white ' : 'text-green-500'} bg-gradient-to-r from-emerald-500/10 to-teal-500/10 w-10 h-10 rounded-full`} aria-label='setting'>
                         <span><IoSettingsOutline className="mx-auto w-5 h-5" /></span>
                     </button>
-                    <button className=' css-icon ' aria-label='user'>
+                    <button className=' css-icon ' aria-label='user'
+                        onClick={() => {
+                            router.push('/login')
+                        }}
+                    >
                         <Stack direction="row" spacing={2}>
                             <StyledBadge
                                 overlap="circular"

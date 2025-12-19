@@ -30,12 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable}  overflow-hidden antialiased flex flex-col w-full h-full `}
+        className={`${geistSans.variable} ${geistMono.variable} relative overflow-hidden antialiased flex flex-col w-full h-full `}
       >
         <BackToTop />
         <Loading />
-        <img src="/footer-bg.png" alt="bg" className="fixed top-0 left-0 w-full h-screen object-cover -z-10"/>
-        <main className="min-h-screen content-center ">
+        <main className="min-h-screen content-center relative bg-black/30">
           {children}
         </main>
       </body>
