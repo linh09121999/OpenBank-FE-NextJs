@@ -1,5 +1,6 @@
 'use client'
 
+import { LoginDirect } from '@/services/OAuth/service';
 import { CreateUser } from '@/services/User/service';
 import { useStateGeneral } from '@/zustand/useStateGeneral'
 import { InputAdornment, TextField } from '@mui/material'
@@ -46,7 +47,7 @@ const Login: React.FC = () => {
 
     const [routerRegister, setRouterRegister] = useState<boolean>(false)
 
-    const { loading } = useStateGeneral()
+    const { loading, setLoading } = useStateGeneral()
 
     // login
     const [errorLoginStatus, setErrorLoginStatus] = useState<string>('')
@@ -84,6 +85,18 @@ const Login: React.FC = () => {
         e.preventDefault();
         if (!validateFieldsLogin()) {
             return;
+        }
+
+        const consumerKey = process.env.NEXT_PUBLIC_CUNSUMER_KEY ?? ""
+
+        try {
+            setLoading(true)
+            const res = await LoginDirect(login.username, login.password, consumerKey)
+            console.log(res)
+        } catch (error) {
+
+        } finally {
+            setLoading(false)
         }
     }
 

@@ -40,7 +40,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
                         isDark={isDark}
                         onToggle={() => setIsDark(!isDark)}
                     />
-                    <main className="min-h-[78vh] content-center ">
+                    <main className="min-h-[78vh]  p-5">
                         {children}
                     </main>
                     <Footer isDark={isDark} />

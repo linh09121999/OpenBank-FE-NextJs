@@ -35,7 +35,7 @@ const Home: React.FC = () => {
       setLoading(true)
       const res = await GetPublicAccountsAtAllBanks()
       const dataAccount = res.data.accounts
-      setTotalBank(dataAccount.length)
+      setTotalAccounts(dataAccount.length)
     } catch (error: any) {
 
     }
@@ -52,9 +52,18 @@ const Home: React.FC = () => {
   }, [])
 
   return (
-    <div className="">
+    <>
+      <div className="grid md:grid-cols-4 gap-5">
+        <div className="bg-white md:col-span-1 md:col-start-1 p-5 rounded-xl shadow-lg">
+          Banks {totalBanks}
+        </div>
+        <div className="bg-white md:col-span-1 md:col-start-2 p-5 rounded-xl shadow-lg">
+          Accounts {totalAccounts}
+        </div>
+        <div className="bg-white md:col-span-2 md:col-start-3 p-5 rounded-xl shadow-lg"></div>
 
-    </div>
+      </div>
+    </>
   );
 }
 
