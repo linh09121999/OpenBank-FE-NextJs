@@ -18,11 +18,20 @@ export function ThemeToggle({ isDark, onToggle }: ThemeToggleProps) {
             <motion.div
                 layout
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className={`w-8 h-8 rounded-full  shadow-md flex items-center justify-center ${isDark ? "ml-auto border border-white/10 bg-white/10" : "mr-auto bg-white"
+                className={`w-8 h-8 rounded-full  shadow-md flex items-center justify-center 
+                    ${isDark
+                        ? "ml-auto bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group "
+                        : "mr-auto bg-white"
                     }`}
             >
                 {isDark ? (
-                    <FaRegMoon className="w-3.5 h-3.5 mx-auto text-white" />
+                    <>
+                        <FaRegMoon className="w-3.5 h-3.5 text-white" />
+                        <div className="absolute inset-0 overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                        </div>
+                        <div className="absolute inset-0 rounded-full border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </>
                 ) : (
                     <LuSun className="w-4.5 h-4.5 mx-auto text-green-600" />
                 )}

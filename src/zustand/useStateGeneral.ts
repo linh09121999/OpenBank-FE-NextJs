@@ -58,7 +58,6 @@ export const useStateGeneral = create<State>((set) => ({
             id: "overview",
             label: 'Dashboard',
             path: '/',
-            badge: null,
             icon: MdOutlineDashboard
         },
         {
@@ -72,6 +71,7 @@ export const useStateGeneral = create<State>((set) => ({
             id: 'system-admin',
             label: 'System Admin',
             path: '/system-admin',
+            // badge: "1",
             icon: GrSystem
         },
         {

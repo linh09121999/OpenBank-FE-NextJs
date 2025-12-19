@@ -1,6 +1,7 @@
 'use client'
 
 import { useStateGeneral } from "@/zustand/useStateGeneral"
+import { Badge } from "@mui/material";
 import LiquidGlass from "liquid-glass-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
@@ -54,39 +55,48 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                     router.push(`${item.path}`)
                                 }}
                                 title={`${isCollapsed ? `${item.label}` : ""}`}
-                                className={`w-full flex items-center gap-3 p-3 rounded-xl  transition-all group relative `}
+                                className={`w-full flex items-center gap-3 ${isCollapsed ? "py-1.5" : "p-3"} rounded-xl  transition-all group relative `}
                             >
-                                {isActive && (
+                                {isActive &&
                                     <motion.div
                                         layoutId="activeTab"
                                         className={`absolute inset-0 rounded-xl 
-                                            ${isDark
-                                                ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10"
-                                                : "bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 overflow-hidden group"
+                                            ${isCollapsed
+                                                ? "hidden"
+                                                : isDark
+                                                    ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10"
+                                                    : "bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 overflow-hidden group"
                                             }`}
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
+                                }
 
-                                )}
-
-                                {(isActive && !isDark) &&
+                                {(isActive && !isCollapsed) &&
                                     <>
-                                        <div className="absolute inset-0 overflow-hidden">
+                                        <div className="absolute inset-0 overflow-hidden rounded-xl">
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                         </div>
-                                        <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                        <div className="absolute inset-0 rounded-xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     </>
                                 }
 
-                                <div className={`relative shrink-0 p-2 rounded-lg transition-all 
-                                ${isActive
-                                        ? isDark
-                                            ? "bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group"
-                                            : "bg-white/20"
-                                        : isDark
-                                            ? "bg-white/5 group-hover:bg-white/10"
-                                            : "bg-gray-100 group-hover:bg-gray-200"
-                                    }`}
+                                <div className={`relative shrink-0 rounded-lg transition-all 
+                                ${isCollapsed
+                                        ? isActive
+                                            ? "text-2xl mx-auto p-3 bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group"
+                                            : isDark
+                                                ? "text-2xl mx-auto p-3 bg-white/5 group-hover:bg-white/10"
+                                                : "text-2xl mx-auto p-3 bg-gray-100 group-hover:bg-gray-200"
+                                        : isActive
+                                            ? isDark
+                                                ? "p-2 bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group"
+                                                : 'p-2 bg-white/20 '
+                                            : isDark
+                                                ? "p-2 bg-white/5 group-hover:bg-white/10"
+                                                : "p-2 bg-gray-100 group-hover:bg-gray-200"
+
+                                    }
+                                    `}
 
                                 >
                                     <Icon className={` ${isActive
@@ -130,7 +140,11 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                                             : isActive
                                                                 ? "bg-white/20 text-white border border-white/30"
                                                                 : "bg-green-500/10 text-green-500 border border-green-500/30"
-                                                        : "bg-red-500/20 text-red-400 border border-red-500/30"
+                                                        : isDark
+                                                            ? 'bg-red-500/10 text-red-400 border border-red-500/30'
+                                                            : isActive
+                                                                ? "bg-white/20 text-white border border-white/30"
+                                                                : "bg-red-500/10 text-red-500 border border-red-500/30"
                                                     }`}>
                                                     {item.badge}
                                                 </span>
@@ -140,12 +154,16 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                 </AnimatePresence>
 
                                 {isCollapsed && item.badge && (
-                                    <div className={`absolute z-10 top-0 -right-1 py-0.5 px-2 
+                                    <div className={`absolute z-10 -top-1 -right-1 w-6 h-6 rounded-full backdrop-blur-md
                                     ${item.badge === "New"
-                                            ? 'bg-white text-green-700 border border-green-500'
-                                            : "bg-red-500 text-white"
+                                            ? isDark
+                                                ? "bg-white/90 text-green-950 border border-green-500 font-bold"
+                                                : "bg-white text-green-700 border border-green-500"
+                                            : isDark
+                                                ? "bg-white/90 text-red-500 border border-red-500 font-bold"
+                                                : "bg-white text-red-700 border border-red-500"
                                         } rounded-full flex items-center justify-center`}>
-                                        <span className=" text-[10px]">{item.badge}</span>
+                                        <span className="text-center text-sm">{item.badge.charAt(0).toUpperCase()}</span>
                                     </div>
                                 )}
                             </motion.button>
@@ -167,39 +185,48 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                 router.push(`${item.path}`)
                             }}
                             title={`${isCollapsed ? `${item.label}` : ""}`}
-                            className={`w-full flex items-center gap-3 p-3 rounded-tr-xl rounded-br-xl transition-all group relative `}
+                            className={`w-full flex items-center gap-3 ${isCollapsed ? "py-1.5" : "p-3"} rounded-xl  transition-all group relative `}
                         >
-                            {isActive && (
+                            {isActive &&
                                 <motion.div
                                     layoutId="activeTab"
                                     className={`absolute inset-0 rounded-xl 
-                                            ${isDark
-                                            ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10"
-                                            : "bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 overflow-hidden group"
+                                            ${isCollapsed
+                                            ? "hidden"
+                                            : isDark
+                                                ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10"
+                                                : "bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 overflow-hidden group"
                                         }`}
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                 />
+                            }
 
-                            )}
-
-                            {(isActive && !isDark) &&
+                            {(isActive && !isCollapsed) &&
                                 <>
-                                    <div className="absolute inset-0 overflow-hidden">
+                                    <div className="absolute inset-0 overflow-hidden rounded-xl">
                                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                     </div>
-                                    <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="absolute inset-0 rounded-xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </>
                             }
 
-                            <div className={`relative shrink-0 p-2 rounded-lg transition-all 
-                                ${isActive
-                                    ? isDark
-                                        ? "bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group"
-                                        : "bg-white/20"
-                                    : isDark
-                                        ? "bg-white/5 group-hover:bg-white/10"
-                                        : "bg-gray-100 group-hover:bg-gray-200"
-                                }`}
+                            <div className={`relative shrink-0 rounded-lg transition-all 
+                                ${isCollapsed
+                                    ? isActive
+                                        ? "text-2xl mx-auto p-3 bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group"
+                                        : isDark
+                                            ? "text-2xl mx-auto p-3 bg-white/5 group-hover:bg-white/10"
+                                            : "text-2xl mx-auto p-3 bg-gray-100 group-hover:bg-gray-200"
+                                    : isActive
+                                        ? isDark
+                                            ? "p-2 bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group"
+                                            : 'p-2 bg-white/20 '
+                                        : isDark
+                                            ? "p-2 bg-white/5 group-hover:bg-white/10"
+                                            : "p-2 bg-gray-100 group-hover:bg-gray-200"
+
+                                }
+                                    `}
 
                             >
                                 <Icon className={` ${isActive
