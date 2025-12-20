@@ -193,6 +193,6 @@ export const useStateGeneral = create<State>((set) => ({
     ],
     activeSection: 'overview',
     setActiveSection: (section) => set({ activeSection: section }),
-    isDark: false,
+    isDark: true,
     setIsDark: (isCheck) => set({ isDark: isCheck })
 }))

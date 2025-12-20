@@ -7,6 +7,8 @@ import { InputAdornment, TextField } from '@mui/material'
 import type { SxProps, Theme } from "@mui/material/styles";
 import LiquidGlass from 'liquid-glass-react';
 import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from "motion/react";
+
 import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash, FaRegUser } from 'react-icons/fa';
 import { MdOutlineEmail, MdOutlineErrorOutline, MdOutlineLock } from 'react-icons/md'
@@ -92,9 +94,30 @@ const Login: React.FC = () => {
         try {
             setLoading(true)
             const res = await LoginDirect(login.username, login.password, consumerKey)
-            console.log(res)
-        } catch (error) {
+            setErrorLoginStatus("")
+            localStorage.setItem('token', res.data.token)
 
+            const previousPage = document.referrer;
+
+            let previousPath = "/";
+
+            if (previousPage && previousPage.startsWith("http")) {
+                try {
+                    const referrerUrl = new URL(previousPage);
+                    previousPath = referrerUrl.pathname;
+                } catch (e) {
+                    previousPath = "/";
+                }
+            }
+            if (previousPath === '/login' || previousPath === '/') {
+                rounter.push('/');
+            } else if (window.history.length > 1) {
+                rounter.back();
+            } else {
+                rounter.push('/');
+            }
+        } catch (error: any) {
+            setErrorLoginStatus(error.response.data.message)
         } finally {
             setLoading(false)
         }
@@ -189,8 +212,8 @@ const Login: React.FC = () => {
                                     <p className="text-center text-gray-400 text-lg">Login to continue the experience</p>
                                 </div>
                                 {errorLoginStatus &&
-                                    <div className="p-4 text-center bg-red-50/80 flex flex-col backdrop-blur-sm border border-red-200 rounded-xl gap-1 text-red-600">
-                                        <MdOutlineErrorOutline className="mx-auto" size={21} />{errorLoginStatus}</div>
+                                    <motion.div className="p-4 w-full bg-red-500 text-center bg-red-50/80 flex flex-col backdrop-blur-sm rounded-xl gap-1 text-white">
+                                        <MdOutlineErrorOutline className="mx-auto" size={21} />{errorLoginStatus}</motion.div>
                                 }
                                 <form
                                     onSubmit={handleSubmitLogout}
@@ -307,8 +330,8 @@ const Login: React.FC = () => {
                                     Create Your Account
                                 </h2>
                                 {errorRegisterStatus &&
-                                    <div className="p-4 text-center bg-red-50/80 flex flex-col backdrop-blur-sm border border-red-200 rounded-xl gap-1 text-red-600">
-                                        <MdOutlineErrorOutline className="mx-auto" size={21} />{errorRegisterStatus}</div>
+                                    <motion.div className="p-4 text-center bg-red-50/80 flex flex-col backdrop-blur-sm border border-red-200 rounded-xl gap-1 text-red-600">
+                                        <MdOutlineErrorOutline className="mx-auto" size={21} />{errorRegisterStatus}</motion.div>
                                 }
                                 <form
                                     onSubmit={handleSubmitRegister}

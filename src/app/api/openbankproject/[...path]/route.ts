@@ -18,11 +18,11 @@ export async function GET(req: NextRequest, context: { params: any }) {
     const fullUrl = search ? `${url}?${search}` : url;
 
     try {
-        // const orderToken = req.headers.get("x-spree-order-token");
+        const authHeader = req.headers.get("authorization");
         const response = await axios.get(fullUrl, {
             headers: {
                 "Content-Type": "application/json",
-                // ...(orderToken ? { "X-Spree-Order-Token": orderToken } : {}),
+                ...(authHeader ? { "Authorization": authHeader } : {}),
             },
         });
 
@@ -44,12 +44,20 @@ export async function POST(req: NextRequest, context: { params: any }) {
     const fullUrl = search ? `${url}?${search}` : url;
 
     try {
-        const body = await req.json(); // lấy body JSON
-        // const orderToken = req.headers.get("x-spree-order-token");
+        let body: any = {};
+        const contentType = req.headers.get("content-type");
+        if (contentType?.includes("application/json")) {
+            try {
+                body = await req.json();
+            } catch (e) {
+                body = {};
+            }
+        }
+        const authHeader = req.headers.get("authorization");
         const response = await axios.post(fullUrl, body, {
             headers: {
                 "Content-Type": "application/json",
-                // ...(orderToken ? { "X-Spree-Order-Token": orderToken } : {}),
+                ...(authHeader ? { "Authorization": authHeader } : {}),
             },
         });
         return NextResponse.json(response.data);
@@ -69,12 +77,11 @@ export async function DELETE(req: NextRequest, context: { params: any }) {
     const search = req.nextUrl.searchParams.toString();
     const fullUrl = search ? `${url}?${search}` : url
     try {
-        // const orderToken = req.headers.get("x-spree-order-token");
-
+        const authHeader = req.headers.get("authorization");
         const response = await axios.delete(fullUrl, {
             headers: {
                 "Content-Type": "application/json",
-                // ...(orderToken ? { "X-Spree-Order-Token": orderToken } : {}),
+                ...(authHeader ? { "Authorization": authHeader } : {}),
             },
         });
 
@@ -88,20 +95,27 @@ export async function DELETE(req: NextRequest, context: { params: any }) {
     }
 }
 
-export async function PATCH(req: NextRequest, context: { params: any }) {
+export async function PUT(req: NextRequest, context: { params: any }) {
     const params = await context.params;
     const pathArray: string[] = Array.isArray(params.path) ? params.path : [];
     const url = `${API_BASE}/${pathArray.join("/")}`;
     const search = req.nextUrl.searchParams.toString();
     const fullUrl = search ? `${url}?${search}` : url
     try {
-        const body = await req.json();
-        // const orderToken = req.headers.get("x-spree-order-token");
-
-        const response = await axios.patch(fullUrl, body, {
+        let body: any = {};
+        const contentType = req.headers.get("content-type");
+        if (contentType?.includes("application/json")) {
+            try {
+                body = await req.json();
+            } catch (e) {
+                body = {};
+            }
+        }
+        const authHeader = req.headers.get("authorization");
+        const response = await axios.put(fullUrl, body, {
             headers: {
-                "Content-Type": "application/vnd.api+json",
-                // ...(orderToken ? { "X-Spree-Order-Token": orderToken } : {}),
+                "Content-Type": "application/json",
+                ...(authHeader ? { "Authorization": authHeader } : {}),
             },
         });
 

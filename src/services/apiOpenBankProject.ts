@@ -10,13 +10,13 @@ const api: AxiosInstance = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    // const orderToken = localStorage.getItem("order_token");
+    const orderToken = localStorage.getItem("order_token");
     // if (orderToken) {
     //   config.headers["X-Spree-Order-Token"] = orderToken;
     // }
 
     if (config.method?.toLowerCase() === "post") {
-      config.headers["Content-Type"] = "application/vnd.api+json";
+      config.headers["Content-Type"] = "application/json";
     }
     return config;
   },
