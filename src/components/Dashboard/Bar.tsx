@@ -1,5 +1,6 @@
 'use client'
 
+import { useAuth } from "@/contexts/AuthContext";
 import { useStateGeneral } from "@/zustand/useStateGeneral"
 import { Badge } from "@mui/material";
 import LiquidGlass from "liquid-glass-react";
@@ -19,6 +20,8 @@ interface SidebarProps {
 const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onSectionChange, isDark }) => {
     const router = useRouter()
     const { navItems, bottomNavItems } = useStateGeneral()
+
+    const { handleLogOut } = useAuth()
 
     return (
         <motion.aside
@@ -181,8 +184,13 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                         <button
                             key={item.id}
                             onClick={() => {
-                                onSectionChange(item.id)
-                                router.push(`${item.path}`)
+                                if (item.id === 'logout') {
+                                    handleLogOut()
+                                    router.push('/login')
+                                } else {
+                                    onSectionChange(item.id)
+                                    router.push(`${item.path}`)
+                                }
                             }}
                             title={`${isCollapsed ? `${item.label}` : ""}`}
                             className={`w-full flex items-center gap-3 ${isCollapsed ? "py-1.5" : "p-3"} rounded-xl  transition-all group relative `}

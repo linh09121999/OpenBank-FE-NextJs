@@ -36,7 +36,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         localStorage.removeItem('token')
         localStorage.removeItem('tokenExpiration')
         clearLogoutTimer()
-        window.location.reload();
     }, [])
 
     const handleLogin = useCallback((token: string) => {
