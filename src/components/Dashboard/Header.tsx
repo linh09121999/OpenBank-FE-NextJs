@@ -90,10 +90,16 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
         },
     }
 
-    const { activeSection, navItems, setLoading } = useStateGeneral()
+    const { activeSection, navItems, bottomNavItems, setLoading } = useStateGeneral()
 
     const titleNav = useMemo(() => {
         return navItems.filter((r) =>
+            r.id.includes(activeSection)
+        )
+    }, [activeSection])
+
+    const titleBottomNav = useMemo(() => {
+        return bottomNavItems.filter((r) =>
             r.id.includes(activeSection)
         )
     }, [activeSection])
@@ -139,7 +145,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
         `}>
             <div className="p-5 w-full flex items-center justify-between gap-5">
                 <div>
-                    {titleNav.map((item, index) => {
+                    {[...titleNav, ...titleBottomNav].map((item, index) => {
                         const Icon = item.icon;
                         return (
                             <div className="flex items-center gap-4" key={index}>

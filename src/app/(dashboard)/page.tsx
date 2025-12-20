@@ -131,6 +131,8 @@ const Home: React.FC = () => {
     }
   }
 
+  // Get cards for the current user
+
   useEffect(() => {
     setActiveSection("overview")
     getBanks()
