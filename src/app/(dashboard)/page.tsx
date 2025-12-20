@@ -53,7 +53,7 @@ const Home: React.FC = () => {
       setLoading(true)
       const res = await GetPublicAccountsAtAllBanks()
       const dataAccount = res.data.accounts
-      // setTotalAccounts(dataAccount.length)
+      setTotalAccounts(dataAccount.length)
     } catch (error: any) {
 
     }
@@ -62,27 +62,44 @@ const Home: React.FC = () => {
     }
   }
 
+  // Get My Consents
+  // Get My Consents Info
+  // Get Consumers (logged in User)
+  // Get Customers for Current User ?? Get Customers for Current User (IDs only) ?? Get My Customers
+
   const { isAuthenticated } = useAuth()
 
   useEffect(() => {
     setActiveSection("overview")
     getBanks()
-    // getAccountAllBankPublic()
+    getAccountAllBankPublic()
     getAccountAllBankPrivate()
   }, [])
 
   return (
     <>
       <div className="grid md:grid-cols-4 gap-5">
-        <div className="bg-white md:col-span-1 md:col-start-1 p-5 rounded-xl shadow-lg">
+        <div className={` md:col-span-1 md:col-start-1 p-5 rounded-xl shadow-lg backdrop-blur-xl
+            ${isDark
+              ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+              : "bg-white/90"
+            }`}>
           Banks {totalBanks}
         </div>
-        <div className="bg-white md:col-span-1 md:col-start-2 p-5 rounded-xl shadow-lg">
+        <div className={`md:col-span-1 md:col-start-2 p-5 rounded-xl shadow-lg backdrop-blur-xl
+          ${isDark
+            ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+            : "bg-white/90"
+          }`}>
           Accounts {totalAccounts}
         </div>
-        <div className="bg-white md:col-span-2 md:col-start-3 p-5 rounded-xl shadow-lg"></div>
+        <div className={`md:col-span-2 md:col-start-3 p-5 rounded-xl shadow-lg backdrop-blur-xl
+          ${isDark
+            ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+            : "bg-white/90"
+          }`}></div>
 
-      </div>
+      </div >
     </>
   );
 }
