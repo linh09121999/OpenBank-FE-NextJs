@@ -10,13 +10,12 @@ import {
     IoAccessibilityOutline
 } from "react-icons/io5";
 import { BiLogOut } from "react-icons/bi";
-import { AiTwotoneBank } from "react-icons/ai";
 import { PiGitBranch } from "react-icons/pi";
 import {
     GrAtm,
     GrSystem
 } from "react-icons/gr";
-import { RiCustomerService2Line } from "react-icons/ri";
+import { RiBankLine, RiCustomerService2Line } from "react-icons/ri";
 import {
     FaRegAddressCard,
     // FaRegUser
@@ -65,7 +64,7 @@ export const useStateGeneral = create<State>((set) => ({
             label: 'Banks Management',
             path: '/banks',
             badge: 'New',
-            icon: AiTwotoneBank
+            icon: RiBankLine
         },
         {
             id: 'system-admin',

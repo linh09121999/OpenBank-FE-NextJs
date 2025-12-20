@@ -7,6 +7,7 @@ import { GetAccountsatallBanks_private } from "@/services/Account/service";
 import { GetBanks } from "@/services/BankAccountTag1/service";
 import { GetMyConsents, GetMyConsentsInfo } from "@/services/Consent/service";
 import { GetConsumers_LoggedInUser } from "@/services/Consumer/service";
+import { GetCustomersForCurrentUser, GetCustomersForCurrentUser_IDsOnly, GetMyCustomers } from "@/services/Customer/service";
 import { useStateGeneral } from "@/zustand/useStateGeneral";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -14,6 +15,7 @@ import { useEffect, useState } from "react";
 import { AiTwotoneBank } from "react-icons/ai";
 import { BsCart2, BsJournalCheck } from "react-icons/bs";
 import { MdOutlineManageAccounts, MdOutlineShoppingCart } from "react-icons/md";
+import { RiBankLine, RiCustomerService2Line } from "react-icons/ri";
 
 const Home: React.FC = () => {
   const router = useRouter()
@@ -27,7 +29,8 @@ const Home: React.FC = () => {
     accountPrivate: 0,
     accountPublic: 0,
     consents: 0,
-    cunsumers: 0
+    cunsumers: 0,
+    customers: 0
   })
 
   const getBanks = async () => {
@@ -111,8 +114,22 @@ const Home: React.FC = () => {
       setLoading(false)
     }
   }
-  // Get Customers for Current User ?? Get Customers for Current User (IDs only) ?? Get My Customers
 
+  const getCustomersForCurrentUser = async () => {
+    try {
+      setLoading(true)
+      const res = await GetCustomersForCurrentUser()
+      setTotal(prev => ({
+        ...prev,
+        customers: res.data.customers.length
+      }))
+    } catch (error: any) {
+
+    }
+    finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     setActiveSection("overview")
@@ -121,16 +138,18 @@ const Home: React.FC = () => {
     getAccountAllBankPrivate()
     getMyConsents()
     getConsumers_LoggedInUser()
+    getCustomersForCurrentUser()
   }, [])
 
   return (
     <>
-      <div className="grid md:grid-cols-4 gap-5">
+      <div className="grid md:grid-cols-5 gap-5">
         {[
-          { total: total.banks, label: "Total Banks", icon: AiTwotoneBank },
+          { total: total.banks, label: "Total Banks", icon: RiBankLine },
           { total: (total.accountPrivate + total.accountPublic), label: "Total Account", icon: MdOutlineManageAccounts },
           { total: total.consents, label: "Total Consent", icon: BsJournalCheck },
-          { total: total.cunsumers, label: "Total Cunsumers", icon: MdOutlineShoppingCart }
+          { total: total.cunsumers, label: "Total Cunsumers", icon: MdOutlineShoppingCart },
+          { total: total.customers, label: "Total Customers", icon: RiCustomerService2Line }
         ].map(({ total, label, icon }, index) => {
           const Icon = icon
           return (
@@ -149,7 +168,7 @@ const Home: React.FC = () => {
                 </div>
               </div>
               <div className={``}>
-                <div className="justify-start text-slate-400 text-base font-normal ">{label}</div>
+                <div className={`justify-start text-base font-normal ${isDark ? "text-gray-400 " : "text-gray-600"}`}>{label}</div>
                 <div className={`justify-start  text-2xl font-semibold
               ${isDark ? "" : "text-neutral-800"}
               `}>{total}</div>
