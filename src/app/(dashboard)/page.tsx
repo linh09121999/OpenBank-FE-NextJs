@@ -3,6 +3,7 @@
 
 import { useAuth } from "@/contexts/AuthContext";
 import { GetPublicAccountsAtAllBanks } from "@/services/Account-Public/service";
+import { GetAccountsatallBanks_private } from "@/services/Account/service";
 import { GetBanks } from "@/services/BankAccountTag1/service";
 import { useStateGeneral } from "@/zustand/useStateGeneral";
 import Image from "next/image";
@@ -33,12 +34,26 @@ const Home: React.FC = () => {
     }
   }
 
+  const getAccountAllBankPrivate = async () => {
+    try {
+      setLoading(true)
+      const res = await GetAccountsatallBanks_private()
+      const dataAccount = res.data.accounts
+      setTotalAccounts(dataAccount.length)
+    } catch (error: any) {
+
+    }
+    finally {
+      setLoading(false)
+    }
+  }
+
   const getAccountAllBankPublic = async () => {
     try {
       setLoading(true)
       const res = await GetPublicAccountsAtAllBanks()
       const dataAccount = res.data.accounts
-      setTotalAccounts(dataAccount.length)
+      // setTotalAccounts(dataAccount.length)
     } catch (error: any) {
 
     }
@@ -52,7 +67,8 @@ const Home: React.FC = () => {
   useEffect(() => {
     setActiveSection("overview")
     getBanks()
-    getAccountAllBankPublic()
+    // getAccountAllBankPublic()
+    getAccountAllBankPrivate()
   }, [])
 
   return (

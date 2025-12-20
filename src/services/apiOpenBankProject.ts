@@ -10,13 +10,12 @@ const api: AxiosInstance = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    // const token = localStorage.getItem("token");
-    // if (token) {
-    //   config.headers["Authorization"] = token;
-    // }
-
+    const token = localStorage.getItem('token')
     if (config.method?.toLowerCase() === "post") {
       config.headers["Content-Type"] = "application/json";
+    }
+    if (token) {
+      config.headers["Authorization"] = `DirectLogin token=${token}`;
     }
     return config;
   },
