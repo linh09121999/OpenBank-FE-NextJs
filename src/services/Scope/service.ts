@@ -1,14 +1,14 @@
 import { AxiosResponse } from "axios"
 import api from "../apiOpenBankProject"
 
-export const CreateScopeForAConsumer = (consumer_id: string) => {
+export const CreateScopeForAConsumer = (consumer_id: string): Promise<AxiosResponse> => {
     return api.post(`/obp/v4.0.0/consumers/${consumer_id}/scopes`)
 }
 
-export const DeleteConsumerScope = (consumer_id: string, scope_id: string) => {
+export const DeleteConsumerScope = (consumer_id: string, scope_id: string): Promise<AxiosResponse> => {
     return api.delete(`/obp/v4.0.0/consumers/${consumer_id}/scope/${scope_id}`)
 }
 
-export const GetScopesForConsumer = (consumer_id: string) => {
+export const GetScopesForConsumer = (consumer_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/consumers/${consumer_id}/scopes`)
 }

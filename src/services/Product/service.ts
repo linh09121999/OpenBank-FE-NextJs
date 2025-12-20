@@ -45,19 +45,19 @@ export const GetProductAttributeDefinition = (bank_id: string): Promise<AxiosRes
     return api.get(`/obp/v4.0.0/banks/${bank_id}/attribute-definitions/product`)
 }
 
-export const GetProductFee = (bank_id: string, product_code: string, product_fee_id: string) => {
+export const GetProductFee = (bank_id: string, product_code: string, product_fee_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/banks/${bank_id}/products/${product_code}/fees/${product_fee_id}`)
 }
 
-export const GetProductFees = (bank_id: string, product_code: string) => {
+export const GetProductFees = (bank_id: string, product_code: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/banks/${bank_id}/products/${product_code}/fees`)
 }
 
-export const GetProductTree = (bank_id: string, product_code: string) => {
+export const GetProductTree = (bank_id: string, product_code: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/banks/${bank_id}/product-tree/${product_code}`)
 }
 
-export const GetProducts = (bank_id: string) => {
+export const GetProducts = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/banks/${bank_id}/products`)
 }
 

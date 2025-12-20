@@ -5,7 +5,7 @@ export const CreateAddress = (bank_id: string, customer_id: string): Promise<Axi
     return api.post(`/obp/v3.1.0/banks/${bank_id}/customers/${customer_id}/address`)
 }
 
-export const CreateAgent = (bank_id: string) => {
+export const CreateAgent = (bank_id: string): Promise<AxiosResponse> => {
     return api.post(`/obp/v6.0.0/banks/${bank_id}/agents`)
 }
 
@@ -65,11 +65,11 @@ export const DeleteUserCustomerLink = (bank_id: string, user_customer_link_id: s
     return api.delete(`/obp/v4.0.0/banks/${bank_id}/user_customer_links/${user_customer_link_id}`)
 }
 
-export const GetCRMEvents = (bank_id: string) => {
+export const GetCRMEvents = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v2.1.0/banks/${bank_id}/crm-events`)
 }
 
-export const GetCorrelatedEntitiesForTheCurrentUser = () => {
+export const GetCorrelatedEntitiesForTheCurrentUser = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/my/correlated-entities`)
 }
 
@@ -149,11 +149,11 @@ export const GetCustomersByMOBILE_PHONE_NUMBER = (bank_id: string): Promise<Axio
     return api.post(`/obp/v6.0.0/banks/${bank_id}/search/customers/mobile-phone-number`)
 }
 
-export const GetCustomersForCurrentUser = () => {
+export const GetCustomersForCurrentUser = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/users/current/customers`)
 }
 
-export const GetCustomersForCurrentUser_IDsOnly = () => {
+export const GetCustomersForCurrentUser_IDsOnly = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/users/current/customers/customer_ids`)
 }
 
@@ -161,15 +161,15 @@ export const GetFirehoseCustomers = (bank_id: string): Promise<AxiosResponse> =>
     return api.get(`/obp/v6.0.0/banks/${bank_id}/firehose/customers`)
 }
 
-export const GetMyCustomers = () => {
+export const GetMyCustomers = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/my/customers`)
 }
 
-export const GetMyCustomersAtBank = (bank_id: string) => {
+export const GetMyCustomersAtBank = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/my/customers`)
 }
 
-export const GetTaxResidencesOfCustomer = (bank_id: string, customer_id: string) => {
+export const GetTaxResidencesOfCustomer = (bank_id: string, customer_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/customers/${customer_id}/tax-residences`)
 }
 
@@ -193,7 +193,7 @@ export const UpdateCustomerAttribute = (bank_id: string, customer_id: string, cu
     return api.put(`/obp/v6.0.0/banks/${bank_id}/customers/${customer_id}/attributes/${customer_attribute_id}`)
 }
 
-export const UpdateTheAddressOfACustomer = (bank_id: string, customer_id: string, customer_address_id: string) => {
+export const UpdateTheAddressOfACustomer = (bank_id: string, customer_id: string, customer_address_id: string): Promise<AxiosResponse> => {
     return api.put(`/obp/v6.0.0/banks/${bank_id}/customers/${customer_id}/addresses/${customer_address_id}`)
 }
 

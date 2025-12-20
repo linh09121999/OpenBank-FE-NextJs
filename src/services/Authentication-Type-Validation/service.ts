@@ -13,7 +13,7 @@ export const GetAllAuthenticationTypeValidations = (): Promise<AxiosResponse> =>
     return api.get(`/obp/v6.0.0/management/authentication-type-validations`)
 }
 
-export const GetAllAuthenticationTypeValidations_Public = () => {
+export const GetAllAuthenticationTypeValidations_Public = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/endpoints/authentication-type-validations`)
 }
 

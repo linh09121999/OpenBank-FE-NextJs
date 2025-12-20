@@ -5,11 +5,11 @@ export const AddEntitlementForAUser = (user_id: string): Promise<AxiosResponse> 
     return api.post(`/obp/v4.0.0/users/${user_id}/entitlements`)
 }
 
-export const Create_DAuth_UserWithRoles = () => {
+export const Create_DAuth_UserWithRoles = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v4.0.0/user-entitlements`)
 }
 
-export const CreateEntitlementRequestForCurrentUser = () => {
+export const CreateEntitlementRequestForCurrentUser = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v4.0.0/entitlement-requests`)
 }
 
@@ -25,7 +25,7 @@ export const GetEntitlementRequestsForAUser = (user_id: string): Promise<AxiosRe
     return api.get(`/obp/v4.0.0/users/${user_id}/entitlement-requests`)
 }
 
-export const GetEntitlementRequestsForTheCurrentUser = () => {
+export const GetEntitlementRequestsForTheCurrentUser = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/my/entitlement-requests`)
 }
 
@@ -45,11 +45,11 @@ export const GetEntitlementsForUserAtBank = (bank_id: string, user_id: string): 
     return api.get(`/obp/v4.0.0/banks/${bank_id}/users/${user_id}/entitlements`)
 }
 
-export const GetEntitlementsForTheCurrentUser = () => {
+export const GetEntitlementsForTheCurrentUser = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/my/entitlements`)
 }
 
-export const GetRoles = () => {
+export const GetRoles = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/roles`)
 }
 
@@ -57,6 +57,6 @@ export const GetAllEntitlementRequests = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/entitlement-requests`)
 }
 
-export const GetAllEntitlements = () => {
+export const GetAllEntitlements = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/entitlements`)
 }

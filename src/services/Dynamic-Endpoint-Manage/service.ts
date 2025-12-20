@@ -17,7 +17,7 @@ export const DeleteDynamicEndpoint = (dynamic_endpoint_id: string): Promise<Axio
     return api.delete(`/obp/v4.0.0/management/dynamic-endpoints/${dynamic_endpoint_id}`)
 }
 
-export const DeleteMyDynamicEndpoint = (dynamic_endpoint_id: string) => {
+export const DeleteMyDynamicEndpoint = (dynamic_endpoint_id: string): Promise<AxiosResponse> => {
     return api.delete(`/obp/v4.0.0/my/dynamic-endpoints/${dynamic_endpoint_id}`)
 }
 
@@ -37,14 +37,14 @@ export const GetDynamicEndpoints = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/management/dynamic-endpoints`)
 }
 
-export const GetMyDynamicEndpoints = () => {
+export const GetMyDynamicEndpoints = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/my/dynamic-endpoints`)
 }
 
-export const UpdateBankLevelDynamicEndpointHost = (bank_id: string, dynamic_endpoint_id: string) => {
+export const UpdateBankLevelDynamicEndpointHost = (bank_id: string, dynamic_endpoint_id: string): Promise<AxiosResponse> => {
     return api.put(`/obp/v4.0.0/management/banks/${bank_id}/dynamic-endpoints/${dynamic_endpoint_id}/host`)
 }
 
-export const UpdateDynamicEndpointHost = (dynamic_endpoint_id: string) => {
+export const UpdateDynamicEndpointHost = (dynamic_endpoint_id: string): Promise<AxiosResponse> => {
     return api.put(`/obp/v4.0.0/management/dynamic-endpoints/${dynamic_endpoint_id}/host`)
 }

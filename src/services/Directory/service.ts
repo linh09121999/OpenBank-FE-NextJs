@@ -25,11 +25,11 @@ export const GetAllRegulatedEntityAttributes = (regulated_entity_id: string): Pr
     return api.get(`/obp/v6.0.0/regulated-entities/${regulated_entity_id}/attributes`)
 }
 
-export const GetRegulatedEntities = () => {
+export const GetRegulatedEntities = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/regulated-entities`)
 }
 
-export const GetRegulatedEntity = (regulated_entity_id: string) => {
+export const GetRegulatedEntity = (regulated_entity_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/regulated-entities/${regulated_entity_id}`)
 }
 

@@ -25,7 +25,7 @@ export const GetBankLevelDynamicEntities = (bank_id: string): Promise<AxiosRespo
     return api.get(`/obp/v4.0.0/management/banks/${bank_id}/dynamic-entities`)
 }
 
-export const GetMyDynamicEntities = () => {
+export const GetMyDynamicEntities = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/my/dynamic-entities`)
 }
 
@@ -37,7 +37,7 @@ export const UpdateBankLevelDynamicEntity = (bank_id: string, dynamic_entity_id:
     return api.put(`/obp/v4.0.0/management/banks/${bank_id}/dynamic-entities/${dynamic_entity_id}`)
 }
 
-export const UpdateMyDynamicEntity = (dynamic_entity_id: string) => {
+export const UpdateMyDynamicEntity = (dynamic_entity_id: string): Promise<AxiosResponse> => {
     return api.put(`/obp/v4.0.0/my/dynamic-entities/${dynamic_entity_id}`)
 }
 

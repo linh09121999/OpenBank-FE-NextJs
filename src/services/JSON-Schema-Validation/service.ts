@@ -17,7 +17,7 @@ export const GetAllJSONSchemaValidations = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/management/json-schema-validations`)
 }
 
-export const GetAllJSONSchemaValidations_Public = () => {
+export const GetAllJSONSchemaValidations_Public = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/endpoints/json-schema-validations`)
 }
 

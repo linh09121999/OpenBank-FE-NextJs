@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios"
 import api from "../apiOpenBankProject"
 
-export const CheckAvailableFunds = (bank_id: string, account_id: string, view_id: string) => {
+export const CheckAvailableFunds = (bank_id: string, account_id: string, view_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/${account_id}/${view_id}/funds-available`)
 }
 
@@ -45,35 +45,35 @@ export const GetAccountAttributeDefinition = (bank_id: string): Promise<AxiosRes
     return api.get(`/obp/v6.0.0/banks/${bank_id}/attribute-definitions/account`)
 }
 
-export const GetAccountBalancesbyBANK_ID = (bank_id: string) => {
+export const GetAccountBalancesbyBANK_ID = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/balances`)
 }
 
-export const GetAccountBalancesbyBANK_IDandACCOUNT_IDthroughtheVIEW_ID = (bank_id: string, account_id: string, view_id: string) => {
+export const GetAccountBalancesbyBANK_IDandACCOUNT_IDthroughtheVIEW_ID = (bank_id: string, account_id: string, view_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/${account_id}/views/${view_id}/balances`)
 }
 
-export const GetAccountBalancesbyBANK_IDthroughtheVIEW_ID = (bank_id: string, view_id: string) => {
+export const GetAccountBalancesbyBANK_IDthroughtheVIEW_ID = (bank_id: string, view_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/views/${view_id}/balances`)
 }
 
-export const GetAccountbyAccountRouting = () => {
+export const GetAccountbyAccountRouting = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v6.0.0/management/accounts/account-routing-query`)
 }
 
-export const GetAccountbyId_Core = (bank_id: string, account_id: string) => {
+export const GetAccountbyId_Core = (bank_id: string, account_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/my/banks/${bank_id}/accounts/${account_id}/account`)
 }
 
-export const GetAccountbyId_Core_throughtheVIEW_ID = (bank_id: string, account_id: string, view_id: string) => {
+export const GetAccountbyId_Core_throughtheVIEW_ID = (bank_id: string, account_id: string, view_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/${account_id}/views/${view_id}`)
 }
 
-export const GetAccountbyId_Full = (bank_id: string, account_id: string, view_id: string) => {
+export const GetAccountbyId_Full = (bank_id: string, account_id: string, view_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/${account_id}/${view_id}/account`)
 }
 
-export const GetAccountsHeld = (bank_id: string) => {
+export const GetAccountsHeld = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts-held`)
 }
 
@@ -85,43 +85,43 @@ export const GetAccountsMinimalforaCustomer = (customer_id: string): Promise<Axi
     return api.get(`/obp/v6.0.0/customers/${customer_id}/accounts-minimal`)
 }
 
-export const GetAccountsatBank = (bank_id: string) => {
+export const GetAccountsatBank = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts`)
 }
 
-export const GetAccountsatBank_IDsonly = (bank_id: string) => {
+export const GetAccountsatBank_IDsonly = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/account_ids/private`)
 }
 
-export const GetAccountsatBank_Minimal = (bank_id: string) => {
+export const GetAccountsatBank_Minimal = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/private`)
 }
 
-export const GetAccountsatallBanks_private = () => {
+export const GetAccountsatallBanks_private = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/my/accounts`)
 }
 
-export const GetAccountsbyAccountRoutingRegex = () => {
+export const GetAccountsbyAccountRoutingRegex = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v6.0.0/management/accounts/account-routing-regex-query`)
 }
 
-export const GetAgent = (bank_id: string, agent_id: string) => {
+export const GetAgent = (bank_id: string, agent_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/agents/${agent_id}`)
 }
 
-export const GetAgentsatBank = (bank_id: string) => {
+export const GetAgentsatBank = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/agents`)
 }
 
-export const GetAllBankAccountBalances = (bank_id: string, account_id: string) => {
+export const GetAllBankAccountBalances = (bank_id: string, account_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/${account_id}/balances`)
 }
 
-export const GetBankAccountBalanceByID = (bank_id: string, account_id: string, balance_id: string) => {
+export const GetBankAccountBalanceByID = (bank_id: string, account_id: string, balance_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/${account_id}/balances/${balance_id}`)
 }
 
-export const GetCheckbookOrders = (bank_id: string, account_id: string, view_id: string) => {
+export const GetCheckbookOrders = (bank_id: string, account_id: string, view_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/accounts/${account_id}/${view_id}/checkbook/orders`)
 }
 
@@ -149,7 +149,7 @@ export const UpdateBankAccountBalance = (bank_id: string, account_id: string, ba
     return api.put(`/obp/v6.0.0/banks/${bank_id}/accounts/${account_id}/balances/${balance_id}`)
 }
 
-export const ValidateAndCheckIBAN = () => {
+export const ValidateAndCheckIBAN = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v6.0.0/account/check/scheme/iban`)
 }
 

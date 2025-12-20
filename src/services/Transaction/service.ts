@@ -17,7 +17,7 @@ export const DeleteTransactionCascade = (bank_id: string, account_id: string, tr
     return api.delete(`/obp/v4.0.0/management/cascading/banks/${bank_id}/accounts/${account_id}/transactions/${transaction_id}`)
 }
 
-export const GetBalancingTransaction = (transaction_id: string) => {
+export const GetBalancingTransaction = (transaction_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/transactions/${transaction_id}/balancing-transaction`)
 }
 
@@ -29,7 +29,7 @@ export const GetFirehoseTransactionsForAccount = (bank_id: string, account_id: s
     return api.get(`/obp/v4.0.0/banks/${bank_id}/firehose/accounts/${account_id}/views/${view_id}/transactions`)
 }
 
-export const GetOtherAccountOfTransaction = (bank_id: string, account_id: string, view_id: string, transaction_id: string) => {
+export const GetOtherAccountOfTransaction = (bank_id: string, account_id: string, view_id: string, transaction_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/banks/${bank_id}/accounts/${account_id}/${view_id}/transactions/${transaction_id}/other_account`)
 }
 
@@ -45,15 +45,15 @@ export const GetTransactionAttributes = (bank_id: string, account_id: string, tr
     return api.get(`/obp/v4.0.0/banks/${bank_id}/accounts/${account_id}/transactions/${transaction_id}/attributes`)
 }
 
-export const GetTransactionById = (bank_id: string, account_id: string, view_id: string, transaction_id: string) => {
+export const GetTransactionById = (bank_id: string, account_id: string, view_id: string, transaction_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/banks/${bank_id}/accounts/${account_id}/${view_id}/transactions/${transaction_id}/transaction`)
 }
 
-export const GetTransactionsForAccount_Core = (bank_id: string, account_id: string) => {
+export const GetTransactionsForAccount_Core = (bank_id: string, account_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/my/banks/${bank_id}/accounts/${account_id}/transactions`)
 }
 
-export const GetTransactionsForAccount_Full = (bank_id: string, account_id: string, view_id: string) => {
+export const GetTransactionsForAccount_Full = (bank_id: string, account_id: string, view_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/banks/${bank_id}/accounts/${account_id}/${view_id}/transactions`)
 }
 

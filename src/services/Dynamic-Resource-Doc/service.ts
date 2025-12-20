@@ -9,7 +9,7 @@ export const CreateDynamicResourceDoc = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v4.0.0/management/dynamic-resource-docs`)
 }
 
-export const CreateDynamicResourceDocEndpointCode = () => {
+export const CreateDynamicResourceDocEndpointCode = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v4.0.0/management/dynamic-resource-docs/endpoint-code`)
 }
 

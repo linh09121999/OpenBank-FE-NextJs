@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios"
 import api from "../apiOpenBankProject"
 
-export const CreateAConsumer = () => {
+export const CreateAConsumer = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v6.0.0/my/consumers`)
 }
 
@@ -17,7 +17,7 @@ export const GetConsumers = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/management/consumers`)
 }
 
-export const GetConsumers_LoggedInUser = () => {
+export const GetConsumers_LoggedInUser = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/management/users/current/consumers`)
 }
 

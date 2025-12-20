@@ -29,7 +29,7 @@ export const UpdateBankLevelEndpointTag = (data: { tag_name: string }, bank_id: 
     return api.put(`/obp/v6.0.0/management/banks/${bank_id}/endpoints/${operation_id}/tags/${endpoint_tag_id}`, data)
 }
 
-export const UpdateSystemLevelEndpointTag = (data: { tag_name: string }, operation_id: string, endpoint_tag_id: string) => {
+export const UpdateSystemLevelEndpointTag = (data: { tag_name: string }, operation_id: string, endpoint_tag_id: string): Promise<AxiosResponse> => {
     return api.put(`/obp/v6.0.0/management/endpoints/${operation_id}/tags/${endpoint_tag_id}`, data)
 }
 
@@ -37,11 +37,11 @@ export const GetAPIConfiguration = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/config`)
 }
 
-export const GetAPIInfo = () => {
+export const GetAPIInfo = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/root`)
 }
 
-export const GetAPITags = () => {
+export const GetAPITags = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/tags`)
 }
 
@@ -53,15 +53,15 @@ export const GetAdapterInfoForABank = (bank_id: string): Promise<AxiosResponse> 
     return api.get(`/obp/v6.0.0/banks/${bank_id}/adapter`)
 }
 
-export const GetConnectorStatus = () => {
+export const GetConnectorStatus = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/connector/loopback`)
 }
 
-export const GetJSONWebKey = () => {
+export const GetJSONWebKey = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/certs`)
 }
 
-export const GetJSONWebKeyURIs = () => {
+export const GetJSONWebKeyURIs = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/jwks-uris`)
 }
 
@@ -73,15 +73,15 @@ export const GetMapperDatabaseInfo = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/database/info`)
 }
 
-export const GetRateLimitingInfo = () => {
+export const GetRateLimitingInfo = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/rate-limiting`)
 }
 
-export const GetSuggestedSessionTimeout = () => {
+export const GetSuggestedSessionTimeout = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/ui/suggested-session-timeout`)
 }
 
-export const GetWellKnownURIs = () => {
+export const GetWellKnownURIs = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/well-known`)
 }
 
@@ -89,11 +89,11 @@ export const GetTheCallContextOfACurrentCall = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/development/call_context`)
 }
 
-export const VerifyRequestAndSignResponseOfACurrentCall = () => {
+export const VerifyRequestAndSignResponseOfACurrentCall = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/development/echo/jws-verified-request-jws-signed-response`)
 }
 
-export const WaitingForGodot = () => {
+export const WaitingForGodot = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/waiting-for-godot`)
 }
 

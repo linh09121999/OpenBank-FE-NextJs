@@ -1,11 +1,11 @@
 import { AxiosResponse } from "axios"
 import api from "../apiOpenBankProject"
 
-export const AnswerUserAuthContextUpdateChallenge = (bank_id: string, auth_context_update_id: string) => {
+export const AnswerUserAuthContextUpdateChallenge = (bank_id: string, auth_context_update_id: string): Promise<AxiosResponse> => {
     return api.post(`/obp/v5.0.0/banks/${bank_id}/users/current/auth-context-updates/${auth_context_update_id}/challenge`)
 }
 
-export const CreateMyPersonalUserAttribute = () => {
+export const CreateMyPersonalUserAttribute = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v4.0.0/my/user/attributes`)
 }
 
@@ -13,7 +13,7 @@ export const CreateNonPersonalUserAttribute = (user_id: string): Promise<AxiosRe
     return api.post(`/obp/v5.1.0/users/${user_id}/non-personal/attributes`)
 }
 
-export const CreateUser = () => {
+export const CreateUser = (): Promise<AxiosResponse> => {
     return api.post(`/obp/v4.0.0/users`)
 }
 
@@ -21,7 +21,7 @@ export const CreateUserAuthContext = (user_id: string): Promise<AxiosResponse> =
     return api.post(`/obp/v5.0.0/users/${user_id}/auth-context`)
 }
 
-export const CreateUserAuthContextUpdateRequest = (bank_id: string, sca_method: string) => {
+export const CreateUserAuthContextUpdateRequest = (bank_id: string, sca_method: string): Promise<AxiosResponse> => {
     return api.post(`/obp/v5.0.0/banks/${bank_id}/users/current/auth-context-updates/${sca_method}`)
 }
 
@@ -45,15 +45,15 @@ export const DeleteAUser = (user_id: string): Promise<AxiosResponse> => {
     return api.delete(`/obp/v4.0.0/users/${user_id}`)
 }
 
-export const GetLogoutLink = () => {
+export const GetLogoutLink = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/users/current/logout-link`)
 }
 
-export const GetMyPersonalUserAttributes = () => {
+export const GetMyPersonalUserAttributes = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/my/user/attributes`)
 }
 
-export const GetMySpaces = () => {
+export const GetMySpaces = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/my/spaces`)
 }
 
@@ -61,7 +61,7 @@ export const GetNonPersonalUserAttributes = (user_id: string): Promise<AxiosResp
     return api.get(`/obp/v5.1.0/users/${user_id}/non-personal/attributes`)
 }
 
-export const GetUser_Current = () => {
+export const GetUser_Current = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/users/current`)
 }
 
@@ -69,7 +69,7 @@ export const GetUserAuthContexts = (user_id: string): Promise<AxiosResponse> => 
     return api.get(`/obp/v5.0.0/users/${user_id}/auth-context`)
 }
 
-export const GetUserId_Current = () => {
+export const GetUserId_Current = (): Promise<AxiosResponse> => {
     return api.get(`/obp/v4.0.0/users/current/user_id`)
 }
 
@@ -113,7 +113,7 @@ export const UnlockTheUser = (provider: string, username: string): Promise<Axios
     return api.put(`/obp/v5.1.0/users/${provider}/${username}/lock-status`)
 }
 
-export const UpdateMyPersonalUserAttribute = (user_attribute_id: string) => {
+export const UpdateMyPersonalUserAttribute = (user_attribute_id: string): Promise<AxiosResponse> => {
     return api.put(`/obp/v4.0.0/my/user/attributes/${user_attribute_id}`)
 }
 

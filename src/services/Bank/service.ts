@@ -21,7 +21,7 @@ export const CreateOrUpdateBankAttributeDefinition = (bank_id: string): Promise<
     return api.put(`/obp/v6.0.0/banks/${bank_id}/attribute-definitions/bank`)
 }
 
-export const DeleteBankAttribute = (bank_id: string, bank_attribute_id: string) => {
+export const DeleteBankAttribute = (bank_id: string, bank_attribute_id: string): Promise<AxiosResponse> => {
     return api.delete(`/obp/v6.0.0/banks/${bank_id}/attributes/${bank_attribute_id}`)
 }
 
@@ -29,7 +29,7 @@ export const DeleteBankCascade = (bank_id: string): Promise<AxiosResponse> => {
     return api.delete(`/obp/v6.0.0/management/cascading/banks/${bank_id}`)
 }
 
-export const GetBank = (bank_id: string) => {
+export const GetBank = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}`)
 }
 
@@ -45,7 +45,7 @@ export const GetSettlementAccountsAtBank = (bank_id: string): Promise<AxiosRespo
     return api.get(`/obp/v6.0.0/banks/${bank_id}/settlement-accounts`)
 }
 
-export const GetTransactionTypesAtBank = (bank_id: string) => {
+export const GetTransactionTypesAtBank = (bank_id: string): Promise<AxiosResponse> => {
     return api.get(`/obp/v6.0.0/banks/${bank_id}/transaction-types`)
 }
 
