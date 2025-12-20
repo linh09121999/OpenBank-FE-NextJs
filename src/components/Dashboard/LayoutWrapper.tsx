@@ -23,7 +23,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
     useEffect(() => {
         console.log(isAuthenticated)
         if (!isAuthenticated) {
-            // router.push('/login')
+            router.push('/login')
         }
     }, [isAuthenticated])
 
