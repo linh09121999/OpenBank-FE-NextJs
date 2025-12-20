@@ -10,9 +10,9 @@ const api: AxiosInstance = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const orderToken = localStorage.getItem("order_token");
-    // if (orderToken) {
-    //   config.headers["X-Spree-Order-Token"] = orderToken;
+    // const token = localStorage.getItem("token");
+    // if (token) {
+    //   config.headers["Authorization"] = token;
     // }
 
     if (config.method?.toLowerCase() === "post") {

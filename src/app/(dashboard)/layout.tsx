@@ -4,6 +4,7 @@ import "../globals.css";
 import BackToTop from "@/components/BackToTop";
 import Loading from "@/components/loadling";
 import LayoutWrapper from "@/components/Dashboard/LayoutWrapper";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,9 @@ export default function RootLayout({
       >
         <BackToTop />
         <Loading />
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <AuthProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

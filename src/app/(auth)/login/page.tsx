@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash, FaRegUser } from 'react-icons/fa';
 import { MdOutlineEmail, MdOutlineErrorOutline, MdOutlineLock } from 'react-icons/md'
+import { useAuth } from '@/contexts/AuthContext';
 
 const Login: React.FC = () => {
     const rounter = useRouter()
@@ -83,6 +84,8 @@ const Login: React.FC = () => {
         return Object.keys(newErrors).length === 0;
     }
 
+    const { handleLogin } = useAuth()
+
     const handleSubmitLogout = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!validateFieldsLogin()) {
@@ -95,7 +98,7 @@ const Login: React.FC = () => {
             setLoading(true)
             const res = await LoginDirect(login.username, login.password, consumerKey)
             setErrorLoginStatus("")
-            localStorage.setItem('token', res.data.token)
+            handleLogin(res.data.token)
 
             const previousPage = document.referrer;
 

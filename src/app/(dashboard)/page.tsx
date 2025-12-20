@@ -1,13 +1,16 @@
 
 'use client'
 
+import { useAuth } from "@/contexts/AuthContext";
 import { GetPublicAccountsAtAllBanks } from "@/services/Account-Public/service";
 import { GetBanks } from "@/services/BankAccountTag1/service";
 import { useStateGeneral } from "@/zustand/useStateGeneral";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Home: React.FC = () => {
+  const router = useRouter()
   const {
     activeSection, setActiveSection,
     isDark, setIsDark, setLoading
@@ -44,6 +47,7 @@ const Home: React.FC = () => {
     }
   }
 
+  const { isAuthenticated } = useAuth()
 
   useEffect(() => {
     setActiveSection("overview")

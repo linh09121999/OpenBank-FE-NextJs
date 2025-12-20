@@ -1,20 +1,31 @@
 'use client'
 
 import { Footer, Header, Bar } from "@/components/Dashboard";
+import { useAuth } from "@/contexts/AuthContext";
 import { useStateGeneral } from "@/zustand/useStateGeneral";
-import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 type LayoutWrapperProps = {
     children: React.ReactNode;
 };
 
 const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
+    const router = useRouter()
     const {
         sidebarOpen, setSidbarOpen,
         activeSection, setActiveSection,
         isDark, setIsDark
     } = useStateGeneral()
+
+    const { isAuthenticated } = useAuth()
+    useEffect(() => {
+        console.log(isAuthenticated)
+        if (!isAuthenticated) {
+            // router.push('/login')
+        }
+    }, [isAuthenticated])
 
     return (
         <div className={`min-h-screen relative overflow-hidden ${isDark

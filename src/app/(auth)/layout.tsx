@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import BackToTop from "@/components/BackToTop";
 import Loading from "@/components/loadling";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +35,11 @@ export default function RootLayout({
       >
         <BackToTop />
         <Loading />
-        <main className="min-h-screen content-center relative bg-black/30">
-          {children}
-        </main>
+        <AuthProvider>
+          <main className="min-h-screen content-center relative bg-black/30">
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );

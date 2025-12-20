@@ -11,11 +11,3 @@ export const LoginDirect = (username: string, password: string, consumerKey: str
         }
     )
 }
-
-// export const OauthInitiate = () => {
-//     return api.post(`/oauth/initiate`, null,
-//         {
-
-//         }
-//     )
-// }
