@@ -58,12 +58,12 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                     router.push(`${item.path}`)
                                 }}
                                 title={`${isCollapsed ? `${item.label}` : ""}`}
-                                className={`w-full flex items-center gap-3 ${isCollapsed ? "py-1.5" : "p-3"} rounded-xl  transition-all group relative `}
+                                className={`w-full flex items-center gap-3 ${isCollapsed ? "py-1.5" : "p-3"} rounded-2xl  transition-all group relative `}
                             >
                                 {isActive &&
                                     <motion.div
                                         layoutId="activeTab"
-                                        className={`absolute inset-0 rounded-xl 
+                                        className={`absolute inset-0 rounded-2xl 
                                             ${isCollapsed
                                                 ? "hidden"
                                                 : isDark
@@ -76,10 +76,10 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
 
                                 {(isActive && !isCollapsed) &&
                                     <>
-                                        <div className="absolute inset-0 overflow-hidden rounded-xl">
+                                        <div className="absolute inset-0 overflow-hidden rounded-2xl">
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                         </div>
-                                        <div className="absolute inset-0 rounded-xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                        <div className="absolute inset-0 rounded-2xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     </>
                                 }
 
@@ -113,7 +113,7 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                             <div className="absolute inset-0 overflow-hidden">
                                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                             </div>
-                                            <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                            <div className="absolute inset-0 rounded-xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                         </>
                                     }
                                 </div>
@@ -193,12 +193,12 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                 }
                             }}
                             title={`${isCollapsed ? `${item.label}` : ""}`}
-                            className={`w-full flex items-center gap-3 ${isCollapsed ? "py-1.5" : "p-3"} rounded-xl  transition-all group relative `}
+                            className={`w-full flex items-center gap-3 ${isCollapsed ? "py-1.5" : "p-3"} rounded-2xl  transition-all group relative `}
                         >
                             {isActive &&
                                 <motion.div
                                     layoutId="activeTab"
-                                    className={`absolute inset-0 rounded-xl 
+                                    className={`absolute inset-0 rounded-2xl 
                                             ${isCollapsed
                                             ? "hidden"
                                             : isDark
@@ -211,10 +211,10 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
 
                             {(isActive && !isCollapsed) &&
                                 <>
-                                    <div className="absolute inset-0 overflow-hidden rounded-xl">
+                                    <div className="absolute inset-0 overflow-hidden rounded-2xl">
                                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                     </div>
-                                    <div className="absolute inset-0 rounded-xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="absolute inset-0 rounded-2xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </>
                             }
 
@@ -248,7 +248,7 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                         <div className="absolute inset-0 overflow-hidden">
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                         </div>
-                                        <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                        <div className="absolute inset-0 rounded-xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     </>
                                 }
                             </div>
