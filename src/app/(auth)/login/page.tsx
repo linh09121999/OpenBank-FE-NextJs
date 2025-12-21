@@ -13,6 +13,7 @@ import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash, FaRegUser } from 'react-icons/fa';
 import { MdOutlineEmail, MdOutlineErrorOutline, MdOutlineLock } from 'react-icons/md'
 import { useAuth } from '@/contexts/AuthContext';
+import { ReqUser } from '@/types/User/request';
 
 const Login: React.FC = () => {
     const rounter = useRouter()
@@ -167,17 +168,6 @@ const Login: React.FC = () => {
             }
         });
 
-        // Password rule: min 8 chars + at least 1 number
-        if (register.password) {
-            if (register.password.length < 8) {
-                newErrors.password = "Password must be at least 8 characters!";
-            }
-
-            if (!/\d/.test(register.password)) {
-                newErrors.password = "Password must contain at least one number!";
-            }
-        }
-
         // Password confirmation match
         if (register.password && register.password_confirmation) {
             if (register.password !== register.password_confirmation) {
@@ -195,6 +185,25 @@ const Login: React.FC = () => {
 
         if (!validateFieldsRegister()) {
             return;
+        }
+
+        const data: ReqUser = {
+            email: register.email,
+            first_name: register.first_name,
+            last_name: register.last_name,
+            password: register.password,
+            username: register.username
+        }
+
+        try {
+            setLoading(true)
+            const res = CreateUser(data)
+            setErrorRegisterStatus("")
+            setRouterRegister(false)
+        } catch (error: any) {
+            setErrorRegisterStatus(error.response.data.message)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -313,7 +322,7 @@ const Login: React.FC = () => {
                                         <div className="absolute inset-0 rounded-xl border-2 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     </button>
                                 </form>
-                                <div className='text-gray-300 w-full text-sm text-center relative after:absolute after:h-[1px] after:w-[45%] after:bg-gradient-to-r after:to-gray-300 after:left-0 after:top-1/2 before:absolute before:h-[1px] before:w-[45%] before:bg-gradient-to-l before:to-gray-300 before:top-1/2 before:right-0'>Or</div>
+                                {/* <div className='text-gray-300 w-full text-sm text-center relative after:absolute after:h-[1px] after:w-[45%] after:bg-gradient-to-r after:to-gray-300 after:left-0 after:top-1/2 before:absolute before:h-[1px] before:w-[45%] before:bg-gradient-to-l before:to-gray-300 before:top-1/2 before:right-0'>Or</div>
                                 <div className=" flex">
                                     <div className="mx-auto text-gray-300 md:text-md text-sm">
                                         No account?
@@ -325,7 +334,7 @@ const Login: React.FC = () => {
                                             Register for a new account
                                         </button>
                                     </div>
-                                </div>
+                                </div> */}
                             </>
                             :
                             <>

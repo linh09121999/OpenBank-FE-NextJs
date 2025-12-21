@@ -1,4 +1,4 @@
-import { Page } from '@/types/type';
+import { BankViewItem, GroupedBankAccount, Page } from '@/types/type';
 import { create } from 'zustand'
 import {
     MdOutlineDashboard,
@@ -45,9 +45,11 @@ interface State {
     setActiveSection: (section: string) => void;
     isDark: boolean;
     setIsDark: (isCheck: boolean) => void;
+    bankViewItems: GroupedBankAccount[];
+    setBankViewItems: React.Dispatch<React.SetStateAction<GroupedBankAccount[]>>
 }
 
-export const useStateGeneral = create<State>((set) => ({
+export const useStateGeneral = create<State>((set, get) => ({
     loading: false,
     setLoading: (isCheck) => set({ loading: isCheck }),
     sidebarOpen: false,
@@ -193,5 +195,11 @@ export const useStateGeneral = create<State>((set) => ({
     activeSection: 'overview',
     setActiveSection: (section) => set({ activeSection: section }),
     isDark: true,
-    setIsDark: (isCheck) => set({ isDark: isCheck })
+    setIsDark: (isCheck) => set({ isDark: isCheck }),
+    bankViewItems: [],
+    setBankViewItems: (value) =>
+        set((state) => ({
+            bankViewItems:
+                typeof value === "function" ? value(state.bankViewItems) : value
+        })),
 }))

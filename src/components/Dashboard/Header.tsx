@@ -13,6 +13,7 @@ import { GetUser_Current, GetUserId_Current } from "@/services/User/service";
 import { useStateUser } from "@/zustand/useStateUser";
 import { useAuth } from "@/contexts/AuthContext";
 import { BiLogOut } from "react-icons/bi";
+import { BankViewItem, GroupedBankAccount } from "@/types/type";
 
 interface HeaderProps {
     isDark: boolean;
@@ -90,7 +91,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
         },
     }
 
-    const { activeSection, navItems, bottomNavItems, setLoading } = useStateGeneral()
+    const { activeSection, navItems, bottomNavItems, setLoading, setBankViewItems } = useStateGeneral()
 
     const titleNav = useMemo(() => {
         return navItems.filter((r) =>
@@ -108,13 +109,23 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
 
     const { handleLogOut } = useAuth()
 
+    const getUniqueAccounts = (list: BankViewItem[]): GroupedBankAccount[] => {
+        return list.filter((item, index, self) => {
+            return index === self.findIndex(t =>
+                t.bank_id === item.bank_id && t.account_id === item.account_id
+            );
+        }).map(({ bank_id, account_id }) => ({ bank_id, account_id }));
+    };
+
     // Get User (Current)
     const getUser_Current = async () => {
         try {
             setLoading(true)
             const res = await GetUser_Current()
-            console.log(res.data)
             setResGetUserCurrent(res.data)
+            const listView = res.data.views.list
+            const listGroup = getUniqueAccounts(listView)
+            setBankViewItems(listGroup)
         } catch (error: any) {
 
         }

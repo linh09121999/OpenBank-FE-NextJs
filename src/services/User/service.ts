@@ -1,32 +1,34 @@
 import { AxiosResponse } from "axios"
 import api from "../apiOpenBankProject"
+import { Answer, Attribute, BespokeAttribute } from "@/types/type"
+import { ReqPasswordResetUrl, ReqUser } from "@/types/User/request"
 
-export const AnswerUserAuthContextUpdateChallenge = (bank_id: string, auth_context_update_id: string): Promise<AxiosResponse> => {
-    return api.post(`/obp/v5.0.0/banks/${bank_id}/users/current/auth-context-updates/${auth_context_update_id}/challenge`)
+export const AnswerUserAuthContextUpdateChallenge = (data: Answer, bank_id: string, auth_context_update_id: string): Promise<AxiosResponse> => {
+    return api.post(`/obp/v5.0.0/banks/${bank_id}/users/current/auth-context-updates/${auth_context_update_id}/challenge`, data)
 }
 
-export const CreateMyPersonalUserAttribute = (): Promise<AxiosResponse> => {
-    return api.post(`/obp/v4.0.0/my/user/attributes`)
+export const CreateMyPersonalUserAttribute = (data: Attribute): Promise<AxiosResponse> => {
+    return api.post(`/obp/v4.0.0/my/user/attributes`, data)
 }
 
-export const CreateNonPersonalUserAttribute = (user_id: string): Promise<AxiosResponse> => {
-    return api.post(`/obp/v5.1.0/users/${user_id}/non-personal/attributes`)
+export const CreateNonPersonalUserAttribute = (data: Attribute, user_id: string): Promise<AxiosResponse> => {
+    return api.post(`/obp/v5.1.0/users/${user_id}/non-personal/attributes`, data)
 }
 
-export const CreateUser = (): Promise<AxiosResponse> => {
-    return api.post(`/obp/v4.0.0/users`)
+export const CreateUser = (data: ReqUser): Promise<AxiosResponse> => {
+    return api.post(`/obp/v4.0.0/users`, data)
 }
 
-export const CreateUserAuthContext = (user_id: string): Promise<AxiosResponse> => {
-    return api.post(`/obp/v5.0.0/users/${user_id}/auth-context`)
+export const CreateUserAuthContext = (data: BespokeAttribute, user_id: string): Promise<AxiosResponse> => {
+    return api.post(`/obp/v5.0.0/users/${user_id}/auth-context`, data)
 }
 
-export const CreateUserAuthContextUpdateRequest = (bank_id: string, sca_method: string): Promise<AxiosResponse> => {
-    return api.post(`/obp/v5.0.0/banks/${bank_id}/users/current/auth-context-updates/${sca_method}`)
+export const CreateUserAuthContextUpdateRequest = (data: BespokeAttribute, bank_id: string, sca_method: string): Promise<AxiosResponse> => {
+    return api.post(`/obp/v5.0.0/banks/${bank_id}/users/current/auth-context-updates/${sca_method}`, data)
 }
 
-export const CreatePasswordResetUrl = (): Promise<AxiosResponse> => {
-    return api.post(`/obp/v4.0.0/management/user/reset-password-url`)
+export const CreatePasswordResetUrl = (data: ReqPasswordResetUrl): Promise<AxiosResponse> => {
+    return api.post(`/obp/v4.0.0/management/user/reset-password-url`, data)
 }
 
 export const DeleteNonPersonalUserAttribute = (user_id: string, user_attribute_id: string): Promise<AxiosResponse> => {
@@ -113,8 +115,8 @@ export const UnlockTheUser = (provider: string, username: string): Promise<Axios
     return api.put(`/obp/v5.1.0/users/${provider}/${username}/lock-status`)
 }
 
-export const UpdateMyPersonalUserAttribute = (user_attribute_id: string): Promise<AxiosResponse> => {
-    return api.put(`/obp/v4.0.0/my/user/attributes/${user_attribute_id}`)
+export const UpdateMyPersonalUserAttribute = (data: Attribute, user_attribute_id: string): Promise<AxiosResponse> => {
+    return api.put(`/obp/v4.0.0/my/user/attributes/${user_attribute_id}`, data)
 }
 
 export const ValidateAUser = (user_id: string): Promise<AxiosResponse> => {

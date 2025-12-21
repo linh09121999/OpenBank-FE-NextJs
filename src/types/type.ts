@@ -534,3 +534,15 @@ export interface Page {
     badge?: string | null;
     icon: ComponentType<SVGProps<SVGSVGElement>>
 }
+
+export interface BankViewItem {
+    bank_id: string;
+    account_id: string;
+    view_id: string;
+};
+
+export interface GroupedBankAccount {
+    bank_id: string;
+    account_id: string;
+    // view_ids: string[];
+};

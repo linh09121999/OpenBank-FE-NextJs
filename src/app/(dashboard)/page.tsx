@@ -1,6 +1,7 @@
 
 'use client'
 
+import TotalCard from "@/components/TotalCard";
 import { useAuth } from "@/contexts/AuthContext";
 import { GetPublicAccountsAtAllBanks } from "@/services/Account-Public/service";
 import { GetAccountsatallBanks_private } from "@/services/Account/service";
@@ -19,8 +20,7 @@ import { RiBankLine, RiCustomerService2Line } from "react-icons/ri";
 
 const Home: React.FC = () => {
   const router = useRouter()
-  const {
-    activeSection, setActiveSection,
+  const { setActiveSection, bankViewItems,
     isDark, setIsDark, setLoading
   } = useStateGeneral()
 
@@ -155,31 +155,9 @@ const Home: React.FC = () => {
         ].map(({ total, label, icon }, index) => {
           const Icon = icon
           return (
-            <div key={index} className={` p-5 rounded-3xl shadow-lg backdrop-blur-xl flex gap-5
-            ${isDark
-                ? "bg-white/5 text-white border border-white/10 shadow-white/5"
-                : "bg-white/90"
-              }`}>
-              <div className="relative">
-                <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 relative overflow-hidden group p-3 rounded-xl">
-                  <Icon className="text-3xl text-white" />
-                  <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  </div>
-                  <div className="absolute inset-0 rounded-xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-              </div>
-              <div className={``}>
-                <div className={`justify-start text-base font-normal ${isDark ? "text-gray-400 " : "text-gray-600"}`}>{label}</div>
-                <div className={`justify-start  text-2xl font-semibold
-              ${isDark ? "" : "text-neutral-800"}
-              `}>{total}</div>
-              </div>
-            </div>
-
+            <TotalCard key={index} Icon={Icon} isDark={isDark} label={label} total={total} />
           )
         })}
-
       </div >
     </>
   );
