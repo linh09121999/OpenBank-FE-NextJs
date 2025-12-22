@@ -26,27 +26,10 @@ const Home: React.FC = () => {
 
   const [total, setTotal] = useState({
     banks: 0,
-    accountPrivate: 0,
     consents: 0,
     cunsumers: 0,
     customers: 0
   })
-
-  const getAccountAllBankPrivate = async () => {
-    try {
-      setLoading(true)
-      const res = await GetAccountsatallBanks_private()
-      setTotal(prev => ({
-        ...prev,
-        accountPrivate: res.data.accounts.length
-      }))
-    } catch (error: any) {
-
-    }
-    finally {
-      setLoading(false)
-    }
-  }
 
   // Get My Consents
   const getMyConsents = async () => {
@@ -102,9 +85,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     setActiveSection("overview")
-    // getBanks()
-    // getAccountAllBankPublic()
-    getAccountAllBankPrivate()
     getMyConsents()
     getConsumers_LoggedInUser()
     getCustomersForCurrentUser()
@@ -112,10 +92,9 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className="grid md:grid-cols-5 gap-5">
+      <div className="grid md:grid-cols-4 gap-5">
         {[
           { total: bankViewItems.length, label: "Total Banks", icon: RiBankLine },
-          { total: total.accountPrivate, label: "Total Account", icon: MdOutlineManageAccounts },
           { total: total.consents, label: "Total Consent", icon: BsJournalCheck },
           { total: total.cunsumers, label: "Total Cunsumers", icon: MdOutlineShoppingCart },
           { total: total.customers, label: "Total Customers", icon: RiCustomerService2Line }

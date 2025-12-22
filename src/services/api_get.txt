@@ -24,7 +24,6 @@ Get Public Accounts at all Banks
 
 Get Bank
 Get Bank Attribute By BANK_ATTRIBUTE_ID
-Get Bank Attributes
 Get Transaction Types at Bank
 Get Banks
 Get Branches for a Bank
@@ -96,6 +95,5 @@ Get Transaction Requests
 Get Transaction Request
 
 Get My Spaces
-Get Non Personal User Attributes
 Get User (Current)
 Get User Id (Current)
