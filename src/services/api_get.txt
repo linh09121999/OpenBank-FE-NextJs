@@ -1,0 +1,101 @@
+Get Bank ATMS
+Get Bank ATM
+
+Get Account Balances by BANK_ID
+Get Account Balances by BANK_ID and ACCOUNT_ID through the VIEW_ID
+Get Account Balances by BANK_ID through the VIEW_ID
+Get Account by Id (Core)
+Get Account by Id (Core) through the VIEW_ID
+Get Account by Id (Full)
+Get Accounts Held
+Get Accounts at Bank
+Get Accounts at Bank (IDs only)
+Get Accounts at Bank (Minimal)
+Get Accounts at all Banks (private)
+Get Agents at Bank
+Get Agent
+Get All Bank Account Balances
+Get Bank Account Balance By ID
+Get Checkbook orders
+Get tags on account
+Get Public Account by Id
+Get Public Accounts at Bank
+Get Public Accounts at all Banks
+
+Get Bank
+Get Bank Attribute By BANK_ATTRIBUTE_ID
+Get Bank Attributes
+Get Transaction Types at Bank
+Get Banks
+Get Branches for a Bank
+Get Branch
+
+Get cards for the current user
+Get status of Credit Card order
+
+Get My Consents
+Get My Consents Info
+Get My Consents Info At Bank
+Get My Consents at Bank
+Get Consumers (logged in User)
+
+Get Counterparties (Explicit)
+Get Counterparty by Id (Explicit)
+Get Other Account by Id
+Get Other Accounts of one Account
+
+Get Other Account Metadata
+Get Other Account Private Alias
+Get public alias of other bank account
+
+Get CRM Events
+Get Correlated Entities for the current User
+Get Customers for Current User
+Get Customers for Current User (IDs only)
+Get My Customers
+Get My Customers at Bank
+Get Tax Residences of Customer
+
+Get Meetings
+Get Meeting
+
+Get Customer Messages for all Customers
+Get Customer Messages for a Customer
+
+Get My Dynamic Endpoints
+
+Get My Dynamic Entities
+
+Get Currencies at a Bank
+Get Current FxRate
+
+Get Products
+Get Product Tree
+Get Product Fees
+Get Product Fee
+
+Get Product Collection
+
+Get Entitlement Requests for the current User
+Get Entitlements for the current User
+Get Roles
+
+Get Transactions for Account (Core)
+Get Transactions for Account (Full)
+Get Balancing Transaction
+Get Other Account of Transaction
+
+Get Transaction Comments
+Get Transaction Images
+Get Transaction Tags
+Get a Transaction Narrative
+Get a Transaction where Tag
+
+Get Transaction Request Types at Bank
+Get Transaction Requests
+Get Transaction Request
+
+Get My Spaces
+Get Non Personal User Attributes
+Get User (Current)
+Get User Id (Current)

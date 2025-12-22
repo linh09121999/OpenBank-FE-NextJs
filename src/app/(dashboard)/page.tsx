@@ -27,27 +27,10 @@ const Home: React.FC = () => {
   const [total, setTotal] = useState({
     banks: 0,
     accountPrivate: 0,
-    accountPublic: 0,
     consents: 0,
     cunsumers: 0,
     customers: 0
   })
-
-  const getBanks = async () => {
-    try {
-      setLoading(true)
-      const res = await GetBanks()
-      setTotal(prev => ({
-        ...prev,
-        banks: res.data.banks.length
-      }))
-    } catch (error: any) {
-
-    }
-    finally {
-      setLoading(false)
-    }
-  }
 
   const getAccountAllBankPrivate = async () => {
     try {
@@ -56,22 +39,6 @@ const Home: React.FC = () => {
       setTotal(prev => ({
         ...prev,
         accountPrivate: res.data.accounts.length
-      }))
-    } catch (error: any) {
-
-    }
-    finally {
-      setLoading(false)
-    }
-  }
-
-  const getAccountAllBankPublic = async () => {
-    try {
-      setLoading(true)
-      const res = await GetPublicAccountsAtAllBanks()
-      setTotal(prev => ({
-        ...prev,
-        accountPublic: res.data.accounts.length
       }))
     } catch (error: any) {
 
@@ -135,8 +102,8 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     setActiveSection("overview")
-    getBanks()
-    getAccountAllBankPublic()
+    // getBanks()
+    // getAccountAllBankPublic()
     getAccountAllBankPrivate()
     getMyConsents()
     getConsumers_LoggedInUser()
@@ -147,8 +114,8 @@ const Home: React.FC = () => {
     <>
       <div className="grid md:grid-cols-5 gap-5">
         {[
-          { total: total.banks, label: "Total Banks", icon: RiBankLine },
-          { total: (total.accountPrivate + total.accountPublic), label: "Total Account", icon: MdOutlineManageAccounts },
+          { total: bankViewItems.length, label: "Total Banks", icon: RiBankLine },
+          { total: total.accountPrivate, label: "Total Account", icon: MdOutlineManageAccounts },
           { total: total.consents, label: "Total Consent", icon: BsJournalCheck },
           { total: total.cunsumers, label: "Total Cunsumers", icon: MdOutlineShoppingCart },
           { total: total.customers, label: "Total Customers", icon: RiCustomerService2Line }
