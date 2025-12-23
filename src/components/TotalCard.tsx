@@ -4,27 +4,38 @@ type TotalCardProps = {
     Icon: ElementType;
     label: string,
     total: number,
-    isDark: boolean
+    isDark: boolean,
+    bgCard: string
 }
 
-const TotalCard: React.FC<TotalCardProps> = ({ Icon, label, total, isDark }) => {
+const TotalCard: React.FC<TotalCardProps> = ({ Icon, label, total, isDark, bgCard }) => {
     return (
-        <div
-            className={`p-5 rounded-3xl shadow-lg backdrop-blur-xl flex gap-5
-                ${isDark
-                    ? "bg-white/5 text-white border border-white/10 shadow-white/5"
-                    : "bg-white/90"
-                }`}
+        <div className={`p-5 rounded-3xl shadow-lg backdrop-blur-xl flex justify-between gap-5
+            ${isDark
+                ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+                : "bg-white/90"
+            }
+            `}
         >
-            {/* Icon */}
-            <div className="relative">
-                <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 
-          text-white hover:from-green-600 hover:to-emerald-700 
-          overflow-hidden group p-3 rounded-xl"
+            <div>
+                <div
+                    className={`text-4xl  leading-[1.5]
+                    ${isDark ? "" : "text-neutral-800"}`}
                 >
-                    <Icon className="text-3xl text-white" />
-
-                    {/* Shine effect */}
+                    {total}
+                </div>
+                <div
+                    className={`text-sm font-normal 
+                    ${isDark ? "text-gray-400" : "text-gray-600"}`}
+                >
+                    {label}
+                </div>
+            </div>
+            <div className="relative">
+                <div className="relative overflow-hidden group p-3 rounded-xl "
+                    style={{ background: `${bgCard}` }}
+                >
+                    <Icon className="text-4xl text-white" />
                     <div className="absolute inset-0 overflow-hidden">
                         <div
                             className="absolute inset-0 bg-gradient-to-r 
@@ -32,34 +43,17 @@ const TotalCard: React.FC<TotalCardProps> = ({ Icon, label, total, isDark }) => 
               -skew-x-12 -translate-x-full 
               group-hover:translate-x-full 
               transition-transform duration-1000"
-                        />
+                        ></div>
                     </div>
 
-                    {/* Glow border */}
                     <div
-                        className="absolute inset-0 rounded-xl border border-green-400 
+                        className="absolute inset-0 rounded-xl border  
             animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"
-                    />
+                        style={{ borderColor: `${bgCard}` }}
+                    ></div>
                 </div>
             </div>
-
-            {/* Content */}
-            <div>
-                <div
-                    className={`text-base font-normal 
-                    ${isDark ? "text-gray-400" : "text-gray-600"}`}
-                >
-                    {label}
-                </div>
-
-                <div
-                    className={`text-2xl font-semibold 
-                    ${isDark ? "" : "text-neutral-800"}`}
-                >
-                    {total}
-                </div>
-            </div>
-        </div>
+        </div >
     );
 };
 

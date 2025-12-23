@@ -544,5 +544,5 @@ export interface BankViewItem {
 export interface GroupedBankAccount {
     bank_id: string;
     account_id: string;
-    // view_ids: string[];
+    view_ids: string[];
 };

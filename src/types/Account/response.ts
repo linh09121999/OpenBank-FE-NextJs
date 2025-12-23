@@ -270,16 +270,9 @@ export interface ResAgentsatBank {
     agents: AgentsatBank[]
 }
 
-export interface ResBankAccountBalances {
-    bank_id: string;
-    account_id: string;
-    balance_id: string;
-    balance_type: string;
-    balance_amount: string;
-}
 
 export interface ResAllBankAccountBalances {
-    balances: ResBankAccountBalances[];
+    balances: ResBankAccountBalance[];
 }
 
 interface Account {
@@ -346,14 +339,6 @@ export interface ResUpdateAccount {
     type: string;
     branch_id: string;
     account_routings: AccountRouting[];
-}
-
-export interface ResBankAccountBalance {
-    bank_id: string;
-    account_id: string;
-    balance_id: string;
-    balance_type: string;
-    balance_amount: string;
 }
 
 interface ValidateAndCheckIBAN {

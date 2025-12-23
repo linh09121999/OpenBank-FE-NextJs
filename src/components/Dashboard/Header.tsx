@@ -109,23 +109,12 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
 
     const { handleLogOut } = useAuth()
 
-    const getUniqueAccounts = (list: BankViewItem[]): GroupedBankAccount[] => {
-        return list.filter((item, index, self) => {
-            return index === self.findIndex(t =>
-                t.bank_id === item.bank_id && t.account_id === item.account_id
-            );
-        }).map(({ bank_id, account_id }) => ({ bank_id, account_id }));
-    };
-
     // Get User (Current)
     const getUser_Current = async () => {
         try {
             setLoading(true)
             const res = await GetUser_Current()
             setResGetUserCurrent(res.data)
-            const listView = res.data.views.list
-            const listGroup = getUniqueAccounts(listView)
-            setBankViewItems(listGroup)
         } catch (error: any) {
 
         }

@@ -21,7 +21,6 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
 
     const { isAuthenticated } = useAuth()
     useEffect(() => {
-        console.log(isAuthenticated)
         if (!isAuthenticated) {
             router.push('/login')
         }
