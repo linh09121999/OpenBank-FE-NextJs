@@ -145,10 +145,10 @@ const Header: React.FC<HeaderProps> = ({ isDark, onToggle }) => {
         `}>
             <div className="p-5 w-full flex items-center justify-between gap-5">
                 <div>
-                    {[...titleNav, ...titleBottomNav].map((item, index) => {
+                    {[...titleNav, ...titleBottomNav].map((item) => {
                         const Icon = item.icon;
                         return (
-                            <div className="flex items-center gap-4" key={index}>
+                            <div className="flex items-center gap-4" key={`${item.id}`}>
                                 <div className="relative">
                                     <div className="relative bg-gradient-to-r from-emerald-500/10 to-teal-500/10 p-3 rounded-2xl">
                                         <Icon className="w-6 h-6 text-green-500" />

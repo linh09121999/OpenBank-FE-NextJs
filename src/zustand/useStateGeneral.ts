@@ -47,6 +47,7 @@ interface State {
     setIsDark: (isCheck: boolean) => void;
     bankViewItems: GroupedBankAccount[];
     setBankViewItems: React.Dispatch<React.SetStateAction<GroupedBankAccount[]>>
+
 }
 
 export const useStateGeneral = create<State>((set, get) => ({

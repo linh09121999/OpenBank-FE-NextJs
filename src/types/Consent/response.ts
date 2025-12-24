@@ -154,7 +154,7 @@ export interface ResMyConsents {
     consents: MyConsents[]
 }
 
-interface MyConsentsInfo {
+export interface MyConsentsInfo {
     consent_id: string;
     consumer_id: string;
     created_by_user_id: string;

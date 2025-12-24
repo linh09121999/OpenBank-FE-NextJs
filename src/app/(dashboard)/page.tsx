@@ -1,16 +1,13 @@
 
 'use client'
 
-import Badge from "@/components/Badge";
-import TotalCard from "@/components/TotalCard";
-import { useAuth } from "@/contexts/AuthContext";
-import { GetPublicAccountsAtAllBanks } from "@/services/Account-Public/service";
-import { GetAccountBalancesbyBANK_ID, GetAccountsatallBanks_private } from "@/services/Account/service";
+import CardBank from "@/components/CardBank";
+import CardTotal from "@/components/CartTotal";
+import { GetAccountBalancesbyBANK_ID } from "@/services/Account/service";
 import { GetBank } from "@/services/Bank/service";
-import { GetBanks } from "@/services/BankAccountTag1/service";
 import { GetMyConsents, GetMyConsentsInfo } from "@/services/Consent/service";
 import { GetConsumers_LoggedInUser } from "@/services/Consumer/service";
-import { GetCustomersForCurrentUser, GetCustomersForCurrentUser_IDsOnly, GetMyCustomers } from "@/services/Customer/service";
+import { GetCustomersForCurrentUser } from "@/services/Customer/service";
 import { GetUser_Current } from "@/services/User/service";
 import { BankViewItem, GroupedBankAccount } from "@/types/type";
 import { useStateAccount } from "@/zustand/useStateAccount";
@@ -20,10 +17,20 @@ import { useStateUser } from "@/zustand/useStateUser";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { AiTwotoneBank } from "react-icons/ai";
-import { BsCart2, BsJournalCheck } from "react-icons/bs";
-import { MdOutlineManageAccounts, MdOutlineShoppingCart } from "react-icons/md";
+import { BsJournalCheck } from "react-icons/bs";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import { RiBankLine, RiCustomerService2Line } from "react-icons/ri";
+import { motion, AnimatePresence } from "motion/react";
+import { Tab, Tabs } from "@mui/material";
+import { useStateConsent } from "@/zustand/useStateConsent";
+import {
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+} from '@coreui/react';
 
 const Home: React.FC = () => {
   const router = useRouter()
@@ -39,14 +46,17 @@ const Home: React.FC = () => {
   })
 
   // Get My Consents
-  const getMyConsents = async () => {
+  const { resMyConsentInfo, setResMyConsentInfo } = useStateConsent()
+
+  const getMyConsentsInfo = async () => {
     try {
       setLoading(true)
-      const res = await GetMyConsents()
+      const res = await GetMyConsentsInfo()
       setTotal(prev => ({
         ...prev,
         consents: res.data.consents.length
       }))
+      setResMyConsentInfo(res.data.consents)
     } catch (error: any) {
 
     }
@@ -89,14 +99,6 @@ const Home: React.FC = () => {
   }
 
   const { setResGetUserCurrent } = useStateUser()
-
-  // const getUniqueAccounts = (list: BankViewItem[]): GroupedBankAccount[] => {
-  //   return list.filter((item, index, self) => {
-  //     return index === self.findIndex(t =>
-  //       t.bank_id === item.bank_id && t.account_id === item.account_id
-  //     );
-  //   }).map(({ bank_id, account_id }) => ({ bank_id, account_id }));
-  // };
 
   const getUniqueAccounts = (list: BankViewItem[]): GroupedBankAccount[] => {
     const map = new Map<string, GroupedBankAccount>()
@@ -173,10 +175,9 @@ const Home: React.FC = () => {
     }
   }
 
-
   useEffect(() => {
     setActiveSection("overview")
-    getMyConsents()
+    getMyConsentsInfo()
     getConsumers_LoggedInUser()
     getCustomersForCurrentUser()
     getUser_Current()
@@ -207,19 +208,44 @@ const Home: React.FC = () => {
     }))
   }, [resBank, resAccountBlancesByBankID, bankViewItems])
 
+  // const totalAllBanksBalance = useMemo(() =>
+  //   bankMap.reduce(
+  //     (sum, bank) =>
+  //       sum +
+  //       bank.accounts.reduce(
+  //         (aSum, acc) =>
+  //           aSum +
+  //           acc.balances.reduce(
+  //             (bSum: any, bal: any) => bSum + Number(bal.amount),
+  //             0
+  //           ),
+  //         0
+  //       ),
+  //     0
+  //   ),
+  //   [bankMap]
+  // )
+
+  const [tabTable, setTabTable] = useState<string>('consent')
+  const handleTabTable = (e: React.SyntheticEvent, newValue: string) => {
+    setTabTable(newValue)
+  }
+  const [selectedRowConsent, setSelectedRowConsent] = useState<string | null>(null);
+
+
   return (
     <>
-      {/* <div className="flex flex-col gap-5"> */}
       <div className="grid md:grid-cols-4 gap-5">
         {[
           { total: bankViewItems.length, label: "Total Banks", icon: RiBankLine, bg: "var(--color-blue-500)" },
-          { total: total.consents, label: "Total Consent", icon: BsJournalCheck, bg: "#8b5cf6" },
+          // { total: totalAllBanksBalance, label: "Total Balances", icon: PiPiggyBankBold, bg: "#8b5cf6" },
+          { total: total.consents, label: "Total Consent", icon: BsJournalCheck, bg: "var(--color-violet-500)" },
           { total: total.cunsumers, label: "Total Cunsumers", icon: MdOutlineShoppingCart, bg: "var(--color-green-500)" },
           { total: total.customers, label: "Total Customers", icon: RiCustomerService2Line, bg: "var(--color-yellow-500)" }
-        ].map(({ total, label, icon, bg }, index) => {
+        ].map(({ total, label, icon, bg }) => {
           const Icon = icon
           return (
-            <TotalCard key={index} Icon={Icon} isDark={isDark} label={label} total={total} bgCard={bg} />
+            <CardTotal key={`${label}_${total}`} Icon={Icon} isDark={isDark} label={label} total={total} bgCard={bg} />
           )
         })}
         {/* bieu do  */}
@@ -228,48 +254,114 @@ const Home: React.FC = () => {
             ? "bg-white/5 text-white border border-white/10 shadow-white/5"
             : "bg-white/90"
           }`}></div>
-        <div className={`md:col-span-1 md:col-start-4 md:row-start-2 flex flex-col gap-5 max-h-[50vh] overflow-y-auto scroll-y`}>
-          {bankMap.map((bank) => (
-            <div key={bank.id} className={`p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 h-full items-center
+
+        <div className={`md:col-span-1 md:col-start-4 md:row-start-2 grid gap-5 md:max-h-[52.5vh] overflow-y-auto scroll-y`}>
+          {bankMap.map((bank) => {
+            const totalBalance = bank.accounts
+              .flatMap(acc => acc.balances)
+              .reduce((sum, b) => sum + Number(b.amount || 0), 0)
+
+            const currency = bank.accounts?.[0]?.balances?.[0]?.currency ?? ""
+
+            return (
+              <CardBank isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} />
+            )
+          })}
+
+        </div>
+        <div className={`md:col-span-4 md:col-start-1 p-5 rounded-3xl shadow-lg backdrop-blur-xl gap-5
             ${isDark
-                ? "bg-white/5 text-white border border-white/10 shadow-white/5"
-                : "bg-white/90"
+            ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+            : "bg-white/90"
+          }`}>
+
+        </div>
+        <div className={`md:col-span-4 md:col-start-1 p-5 rounded-3xl shadow-lg backdrop-blur-xl gap-5
+            ${isDark
+            ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+            : "bg-white/90"
+          }`}>
+          <Tabs
+            value={tabTable}
+            onChange={handleTabTable}
+            sx={{
+              "& .MuiTab-textColorPrimary": {
+                color: isDark ? "var(--color-gray-400) !important" : "var(--color-gray-600) !important",
+              },
+              ".Mui-selected": {
+                color: isDark ? "var(--color-green-400) !important" : "var(--color-green-600) !important",
+              },
+              "& .MuiTabs-indicator": {
+                backgroundColor: isDark ? "var(--color-green-400) !important" : "var(--color-green-600) !important",
               }
-            `}>
-
-              <div className="flex gap-3 items-center">
-                <img src={bank.logo} alt={bank.id} className="h-24 w-24" />
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-lg font-semibold">{bank.full_name}</h2>
-                  {bank.views.map((view) => (
-                    <div key={view.account_id}>
-                      <div className="flex gap-2 flex-wrap">
-                        {view.view_ids.map((v: any) => (
-                          <Badge key={v} isDark={isDark} badge={v} />
+            }}
+          >
+            {[
+              { tabId: "consent", label: "Consents" },
+              { tabId: "cunsumer", label: "Consumers" },
+              { tabId: "cusstomer", label: "Customers" }
+            ].map(({ tabId, label }) => (
+              <Tab value={tabId} label={label} />
+            ))}
+          </Tabs>
+          {tabTable === "consent" &&
+            <>
+              {resMyConsentInfo.length > 0
+                ? <div className="grid pt-5">
+                  <div className="w-full overflow-x-auto scroll-x">
+                    <CTable bordered hover align="middle" responsive className="w-full  " style={{ tableLayout: 'fixed' }}>
+                      <CTableHead color="light">
+                        <CTableRow>
+                          <CTableHeaderCell className="text-center p-3 ">Consent Id</CTableHeaderCell>
+                          <CTableHeaderCell className="text-center p-3 ">Consumer Id</CTableHeaderCell>
+                          <CTableHeaderCell className="text-center p-3 ">Date</CTableHeaderCell>
+                          <CTableHeaderCell className="text-center p-3 ">Status</CTableHeaderCell>
+                          <CTableHeaderCell className="text-center p-3 ">Api Standard</CTableHeaderCell>
+                        </CTableRow>
+                      </CTableHead>
+                      <CTableBody>
+                        {resMyConsentInfo.slice(0, 5).map((data) => (
+                          <CTableRow className="table-body-row-mucluc" key={data.consent_id}
+                            onClick={() => {
+                              setSelectedRowConsent(data.consent_id);
+                            }} onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault(); // Ngăn xuống dòng nếu cần
+                                setSelectedRowConsent(null); // Thoát khỏi select
+                              }
+                            }}
+                            style={{
+                              border: data.consent_id === selectedRowConsent
+                                ? isDark
+                                  ? '2px dashed var(--color-green-400)'
+                                  : '2px dashed var(--color-green-600)'
+                                : '',
+                              cursor: 'pointer'
+                            }}
+                          >
+                            <CTableDataCell className='text-center p-3 '>{data.consent_id}</CTableDataCell>
+                            <CTableDataCell className='text-center p-3 '>{data.consumer_id}</CTableDataCell>
+                            <CTableDataCell className='text-center p-3'>{data.last_usage_date}</CTableDataCell>
+                            <CTableDataCell className='text-center p-3 '>{data.status}</CTableDataCell>
+                            <CTableDataCell className='text-center p-3 '>{data.api_standard}</CTableDataCell>
+                          </CTableRow>
                         ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="flex flex-col gap-3 ">
-                {bank.accounts.map((acc) => (
-                  <div key={acc.account_id}>
-                    {acc.balances.map((bal: any, i: any) => (
-                      <p key={i} className={`text-3xl  leading-[1.5]
-                    ${isDark ? "" : "text-neutral-800"}`} >
-                        Balance: {bal.amount} {bal.currency}
-                      </p>
-                    ))}
+                      </CTableBody>
+                    </CTable>
                   </div>
-                ))}
-
-              </div>
-            </div>
-          ))}
+                </div>
+                : <></>
+              }
+            </>
+          }
+          {tabTable === "cunsumer" &&
+            <></>
+          }
+          {tabTable === "cusstomer" &&
+            <></>
+          }
         </div>
       </div >
-
     </>
   );
 }

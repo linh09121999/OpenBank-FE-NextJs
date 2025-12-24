@@ -546,3 +546,15 @@ export interface GroupedBankAccount {
     account_id: string;
     view_ids: string[];
 };
+
+export interface BankMap {
+    accounts: any[];
+    views: any[];
+    id: string;
+    bank_code: string;
+    full_name: string;
+    logo: string;
+    website: string;
+    bank_routings: AccountRouting[];
+    attributes: Attribute[];
+}

@@ -12,10 +12,10 @@ const Footer: React.FC<FooterProps> = ({ isDark }) => {
         <footer className={`relative w-full overflow-hidden ${isDark ? 'text-gray-200' : 'text-black '} mt-auto`}>
             <div className={`relative p-5 flex flex-col gap-5 `}>
                 <p className="text-center text-base">© Copyright 2010 - 2023
-                    <a href="http://tesobe.com/" className="text-green-600"> TESOBE GmbH</a>
+                    <a href="http://tesobe.com/" className={`${isDark ? "text-green-400" : "text-green-600"}`}> TESOBE GmbH</a>
                     , All Rights Reserved |
-                    <a href="https://www.openbankproject.com/sitemap.xml" className="text-green-600"> Sitemap</a></p>
-                <div className="flex gap-5 justify-center text-base text-green-600">
+                    <a href="https://www.openbankproject.com/sitemap.xml" className={`${isDark ? "text-green-400" : "text-green-600"}`}> Sitemap</a></p>
+                <div className="flex gap-5 justify-center text-base">
                     {[
                         { link: "https://www.linkedin.com/company/open-bank-project", icon: <FaLinkedinIn /> },
                         { link: "https://www.youtube.com/c/OpenBankProject", icon: <FaYoutube /> },
@@ -23,8 +23,8 @@ const Footer: React.FC<FooterProps> = ({ isDark }) => {
                         { link: "https://vimeo.com/openbankproject", icon: <FaVimeoV /> },
                         { link: "https://www.facebook.com/openbankproject/", icon: <FaFacebookF /> },
                         { link: "https://twitter.com/OpenBankProject", icon: <FaTwitter /> }
-                    ].map(({ link, icon }, index) => (
-                        <a href={`${link}`} key={index}>
+                    ].map(({ link, icon }) => (
+                        <a href={`${link}`} key={`${link}_${icon}`} className={`${isDark ? "text-green-400" : "text-green-600"}`}>
                             {icon}
                         </a>
                     ))}

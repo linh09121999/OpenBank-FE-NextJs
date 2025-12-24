@@ -113,7 +113,7 @@ const Bar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, activeSection, onS
                                             <div className="absolute inset-0 overflow-hidden">
                                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                             </div>
-                                            <div className="absolute inset-0 rounded-xl border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                            <div className="absolute inset-0 rounded-lg border-1 border-green-400 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                         </>
                                     }
                                 </div>

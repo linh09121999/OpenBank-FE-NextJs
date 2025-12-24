@@ -11,7 +11,7 @@ const Loading: React.FC = () => {
         <>
             {loading &&
                 <Backdrop
-                    sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+                    sx={(theme) => ({ color: 'var(--color-green-400)', zIndex: theme.zIndex.drawer + 1 })}
                     open={loading}
                 >
                     <CircularProgress color="inherit" />

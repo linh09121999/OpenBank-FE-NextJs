@@ -27,7 +27,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
     }, [isAuthenticated])
 
     return (
-        <div className={`min-h-screen relative overflow-hidden ${isDark
+        <div className={`flex w-full h-full ${isDark
             ? "bg-black/40"
             : "bg-white/85"
             }`}>
@@ -40,22 +40,22 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
                 onSectionChange={setActiveSection}
                 isDark={isDark}
             />
-            <div className="relative z-1 w-full">
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    style={{ marginLeft: sidebarOpen ? 92 : 280 }}
-                    transition={{ duration: 0.3 }}>
-                    <Header
-                        isDark={isDark}
-                        onToggle={() => setIsDark(!isDark)}
-                    />
-                    <main className="min-h-[78vh]  p-5">
-                        {children}
-                    </main>
-                    <Footer isDark={isDark} />
-                </motion.div>
-            </div>
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                style={{ marginLeft: sidebarOpen ? 92 : 280 }}
+                transition={{ duration: 0.3 }}
+                className=" flex-1 "
+            >
+                <Header
+                    isDark={isDark}
+                    onToggle={() => setIsDark(!isDark)}
+                />
+                <main className="min-h-[77vh] p-5">
+                    {children}
+                </main>
+                <Footer isDark={isDark} />
+            </motion.div>
         </div >
     );
 };

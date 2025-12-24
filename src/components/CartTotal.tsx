@@ -1,6 +1,8 @@
+'use client'
+
 import { ElementType } from "react";
 
-type TotalCardProps = {
+type CardTotalProps = {
     Icon: ElementType;
     label: string,
     total: number,
@@ -8,7 +10,7 @@ type TotalCardProps = {
     bgCard: string
 }
 
-const TotalCard: React.FC<TotalCardProps> = ({ Icon, label, total, isDark, bgCard }) => {
+const CardTotal: React.FC<CardTotalProps> = ({ Icon, label, total, isDark, bgCard }) => {
     return (
         <div className={`p-5 rounded-3xl shadow-lg backdrop-blur-xl flex justify-between gap-5
             ${isDark
@@ -37,24 +39,23 @@ const TotalCard: React.FC<TotalCardProps> = ({ Icon, label, total, isDark, bgCar
                 >
                     <Icon className="text-4xl text-white" />
                     <div className="absolute inset-0 overflow-hidden">
-                        <div
-                            className="absolute inset-0 bg-gradient-to-r 
+                        <div className="absolute inset-0 bg-gradient-to-r 
               from-transparent via-white/20 to-transparent 
               -skew-x-12 -translate-x-full 
               group-hover:translate-x-full 
               transition-transform duration-1000"
-                        ></div>
+                        />
                     </div>
 
                     <div
                         className="absolute inset-0 rounded-xl border  
             animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"
                         style={{ borderColor: `${bgCard}` }}
-                    ></div>
+                    />
                 </div>
             </div>
         </div >
     );
 };
 
-export default TotalCard;
+export default CardTotal;

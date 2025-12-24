@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import BackToTop from "@/components/BackToTop";
-import Loading from "@/components/loadling";
+import Loading from "@/components/Loadling";
 import LayoutWrapper from "@/components/Dashboard/LayoutWrapper";
 import { AuthProvider } from "@/contexts/AuthContext";
 
@@ -31,9 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} overflow-hidden antialiased flex flex-col w-full h-full `}
-      >
+      <body>
         <BackToTop />
         <Loading />
         <AuthProvider>
