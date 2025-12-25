@@ -104,7 +104,7 @@ interface TransactionMetadata {
     where: LocationUser;
 }
 
-interface FirehoseTransactions {
+export interface FirehoseTransactions {
     id: string;
     this_account: BankAccount;
     other_account: OtherAccount;

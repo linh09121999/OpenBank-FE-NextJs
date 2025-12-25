@@ -1,27 +1,26 @@
 'use client'
 
-import { ElementType } from "react";
+import {type ElementType } from "react";
 
 type CardTotalProps = {
-    Icon: ElementType;
+    children: React.ReactNode;
     label: string,
-    total: number,
+    total: React.ReactNode,
     isDark: boolean,
-    bgCard: string
 }
 
-const CardTotal: React.FC<CardTotalProps> = ({ Icon, label, total, isDark, bgCard }) => {
+const CardTotal: React.FC<CardTotalProps> = ({ children, label, total, isDark}) => {
     return (
-        <div className={`p-5 rounded-3xl shadow-lg backdrop-blur-xl flex justify-between gap-5
+        <div className={`p-5 rounded-3xl shadow-lg backdrop-blur-xl flex justify-between gap-5 items-center
             ${isDark
                 ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                 : "bg-white/90"
             }
             `}
         >
-            <div>
+            <div className="flex flex-col gap-1">
                 <div
-                    className={`text-4xl  leading-[1.5]
+                    className={`text-4xl items-end flex gap-2
                     ${isDark ? "" : "text-neutral-800"}`}
                 >
                     {total}
@@ -35,23 +34,8 @@ const CardTotal: React.FC<CardTotalProps> = ({ Icon, label, total, isDark, bgCar
             </div>
             <div className="relative">
                 <div className="relative overflow-hidden group p-3 rounded-xl "
-                    style={{ background: `${bgCard}` }}
                 >
-                    <Icon className="text-4xl text-white" />
-                    <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r 
-              from-transparent via-white/20 to-transparent 
-              -skew-x-12 -translate-x-full 
-              group-hover:translate-x-full 
-              transition-transform duration-1000"
-                        />
-                    </div>
-
-                    <div
-                        className="absolute inset-0 rounded-xl border  
-            animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"
-                        style={{ borderColor: `${bgCard}` }}
-                    />
+                    {children}
                 </div>
             </div>
         </div >
