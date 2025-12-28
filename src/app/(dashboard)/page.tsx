@@ -293,28 +293,44 @@ const Home: React.FC = () => {
     getUser_Current()
   }, [])
 
-  const [selectDetailDay, setSelectDetailDay] = useState<number>(0)
-  const currentHour = new Date().getHours();
+  const filterSortTransactionAccountCore = useMemo(() => {
+    if (!Array.isArray(resTransactionAccountCore)) return [];
+    return [...resTransactionAccountCore].sort(
+      (a, b) =>
+        new Date(a.details.completed).getTime() -
+        new Date(b.details.completed).getTime()
+    )
+  }, [resTransactionAccountCore])
 
-  const isBorderDash = selectDetailDay === 0 ? currentHour : 0
+  const filterTransactionAccountCoreDeposits = useMemo(() => {
+    if (!Array.isArray(filterSortTransactionAccountCore)) return [];
+    return filterSortTransactionAccountCore.filter(
+      (item) => Number(item.details.value.amount) > 0
+    )
+  }, [filterSortTransactionAccountCore])
+
+  const filterTransactionAccountCoreWithdrawals = useMemo(() => {
+    if (!Array.isArray(filterSortTransactionAccountCore)) return [];
+    return filterSortTransactionAccountCore.filter(
+      (item) => Number(item.details.value.amount) < 0
+    )
+  }, [filterSortTransactionAccountCore])
+
+  const depositPoints = useMemo(() => {
+    return filterTransactionAccountCoreDeposits.map(h => ({
+      x: h.details.completed,
+      y: Number(h.details.value.amount) ?? 0,
+    }));
+  }, [filterTransactionAccountCoreDeposits]);
+
+  const withdrawalPoints = useMemo(() => {
+    return filterTransactionAccountCoreWithdrawals.map(h => ({
+      x: h.details.completed,
+      y: Math.abs(Number(h.details.value.amount)) ?? 0,
+    }));
+  }, [filterTransactionAccountCoreWithdrawals]);
 
   const label = ["Deposits", "Withdrawals"]
-
-  const times = resTransactionAccountCore.map(
-    (t) => {
-      const time = format(new Date(t.details.completed), 'MM/dd/yyyy HH:mm:ss', { locale: enUS })
-      return time
-    }
-  )
-
-  const dataDetail = [
-    resTransactionAccountCore.map(
-      (h) => Number(h.details.value.amount) ?? 0
-    ) ?? [],
-    resTransactionAccountCore.map(
-      (h) => Number(h.details.value.amount) ?? 0
-    ) ?? [],
-  ]
 
   return (
     <>
@@ -452,19 +468,18 @@ const Home: React.FC = () => {
           }`}>
           <label htmlFor="balanceChart" className="text-2xl">Your Balance Summary</label>
           <ChartMultiLine
-            stepSize={0.5}
+            stepSize={100}
             label={label}
-            times={times}
-            dataDetail={dataDetail}
-            border={["red", "blue"]}
+            dataDetail={[depositPoints, withdrawalPoints]}
+            border={["#05df72", "#016630"]}
             background={[
-              "rgba(255,0,0,0.2)",
-              "rgba(0,0,255,0.2)",
+              "rgba(0, 248, 21, 0.2)",
+              "rgba(2, 77, 60, 0.2)",
             ]}
             donvi={""}
             isDark={isDark} />
         </div>
-        <div className="md:col-span-1 md:col-start-3 md:row-start-2 grid gap-5 md:max-h-[52.5vh] overflow-y-auto scroll-y">
+        <div className="md:col-span-1 md:col-start-3 md:row-start-2 grid gap-5 md:max-h-[64.5vh] overflow-y-auto scroll-y">
           {bankMap.map((bank) => {
             const totalBalance = bank.accounts
               .flatMap(acc => acc.balances)
@@ -477,12 +492,13 @@ const Home: React.FC = () => {
             )
           })}
         </div>
-        <div className={`md:col-span-3 md:col-start-1 md:row-start-3 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex justify-between gap-5
+        <div className={`md:col-span-3 md:col-start-1 md:row-start-3 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
             ${isDark
             ? "bg-white/5 text-white border border-white/10 shadow-white/5"
             : "bg-white/90"
           }`}>
-          <div className="grid pt-5 w-full">
+          <label htmlFor="balanceTransaction" className="text-2xl">Transaction history</label>
+          <div className="grid w-full">
             <DataTable
               id="my-datatable" className='m-2'
               key={tableKey}

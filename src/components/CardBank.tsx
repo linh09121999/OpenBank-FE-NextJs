@@ -26,19 +26,19 @@ const CardBank: React.FC<CardBankProps> = ({ isDark, bank, totalBalance, currenc
         >
 
             <div className="flex items-center gap-4">
-                <div className={`h-16 w-16 rounded-2xl
+                <div className={`h-24 w-24 rounded-2xl
            flex items-center justify-center shadow-md
           group-hover:scale-105 transition
           ${isDark ? 'bg-white/80' : 'bg-white/80'}`}>
                     <img
                         src={bank.logo}
                         alt={bank.full_name}
-                        className="h-12 w-12 object-contain"
+                        className="h-21 w-21 object-contain"
                     />
                 </div>
 
                 <div className="flex flex-col gap-1">
-                    <h2 className="text-lg font-semibold leading-tight">
+                    <h2 className="text-2xl font-semibold leading-tight">
                         {bank.full_name}
                     </h2>
 
