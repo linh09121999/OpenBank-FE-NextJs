@@ -30,6 +30,10 @@ import 'datatables.net-buttons/js/buttons.html5';
 import JSZip from 'jszip';
 import CardBank from "@/components/CardBank";
 import ChartMultiLine from "@/components/chartMultiLine";
+import { ResAccountBalancesbyBANK_ID } from "@/types/Account/response";
+import { ResBank } from "@/types/Bank/response";
+import { FirehoseTransactions } from "@/types/Transaction/response";
+import { ResCustomerBy } from "@/types/Customer/response";
 
 DataTable.use(DT);
 
@@ -71,7 +75,13 @@ const Home: React.FC = () => {
     try {
       setLoading(true)
       const res = await GetAccountBalancesbyBANK_ID(bank_id)
-      setResAccountBlancesByBankID((prev) => [...prev, ...res.data.accounts])
+      setResAccountBlancesByBankID(prev => {
+        // Tránh nối trùng dữ liệu
+        const newItems = res.data.accounts.filter(
+          (item: ResAccountBalancesbyBANK_ID) => !prev.some(p => p.bank_id === item.bank_id) // check theo id hoặc unique field
+        );
+        return [...prev, ...newItems];
+      });
     } catch (error: any) {
 
     }
@@ -87,7 +97,12 @@ const Home: React.FC = () => {
       setLoading(true)
       const res = await GetBank(bank_id)
 
-      setResBank((prev) => [...prev, res.data])
+      setResBank(prev => {
+        if (prev.some(item => item.id === res.data.id)) {
+          return prev;
+        }
+        return [...prev, res.data];
+      });
     } catch (error: any) {
 
     }
@@ -101,7 +116,12 @@ const Home: React.FC = () => {
     try {
       setLoading(true)
       const res = await GetTransactionsForAccount_Core(bank_id, account_id)
-      setResTransactionAccountCore((prev) => [...prev, ...res.data.transactions])
+      setResTransactionAccountCore(prev => {
+        const newItems = res.data.transactions.filter(
+          (item: FirehoseTransactions) => !prev.some(p => p.id === item.id)
+        );
+        return [...prev, ...newItems];
+      });
     } catch (error: any) {
 
     }
@@ -139,7 +159,12 @@ const Home: React.FC = () => {
     try {
       setLoading(true)
       const res = await GetCustomersForCurrentUser()
-      setResCustomerForCurrentUser((prev) => [...prev, ...res.data.customers])
+      setResCustomerForCurrentUser(prev => {
+        const newItems = res.data.transactions.filter(
+          (item: ResCustomerBy) => !prev.some(p => p.customer_id === item.customer_id)
+        );
+        return [...prev, ...newItems];
+      });
     } catch (error: any) {
 
     }
@@ -485,7 +510,7 @@ const Home: React.FC = () => {
             const currency = bank.accounts?.[0]?.balances?.[0]?.currency ?? ""
 
             return (
-              <CardBank isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} onToggle={()=>{}}/>
+              <CardBank isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} onToggle={() => { }} />
             )
           })}
         </div>
@@ -501,7 +526,22 @@ const Home: React.FC = () => {
               key={tableKey}
               data={resTransactionAccountCore}
               columns={columns}
-              options={options}
+              options={{
+                ...options,
+                rowCallback: (row, data, index) => {
+                  row.style.cursor = "pointer";
+                  row.onclick = () => {
+                    const table = document.getElementById("my-datatable");
+                    table?.querySelectorAll("tr").forEach((tr) => {
+                      tr.style.border = ""; // reset border
+                    });
+
+                    // Thêm border cho row vừa click
+                    row.style.border = "2px dashed var(--color-green-500)"; // màu đỏ ví dụ
+                    row.style.borderRadius = "4px";
+                  };
+                },
+              }}
             />
           </div>
         </div>

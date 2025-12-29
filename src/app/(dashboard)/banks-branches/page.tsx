@@ -22,6 +22,7 @@ import { useStateBranch } from "@/zustand/useStateBranches";
 import { GetBranchesforaBank } from "@/services/Branch/service";
 import { MdAdd } from "react-icons/md";
 import GoogleMapComponent from "@/components/GoogleMapComponent ";
+import { ResBranch } from "@/types/Branch/response";
 
 DataTable.use(DT);
 (window as any).JSZip = JSZip;
@@ -38,7 +39,13 @@ const Banks_BranchesPage: React.FC = () => {
         try {
             setLoading(true)
             const res = await GetBranchesforaBank(bank_id)
-            setResBranch((prev) => [...prev, ...res.data.branches])
+            // setResBranch((prev) => [...prev, ...res.data.branches])
+            setResBranch(prev => {
+                const newItem = res.data.branches.filter(
+                    (item: ResBranch) => !prev.some(p => p.id === item.id)
+                )
+                return [...prev, ...newItem]
+            })
         } catch (error: any) {
 
         }
@@ -164,7 +171,7 @@ const Banks_BranchesPage: React.FC = () => {
         getUser_Current()
     }, [])
 
-    const [centerIndexMap, setCenterIndexMap] = useState<number>(0)
+    const [centerIndexMap, setCenterIndexMap] = useState<number | null>(null)
 
     return (
         <>
@@ -213,7 +220,7 @@ const Banks_BranchesPage: React.FC = () => {
                             ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                             : "bg-white/90"
                         }`}>
-                        <GoogleMapComponent data={resBranch} index={centerIndexMap} zoom={centerIndexMap === -1 ? 4 : 10} />
+                        <GoogleMapComponent data={resBranch} index={centerIndexMap} zoom={centerIndexMap === null ? 4 : 15} />
                     </div>
                 }
 

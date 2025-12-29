@@ -11,7 +11,7 @@ const containerStyle = {
 
 type GoogleMapComponentProp = {
     data: ResBranch[];
-    index: number;
+    index: number | null;
     zoom: number
 }
 
@@ -21,8 +21,8 @@ const GoogleMapComponent: React.FC<GoogleMapComponentProp> = ({ data, index, zoo
     });
 
     const center = {
-        lat: data[index].location.latitude,
-        lng: data[index].location.longitude,
+        lat: data[index ?? 0].location.latitude,
+        lng: data[index ?? 0].location.longitude,
     };
 
     if (!isLoaded) return <p>Loading map...</p>;
