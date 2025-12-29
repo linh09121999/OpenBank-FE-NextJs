@@ -23,6 +23,7 @@ import { GetBranchesforaBank } from "@/services/Branch/service";
 import { MdAdd } from "react-icons/md";
 import GoogleMapComponent from "@/components/GoogleMapComponent ";
 import { ResBranch } from "@/types/Branch/response";
+import Button from "@/components/button";
 
 DataTable.use(DT);
 (window as any).JSZip = JSZip;
@@ -183,10 +184,14 @@ const Banks_BranchesPage: React.FC = () => {
                     }`}>
                     <div className="flex justify-between items-center">
                         <label htmlFor="branch" className="text-2xl">My Branches</label>
-                        <button className="items-center flex gap-1">
-                            <MdAdd />
-                            Add Branch
-                        </button>
+                        <div className="flex gap-5">
+                            <Button onToggle={() => { }} padding="py-2 px-3" radius="rounded-xl" display="flex gap-1 items-center" fontSize="text-md">
+                                <MdAdd />
+                                Add Branch
+                            </Button>
+                            <button>Filter</button>
+                        </div>
+
                     </div>
                     <div className="grid w-full">
                         <DataTable

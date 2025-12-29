@@ -86,7 +86,7 @@ const CardBank: React.FC<CardBankProps> = ({ isDark, bank, totalBalance, currenc
       shadow-lg
     `}
                 >
-                    <Button onToggle={onToggle} radius="rounded-full" padding="p-1">
+                    <Button onToggle={onToggle} radius="rounded-full" padding="p-1" fontSize="text-2xl">
                         <FaArrowRight />
                     </Button>
 
