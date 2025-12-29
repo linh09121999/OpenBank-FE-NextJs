@@ -16,9 +16,6 @@ import { useStateTransaction } from "@/zustand/useStateTransaction";
 import { useStateUser } from "@/zustand/useStateUser";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { BsJournalCheck } from "react-icons/bs";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { RiBankLine } from "react-icons/ri";
 
 import { format, parse } from 'date-fns'
 import { vi, enUS } from 'date-fns/locale'
@@ -32,7 +29,6 @@ import 'datatables.net-buttons/js/buttons.html5';
 
 import JSZip from 'jszip';
 import CardBank from "@/components/CardBank";
-import { CircularProgress } from "@mui/material";
 import ChartMultiLine from "@/components/chartMultiLine";
 
 DataTable.use(DT);
@@ -289,6 +285,7 @@ const Home: React.FC = () => {
 
 
   useEffect(() => {
+    setActiveSection('overview')
     getCustomersForCurrentUser()
     getUser_Current()
   }, [])
@@ -488,7 +485,7 @@ const Home: React.FC = () => {
             const currency = bank.accounts?.[0]?.balances?.[0]?.currency ?? ""
 
             return (
-              <CardBank isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} />
+              <CardBank isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} onToggle={()=>{}}/>
             )
           })}
         </div>

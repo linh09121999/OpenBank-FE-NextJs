@@ -63,18 +63,12 @@ export const useStateGeneral = create<State>((set, get) => ({
             icon: MdOutlineDashboard
         },
         {
-            id: 'banks_branches',
+            id: 'banks-branches',
             label: 'Banks & Branches',
-            path: '/banks',
+            path: '/banks-branches',
             badge: 'New',
             icon: RiBankLine
         },
-        // {
-        //     id: 'system-admin',
-        //     label: 'System Admin',
-        //     path: '/system-admin',
-        //     icon: GrSystem
-        // },
         {
             id: 'accounts',
             label: 'Accounts',
@@ -87,12 +81,12 @@ export const useStateGeneral = create<State>((set, get) => ({
             path: '/transactions',
             icon: GrTransaction
         },
-        // {
-        //     id: 'transaction-requests',
-        //     label: 'Transaction Requests',
-        //     path: '/transaction-requests',
-        //     icon: LuGitPullRequestDraft
-        // },
+        {
+            id: 'transaction-requests',
+            label: 'Transaction Requests',
+            path: '/transaction-requests',
+            icon: LuGitPullRequestDraft
+        },
         {
             id: 'customers',
             label: 'Customers',
@@ -111,73 +105,18 @@ export const useStateGeneral = create<State>((set, get) => ({
             path: '/cards',
             icon: FaRegAddressCard
         },
-        // {
-        //     id: 'atms',
-        //     label: 'ATMs',
-        //     path: '/atms',
-        //     icon: GrAtm
-        // },
-        // {
-        //     id: 'branches',
-        //     label: 'Branches',
-        //     path: '/branches',
-        //     icon: PiGitBranch
-        // },
+        {
+            id: 'atms',
+            label: 'ATMs',
+            path: '/atms',
+            icon: GrAtm
+        },
         {
             id: 'consents',
             label: 'Consents',
             path: '/consents',
             icon: BsJournalCheck
         },
-        // {
-        //     id: 'account-access',
-        //     label: 'Account Access',
-        //     path: '/account-access',
-        //     icon: IoAccessibilityOutline
-        // },
-        // {
-        //     id: 'counterparties',
-        //     label: 'Counterparties',
-        //     path: '/counterparties',
-        //     icon: FaUsersViewfinder
-        // },
-        // {
-        //     id: 'api-collections',
-        //     label: 'API Collections',
-        //     path: '/api-collections',
-        //     icon: TbApi,
-        //     badge: 'New'
-        // },
-        // {
-        //     id: 'users',
-        //     label: 'Users',
-        //     path: '/users',
-        //     icon: FaRegUser
-        // },
-        // {
-        //     id: 'roles-entitlements',
-        //     label: 'Roles & Entitlements',
-        //     path: '/roles-entitlements',
-        //     icon: FaRegUser
-        // },
-        // {
-        //     id: 'webhooks',
-        //     label: 'Webhooks',
-        //     path: '/webhooks',
-        //     icon: MdWebhook
-        // },
-        // {
-        //     id: 'directory',
-        //     label: 'Directory',
-        //     path: '/directory',
-        //     icon: GoFileDirectory
-        // },
-        // {
-        //     id: 'data-warehouse',
-        //     label: 'Data Warehouse',
-        //     path: '/data-warehouse',
-        //     icon: LuWarehouse
-        // }
     ],
     bottomNavItems: [
         {
