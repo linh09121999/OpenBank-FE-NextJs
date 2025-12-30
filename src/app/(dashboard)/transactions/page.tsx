@@ -21,7 +21,7 @@ import { FirehoseTransactions } from "@/types/Transaction/response";
 import { GetUser_Current } from "@/services/User/service";
 import { BankViewItem, GroupedBankAccount } from "@/types/type";
 import CardTotal from "@/components/CartTotal";
-import DoughnutChart from "@/components/ChartDoughNut";
+import ChartDoughnut from "@/components/ChartDoughNut";
 
 DataTable.use(DT);
 
@@ -402,7 +402,10 @@ const TransactionsPage: React.FC = () => {
                         ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                         : "bg-white/90"
                     }`}>
-                    <label htmlFor="balanceChart" className="text-2xl">Your Transaction Summary</label>
+                    <div className="flex justify-between items-center">
+                        <label htmlFor="balanceChart" className="text-2xl">Your Transaction Summary</label>
+                        <button>Filter</button>
+                    </div>
                     <ChartMultiLine
                         stepSize={100}
                         label={label}
@@ -419,8 +422,11 @@ const TransactionsPage: React.FC = () => {
                             ${isDark
                         ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                         : "bg-white/90"}`}>
-                    <label htmlFor="balanceChartDoughnut" className="text-2xl">Transaction rate</label>
-                    <DoughnutChart
+                    <div className="flex justify-between items-center">
+                        <label htmlFor="balanceChartDoughnut" className="text-2xl">Transaction rate</label>
+                        <button>Filter</button>
+                    </div>
+                    <ChartDoughnut
                         isDark={isDark}
                         labels={["Deposits", "Withdrawals"]}
                         backgroundColor={["#05df72", "#ff8904"]}

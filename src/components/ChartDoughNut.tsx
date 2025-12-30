@@ -24,7 +24,7 @@ interface DoughnutChartProps {
     isDark: boolean
 }
 
-const DoughnutChart: React.FC<DoughnutChartProps> = ({
+const ChartDoughnut: React.FC<DoughnutChartProps> = ({
     labels,
     data,
     backgroundColor = [
@@ -79,7 +79,7 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({
                     <p className={`text-lg opacity-70 max-sm:text-sm`}>{donvi}</p>
                 </div>
             </div>
-            <div className="justify-center flex ">
+            <div className="justify-center flex flex-wrap">
                 {labels.map((label, index) => (
                     <div
                         className={`flex items-center text-[12px] p-[6px] md:p-[12px] md:text-[16px] gap-2
@@ -96,4 +96,4 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({
     );
 };
 
-export default DoughnutChart;
+export default ChartDoughnut;

@@ -21,10 +21,10 @@ import 'datatables.net-buttons-dt';
 import 'datatables.net-buttons/js/buttons.html5';
 
 import JSZip from 'jszip';
-import { title } from "process"
 import Badge from "@/components/Badge"
 import Button from "@/components/button"
 import { MdAdd } from "react-icons/md"
+import ChartDoughnut from "@/components/ChartDoughNut"
 DataTable.use(DT);
 
 (window as any).JSZip = JSZip;
@@ -106,12 +106,26 @@ const TransactionRequestsPage: React.FC = () => {
         )
     }, [resTransactionRequest])
 
+    const summary_SANDBOX_TAN = {
+        total: filterTransactionRequests_SANDBOX_TAN.reduce(
+            (sum, t) => sum + Number(t.details.value.amount || 0),
+            0
+        ),
+    };
+
     const filterTransactionRequests_SEPA = useMemo(() => {
         if (!Array.isArray(resTransactionRequest)) return []
         return resTransactionRequest.filter(
             (item) => item.transaction_request_type.includes("SEPA")
         )
     }, [resTransactionRequest])
+
+    const summary_SEPA = {
+        total: filterTransactionRequests_SEPA.reduce(
+            (sum, t) => sum + Number(t.details.value.amount || 0),
+            0
+        )
+    }
 
     const filterTransactionRequests_FREE_FORM = useMemo(() => {
         if (!Array.isArray(resTransactionRequest)) return []
@@ -120,12 +134,24 @@ const TransactionRequestsPage: React.FC = () => {
         )
     }, [resTransactionRequest])
 
+    const summary_FREE_FORM = {
+        total: filterTransactionRequests_FREE_FORM.reduce(
+            (sum, t) => sum + Number(t.details.value.amount || 0), 0
+        )
+    }
+
     const filterTransactionRequests_COUNTERPARTY = useMemo(() => {
         if (!Array.isArray(resTransactionRequest)) return []
         return resTransactionRequest.filter(
             (item) => item.transaction_request_type.includes("COUNTERPARTY")
         )
     }, [resTransactionRequest])
+
+    const summary_COUNTERPARTY = {
+        total: filterTransactionRequests_COUNTERPARTY.reduce(
+            (sum, t) => sum + Number(t.details.value.amount || 0), 0
+        )
+    }
 
     const filterTransactionRequests_ACCOUNT_OTP = useMemo(() => {
         if (!Array.isArray(resTransactionRequest)) return []
@@ -134,6 +160,12 @@ const TransactionRequestsPage: React.FC = () => {
         )
     }, [resTransactionRequest])
 
+    const summary_ACCOUNT_OTP = {
+        total: filterTransactionRequests_ACCOUNT_OTP.reduce(
+            (sum, t) => sum + Number(t.details.value.amount || 0), 0
+        )
+    }
+
     const filterTransactionRequests_ACCOUNT = useMemo(() => {
         if (!Array.isArray(resTransactionRequest)) return []
         return resTransactionRequest.filter(
@@ -141,12 +173,24 @@ const TransactionRequestsPage: React.FC = () => {
         )
     }, [resTransactionRequest])
 
+    const summary_ACCOUNT = {
+        total: filterTransactionRequests_ACCOUNT.reduce(
+            (sum, t) => sum + Number(t.details.value.amount || 0), 0
+        )
+    }
+
     const filterTransactionRequests_SIMPLE = useMemo(() => {
         if (!Array.isArray(resTransactionRequest)) return []
         return resTransactionRequest.filter(
             (item) => item.transaction_request_type.includes("SIMPLE")
         )
     }, [resTransactionRequest])
+
+    const summary_SIMPLE = {
+        total: filterTransactionRequests_SIMPLE.reduce(
+            (sum, t) => sum + Number(t.details.value.amount || 0), 0
+        )
+    }
 
     const columns = [
         {
@@ -263,23 +307,133 @@ const TransactionRequestsPage: React.FC = () => {
         });
     }, [columns, options]);
 
+    const valueDoughnutCenter =
+        summary_SANDBOX_TAN.total +
+        summary_SEPA.total +
+        summary_FREE_FORM.total +
+        summary_COUNTERPARTY.total +
+        summary_ACCOUNT_OTP.total +
+        summary_ACCOUNT.total +
+        summary_SIMPLE.total
+
     return (
         <>
             <div className={`grid  gap-5 md:grid-cols-7`}>
-                {[
-                    { total: filterTransactionRequests_SANDBOX_TAN.length, label: "SANDBOX_TAN", icon: <></> },
-                    { total: filterTransactionRequests_SEPA.length, label: "SEPA", icon: <></> },
-                    { total: filterTransactionRequests_FREE_FORM.length, label: "FREE_FORM", icon: <></> },
-                    { total: filterTransactionRequests_COUNTERPARTY.length, label: "COUNTERPARTY", icon: <></> },
-                    { total: filterTransactionRequests_ACCOUNT_OTP.length, label: "ACCOUNT_OTP", icon: <></> },
-                    { total: filterTransactionRequests_ACCOUNT.length, label: "ACCOUNT", icon: <></> },
-                    { total: filterTransactionRequests_SIMPLE.length, label: "SIMPLE", icon: <></> }
-                ].map(({ total, label, icon }) => {
-                    return (
-                        <CardTotal key={`${label}_${total}`} children={icon} isDark={isDark} label={label} total={total} />
-                    )
-                })}
-                <div className={`md:col-span-7 md:col-start-1 md:row-start-2 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+                <div className="md:col-span-7 md:row-start-1 flex gap-5 overflow-x-auto scroll-x pb-1">
+                    {[
+                        {
+                            total:
+                                <>
+                                    {summary_SANDBOX_TAN.total.toLocaleString()}
+                                    <span className="text-lg font-medium opacity-70">
+                                        EUR
+                                    </span>
+                                </>
+                            , label: "SANDBOX_TAN", icon: <></>
+                        },
+                        {
+                            total:
+                                <>
+                                    {summary_SEPA.total.toLocaleString()}
+                                    <span className="text-lg font-medium opacity-70">
+                                        EUR
+                                    </span>
+                                </>
+                            , label: "SEPA", icon: <></>
+                        },
+                        {
+                            total:
+                                <>
+                                    {summary_FREE_FORM.total.toLocaleString()}
+                                    <span className="text-lg font-medium opacity-70">
+                                        EUR
+                                    </span>
+                                </>, label: "FREE_FORM", icon: <></>
+                        },
+                        {
+                            total:
+                                <>
+                                    {summary_COUNTERPARTY.total.toLocaleString()}
+                                    <span className="text-lg font-medium opacity-70">
+                                        EUR
+                                    </span>
+                                </>
+                            , label: "COUNTERPARTY", icon: <></>
+                        },
+                        {
+                            total:
+                                <>
+                                    {summary_ACCOUNT_OTP.total.toLocaleString()}
+                                    <span className="text-lg font-medium opacity-70">
+                                        EUR
+                                    </span>
+                                </>
+                            , label: "ACCOUNT_OTP", icon: <></>
+                        },
+                        {
+                            total:
+                                <>
+                                    {summary_ACCOUNT.total.toLocaleString()}
+                                    <span className="text-lg font-medium opacity-70">
+                                        EUR
+                                    </span>
+                                </>
+                            , label: "ACCOUNT", icon: <></>
+                        },
+                        {
+                            total:
+                                <>
+                                    {summary_SIMPLE.total.toLocaleString()}
+                                    <span className="text-lg font-medium opacity-70">
+                                        EUR
+                                    </span>
+                                </>
+                            , label: "SIMPLE", icon: <></>
+                        }
+                    ].map(({ total, label, icon }) => {
+                        return (
+                            <CardTotal key={`${label}_${total}`} children={icon} isDark={isDark} label={label} total={total} />
+                        )
+                    })}
+                </div>
+                <div className={`md:col-span-2 md:col-start-1 md:row-start-2 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+            ${isDark
+                        ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+                        : "bg-white/90"
+                    }`}>
+                    <div className="flex justify-between items-center">
+                        <label htmlFor="transactionRequestChartDoughnut" className="text-2xl">Transaction request Rate</label>
+                        <button>Filter</button>
+                    </div>
+                    <ChartDoughnut
+                        donvi="EUR"
+                        isDark={isDark}
+                        labels={["SANDBOX_TAN", "SEPA", "FREE_FORM", "COUNTERPARTY", "ACCOUNT_OTP", "ACCOUNT", "SIMPLE"]}
+                        data={[
+                            summary_SANDBOX_TAN.total,
+                            summary_SEPA.total,
+                            summary_FREE_FORM.total,
+                            summary_COUNTERPARTY.total,
+                            summary_ACCOUNT_OTP.total,
+                            summary_ACCOUNT.total,
+                            summary_SIMPLE.total
+                        ]}
+                        backgroundColor={["#05df72", "#00BFFF", "#4B0082", "#8A2BE2", "#FF0000", "#FFA500", "#FFFF00"]}
+                        value={valueDoughnutCenter}
+                        cutout="80%"
+                    />
+                </div>
+                <div className={`md:col-span-5 md:col-start-3 md:row-start-2 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+            ${isDark
+                        ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+                        : "bg-white/90"
+                    }`}>
+                    <div className="flex justify-between items-center">
+                        <label htmlFor="transactionRequestChartDoughnut" className="text-2xl"></label>
+                        <button>Filter</button>
+                    </div>
+                </div>
+                <div className={`md:col-span-7 md:col-start-1 md:row-start-3 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
             ${isDark
                         ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                         : "bg-white/90"

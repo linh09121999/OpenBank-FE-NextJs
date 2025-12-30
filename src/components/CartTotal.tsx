@@ -1,6 +1,6 @@
 'use client'
 
-import {type ElementType } from "react";
+import { type ElementType } from "react";
 
 type CardTotalProps = {
     children: React.ReactNode;
@@ -9,9 +9,9 @@ type CardTotalProps = {
     isDark: boolean,
 }
 
-const CardTotal: React.FC<CardTotalProps> = ({ children, label, total, isDark}) => {
+const CardTotal: React.FC<CardTotalProps> = ({ children, label, total, isDark }) => {
     return (
-        <div className={`p-5 rounded-3xl shadow-lg backdrop-blur-xl flex justify-between gap-5 items-center
+        <div className={`p-5 rounded-3xl shadow-lg backdrop-blur-xl flex justify-between gap-5 items-center md:min-w-[300px]
             ${isDark
                 ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                 : "bg-white/90"
