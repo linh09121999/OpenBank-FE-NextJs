@@ -25,6 +25,7 @@ import GoogleMapComponent from "@/components/GoogleMapComponent ";
 import { useStateBranch } from "@/zustand/useStateBranches";
 import { GetBranchesforaBank } from "@/services/Branch/service";
 import { ResBranch } from "@/types/Branch/response";
+import DoughnutChart from "@/components/ChartDoughNut";
 
 
 const Home: React.FC = () => {
@@ -265,6 +266,27 @@ const Home: React.FC = () => {
   return (
     <>
       <div className={`grid  gap-5 ${resCustomerForCurrentUser.length > 0 ? "md:grid-cols-4" : "md:grid-cols-3"}`}>
+        <div className={`md:col-span-3 md:col-start-1 md:row-start-1  
+          ${bankMap.length === 1
+            ? "grid-cols-1 grid"
+            : bankMap.length === 2
+              ? "grid-cols-2 grid"
+              : bankMap.length === 3
+                ? "grid-cols-3 grid"
+                : "flex"} 
+            gap-5 md:max-h-[64.5vh] overflow-x-auto scroll-x`}>
+          {bankMap.map((bank) => {
+            const totalBalance = bank.accounts
+              .flatMap(acc => acc.balances)
+              .reduce((sum, b) => sum + Number(b.amount || 0), 0)
+
+            const currency = bank.accounts?.[0]?.balances?.[0]?.currency ?? ""
+
+            return (
+              <CardBank position="md:min-h-[25vh] min-w-[450px] flex flex-col" isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} onToggle={() => { }} />
+            )
+          })}
+        </div>
         {[
           {
             total:
@@ -413,12 +435,12 @@ const Home: React.FC = () => {
             <CardTotal key={`${label}_${total}`} children={icon} isDark={isDark} label={label} total={total} />
           )
         })}
-        <div className={`md:col-span-2 md:col-start-1 md:row-start-2 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+        <div className={`md:col-span-2 md:col-start-1 md:row-start-3 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
             ${isDark
             ? "bg-white/5 text-white border border-white/10 shadow-white/5"
             : "bg-white/90"
           }`}>
-          <label htmlFor="balanceChart" className="text-2xl">Your Balance Summary</label>
+          <label htmlFor="balanceChart" className="text-2xl">Your Transaction Summary</label>
           <ChartMultiLine
             stepSize={100}
             label={label}
@@ -431,22 +453,23 @@ const Home: React.FC = () => {
             donvi={""}
             isDark={isDark} />
         </div>
-        <div className="md:col-span-1 md:col-start-3 md:row-start-2 grid gap-5 md:max-h-[64.5vh] overflow-y-auto scroll-y">
-          {bankMap.map((bank) => {
-            const totalBalance = bank.accounts
-              .flatMap(acc => acc.balances)
-              .reduce((sum, b) => sum + Number(b.amount || 0), 0)
-
-            const currency = bank.accounts?.[0]?.balances?.[0]?.currency ?? ""
-
-            return (
-              <CardBank position="md:min-h-[25vh] flex flex-col" isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} onToggle={() => { }} />
-            )
-          })}
+        <div className={`md:col-span-1 md:col-start-3 md:row-start-3 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+                            ${isDark
+            ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+            : "bg-white/90"}`}>
+          <label htmlFor="balanceChartDoughnut" className="text-2xl">Transaction rate</label>
+          <DoughnutChart
+            isDark={isDark}
+            labels={["Deposits", "Withdrawals"]}
+            backgroundColor={["#05df72", "#ff8904"]}
+            data={[summary.totalDeposits, summary.totalWithdrawals]}
+            cutout="80%"
+            value={summary.totalDeposits + summary.totalWithdrawals}
+            donvi="EUR"
+          />
         </div>
-
         {resBranch.length > 0 &&
-          <div className={`md:col-span-3 md:col-start-1 md:row-start-3 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 
+          <div className={`md:col-span-3 md:col-start-1 md:row-start-4 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 
             ${isDark
               ? "bg-white/5 text-white border border-white/10 shadow-white/5"
               : "bg-white/90"

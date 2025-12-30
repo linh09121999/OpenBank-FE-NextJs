@@ -109,8 +109,8 @@ export interface ResHistoricalTransactions {
 }
 
 export interface ResTransactionRequest {
-    id: string;
-    type: string;
+    transaction_request_id: string;
+    transaction_request_type: string;
     from: AccountMinimal;
     details: TransactionRequestChallengeDetails;
     transaction_ids: string[];

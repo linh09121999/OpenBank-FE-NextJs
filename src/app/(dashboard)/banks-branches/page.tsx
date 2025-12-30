@@ -173,7 +173,7 @@ const Banks_BranchesPage: React.FC = () => {
     return (
         <>
             <div className="grid md:grid-cols-3 gap-5">
-                <div className={`md:col-span-2 md:col-start-1 md:row-start-1 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+                <div className={`${resBranch.length > 0 ? "md:col-span-2":"md:col-span-3"}  md:col-start-1 md:row-start-1 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
             ${isDark
                         ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                         : "bg-white/90"
