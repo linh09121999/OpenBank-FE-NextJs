@@ -70,9 +70,8 @@ const CardBank: React.FC<CardBankProps> = ({ isDark, bank, totalBalance, currenc
             <div
                 className="
     pointer-events-none
-    absolute bottom-6 right-6
-    opacity-0 translate-x-2 translate-y-2
-    group-hover:opacity-100
+    absolute bottom-9 right-9
+    translate-x-2 translate-y-2
     group-hover:translate-x-0
     group-hover:translate-y-0
     transition-all duration-300 ease-out
@@ -86,7 +85,7 @@ const CardBank: React.FC<CardBankProps> = ({ isDark, bank, totalBalance, currenc
       shadow-lg
     `}
                 >
-                    <Button onToggle={onToggle} radius="rounded-full" padding="p-1" fontSize="text-2xl">
+                    <Button onToggle={onToggle} radius="rounded-full" padding="p-2" fontSize="text-2xl">
                         <FaArrowRight />
                     </Button>
 

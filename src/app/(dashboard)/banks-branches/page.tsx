@@ -179,7 +179,7 @@ const Banks_BranchesPage: React.FC = () => {
                         : "bg-white/90"
                     }`}>
                     <div className="flex justify-between items-center">
-                        <label htmlFor="branch" className="text-2xl">My Branches</label>
+                        <label htmlFor="branch" className="text-2xl">Your Branches</label>
                         <div className="flex gap-5">
                             <Button onToggle={() => { }} padding="py-2 px-3" radius="rounded-xl" display="flex gap-1 items-center" fontSize="text-md">
                                 <MdAdd />
