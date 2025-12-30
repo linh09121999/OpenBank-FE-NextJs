@@ -26,7 +26,7 @@ import Button from "@/components/button";
 DataTable.use(DT);
 (window as any).JSZip = JSZip;
 
-const Banks_BranchesPage: React.FC = () => {
+const BranchesPage: React.FC = () => {
     const router = useRouter()
     const { setActiveSection, bankViewItems, setBankViewItems,
         isDark, setIsDark, setLoading
@@ -164,7 +164,7 @@ const Banks_BranchesPage: React.FC = () => {
     }, [columns, options]);
 
     useEffect(() => {
-        setActiveSection('banks-branches')
+        setActiveSection('branches')
         getUser_Current()
     }, [])
 
@@ -221,7 +221,7 @@ const Banks_BranchesPage: React.FC = () => {
                             ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                             : "bg-white/90"
                         }`}>
-                        <GoogleMapComponent height="100%" data={resBranch} index={centerIndexMap} zoom={centerIndexMap === null ? 4 : 15} />
+                        <GoogleMapComponent height="100%" data={resBranch} index={centerIndexMap} zoom={centerIndexMap === null ? 5 : 15} />
                     </div>
                 }
 
@@ -230,4 +230,4 @@ const Banks_BranchesPage: React.FC = () => {
     )
 }
 
-export default Banks_BranchesPage
+export default BranchesPage

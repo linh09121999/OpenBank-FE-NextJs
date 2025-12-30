@@ -74,9 +74,9 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({
         <>
             <div className="flex flex-col items-center relative w-60 m-auto">
                 <Doughnut data={chartData} options={options} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
-                    <p className="text-xl font-bold text-white">{value}</p>
-                    <p className="text-lg text-white/70 max-sm:text-sm">{donvi}</p>
+                <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none ${isDark ? "text-white" : "text-black"}`}>
+                    <p className={`text-xl font-bold `}>{value}</p>
+                    <p className={`text-lg opacity-70 max-sm:text-sm`}>{donvi}</p>
                 </div>
             </div>
             <div className="justify-center flex ">

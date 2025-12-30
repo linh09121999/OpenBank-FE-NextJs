@@ -25,7 +25,6 @@ const CardBank: React.FC<CardBankProps> = ({ isDark, bank, totalBalance, currenc
                     : "bg-white border border-neutral-200"}
       `}
         >
-
             <div className="flex items-center gap-4">
                 <div className={`h-24 w-24 rounded-2xl
            flex items-center justify-center shadow-md

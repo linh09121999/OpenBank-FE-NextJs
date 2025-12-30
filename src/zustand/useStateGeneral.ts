@@ -63,17 +63,17 @@ export const useStateGeneral = create<State>((set, get) => ({
             icon: MdOutlineDashboard
         },
         {
-            id: 'banks-branches',
-            label: 'Banks & Branches',
-            path: '/banks-branches',
+            id: 'banks-accounts',
+            label: 'Banks & Accounts',
+            path: '/banks-accounts',
             badge: 'New',
             icon: RiBankLine
         },
         {
-            id: 'accounts',
-            label: 'Accounts',
-            path: '/accounts',
-            icon: MdOutlineManageAccounts
+            id: 'branches',
+            label: 'Branches',
+            path: '/branches',
+            icon: PiGitBranch
         },
         {
             id: 'transactions',
