@@ -2,8 +2,6 @@
 
 import React, { useEffect, useMemo, useState } from "react"
 
-import { format, parse } from 'date-fns'
-import { vi, enUS } from 'date-fns/locale'
 import DataTable from 'datatables.net-react';
 import DT from 'datatables.net-dt';
 import 'datatables.net-buttons-dt/css/buttons.dataTables.css';
@@ -40,7 +38,6 @@ const Banks_BranchesPage: React.FC = () => {
         try {
             setLoading(true)
             const res = await GetBranchesforaBank(bank_id)
-            // setResBranch((prev) => [...prev, ...res.data.branches])
             setResBranch(prev => {
                 const newItem = res.data.branches.filter(
                     (item: ResBranch) => !prev.some(p => p.id === item.id)
@@ -87,7 +84,6 @@ const Banks_BranchesPage: React.FC = () => {
             setResGetUserCurrent(res.data)
             const listView = res.data.views.list
             const listGroup = getUniqueAccounts(listView)
-            setBankViewItems(listGroup)
             for (const item of listGroup) {
                 await getBranchesForABank(item.bank_id)
             }
@@ -225,7 +221,7 @@ const Banks_BranchesPage: React.FC = () => {
                             ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                             : "bg-white/90"
                         }`}>
-                        <GoogleMapComponent data={resBranch} index={centerIndexMap} zoom={centerIndexMap === null ? 4 : 15} />
+                        <GoogleMapComponent height="100%" data={resBranch} index={centerIndexMap} zoom={centerIndexMap === null ? 4 : 15} />
                     </div>
                 }
 

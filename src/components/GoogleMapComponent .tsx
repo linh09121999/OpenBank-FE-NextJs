@@ -2,20 +2,21 @@
 import { ResBranch } from "@/types/Branch/response";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
-const containerStyle = {
-    width: "100%",
-    height: "100%",
-    borderRadius: 'var(--radius-3xl)'
-};
-
-
 type GoogleMapComponentProp = {
     data: ResBranch[];
     index: number | null;
-    zoom: number
+    zoom: number;
+    height: string
 }
 
-const GoogleMapComponent: React.FC<GoogleMapComponentProp> = ({ data, index, zoom }) => {
+const GoogleMapComponent: React.FC<GoogleMapComponentProp> = ({ data, index, zoom, height }) => {
+    const containerStyle = {
+        width: "100%",
+        height: `${height}`,
+        borderRadius: height === '100%' ? 'var(--radius-3xl)' : 'var(--radius-xl)',
+        border: 'none'
+    };
+
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
     });

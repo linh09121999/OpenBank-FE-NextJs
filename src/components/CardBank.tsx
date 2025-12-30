@@ -9,16 +9,16 @@ type CardBankProps = {
     bank: BankMap;
     totalBalance: any;
     currency: any;
-    onToggle: () => void
+    onToggle: () => void;
+    position: string;
 }
 
-const CardBank: React.FC<CardBankProps> = ({ isDark, bank, totalBalance, currency, onToggle }) => {
+const CardBank: React.FC<CardBankProps> = ({ isDark, bank, totalBalance, currency, onToggle, position }) => {
     return (
         <div
             className={`
         group relative overflow-hidden
-        p-6 rounded-3xl md:min-h-[25vh]
-        flex flex-col justify-between gap-6
+        p-6 rounded-3xl ${position}  justify-between gap-6
         transition-all duration-300
         ${isDark
                     ? "bg-white/5 border border-white/10 backdrop-blur-xl text-white"
