@@ -318,162 +318,172 @@ const TransactionRequestsPage: React.FC = () => {
 
     return (
         <>
-            <div className={`grid  gap-5 md:grid-cols-7`}>
-                <div className="md:col-span-7 md:row-start-1 flex gap-5 overflow-x-auto scroll-x pb-1">
-                    {[
-                        {
-                            total:
-                                <>
-                                    {summary_SANDBOX_TAN.total.toLocaleString()}
-                                    <span className="text-lg font-medium opacity-70">
-                                        EUR
-                                    </span>
-                                </>
-                            , label: "SANDBOX_TAN", icon: <></>
-                        },
-                        {
-                            total:
-                                <>
-                                    {summary_SEPA.total.toLocaleString()}
-                                    <span className="text-lg font-medium opacity-70">
-                                        EUR
-                                    </span>
-                                </>
-                            , label: "SEPA", icon: <></>
-                        },
-                        {
-                            total:
-                                <>
-                                    {summary_FREE_FORM.total.toLocaleString()}
-                                    <span className="text-lg font-medium opacity-70">
-                                        EUR
-                                    </span>
-                                </>, label: "FREE_FORM", icon: <></>
-                        },
-                        {
-                            total:
-                                <>
-                                    {summary_COUNTERPARTY.total.toLocaleString()}
-                                    <span className="text-lg font-medium opacity-70">
-                                        EUR
-                                    </span>
-                                </>
-                            , label: "COUNTERPARTY", icon: <></>
-                        },
-                        {
-                            total:
-                                <>
-                                    {summary_ACCOUNT_OTP.total.toLocaleString()}
-                                    <span className="text-lg font-medium opacity-70">
-                                        EUR
-                                    </span>
-                                </>
-                            , label: "ACCOUNT_OTP", icon: <></>
-                        },
-                        {
-                            total:
-                                <>
-                                    {summary_ACCOUNT.total.toLocaleString()}
-                                    <span className="text-lg font-medium opacity-70">
-                                        EUR
-                                    </span>
-                                </>
-                            , label: "ACCOUNT", icon: <></>
-                        },
-                        {
-                            total:
-                                <>
-                                    {summary_SIMPLE.total.toLocaleString()}
-                                    <span className="text-lg font-medium opacity-70">
-                                        EUR
-                                    </span>
-                                </>
-                            , label: "SIMPLE", icon: <></>
-                        }
-                    ].map(({ total, label, icon }) => {
-                        return (
-                            <CardTotal key={`${label}_${total}`} children={icon} isDark={isDark} label={label} total={total} />
-                        )
-                    })}
-                </div>
-                <div className={`md:col-span-2 md:col-start-1 md:row-start-2 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
-            ${isDark
-                        ? "bg-white/5 text-white border border-white/10 shadow-white/5"
-                        : "bg-white/90"
-                    }`}>
-                    <div className="flex justify-between items-center">
-                        <label htmlFor="transactionRequestChartDoughnut" className="text-2xl">Transaction request Rate</label>
-                        <button>Filter</button>
+            {resTransactionRequest.length > 0
+                ? <div className={`grid  gap-5 md:grid-cols-3`}>
+                    <div className="md:col-span-3 md:row-start-1 flex gap-5 overflow-x-auto scroll-x pb-1">
+                        {[
+                            {
+                                total:
+                                    <>
+                                        {summary_SANDBOX_TAN.total.toLocaleString()}
+                                        <span className="text-lg font-medium opacity-70">
+                                            EUR
+                                        </span>
+                                    </>
+                                , label: "SANDBOX_TAN", icon: <></>
+                            },
+                            {
+                                total:
+                                    <>
+                                        {summary_SEPA.total.toLocaleString()}
+                                        <span className="text-lg font-medium opacity-70">
+                                            EUR
+                                        </span>
+                                    </>
+                                , label: "SEPA", icon: <></>
+                            },
+                            {
+                                total:
+                                    <>
+                                        {summary_FREE_FORM.total.toLocaleString()}
+                                        <span className="text-lg font-medium opacity-70">
+                                            EUR
+                                        </span>
+                                    </>, label: "FREE_FORM", icon: <></>
+                            },
+                            {
+                                total:
+                                    <>
+                                        {summary_COUNTERPARTY.total.toLocaleString()}
+                                        <span className="text-lg font-medium opacity-70">
+                                            EUR
+                                        </span>
+                                    </>
+                                , label: "COUNTERPARTY", icon: <></>
+                            },
+                            {
+                                total:
+                                    <>
+                                        {summary_ACCOUNT_OTP.total.toLocaleString()}
+                                        <span className="text-lg font-medium opacity-70">
+                                            EUR
+                                        </span>
+                                    </>
+                                , label: "ACCOUNT_OTP", icon: <></>
+                            },
+                            {
+                                total:
+                                    <>
+                                        {summary_ACCOUNT.total.toLocaleString()}
+                                        <span className="text-lg font-medium opacity-70">
+                                            EUR
+                                        </span>
+                                    </>
+                                , label: "ACCOUNT", icon: <></>
+                            },
+                            {
+                                total:
+                                    <>
+                                        {summary_SIMPLE.total.toLocaleString()}
+                                        <span className="text-lg font-medium opacity-70">
+                                            EUR
+                                        </span>
+                                    </>
+                                , label: "SIMPLE", icon: <></>
+                            }
+                        ].map(({ total, label, icon }) => {
+                            return (
+                                <CardTotal key={`${label}_${total}`} children={icon} isDark={isDark} label={label} total={total} />
+                            )
+                        })}
                     </div>
-                    <ChartDoughnut
-                        donvi="EUR"
-                        isDark={isDark}
-                        labels={["SANDBOX_TAN", "SEPA", "FREE_FORM", "COUNTERPARTY", "ACCOUNT_OTP", "ACCOUNT", "SIMPLE"]}
-                        data={[
-                            summary_SANDBOX_TAN.total,
-                            summary_SEPA.total,
-                            summary_FREE_FORM.total,
-                            summary_COUNTERPARTY.total,
-                            summary_ACCOUNT_OTP.total,
-                            summary_ACCOUNT.total,
-                            summary_SIMPLE.total
-                        ]}
-                        backgroundColor={["#05df72", "#00BFFF", "#4B0082", "#8A2BE2", "#FF0000", "#FFA500", "#FFFF00"]}
-                        value={valueDoughnutCenter}
-                        cutout="80%"
-                    />
-                </div>
-                <div className={`md:col-span-5 md:col-start-3 md:row-start-2 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+                    <div className={`md:col-span-1 md:col-start-1 md:row-start-2 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
             ${isDark
-                        ? "bg-white/5 text-white border border-white/10 shadow-white/5"
-                        : "bg-white/90"
-                    }`}>
-                    <div className="flex justify-between items-center">
-                        <label htmlFor="transactionRequestChartDoughnut" className="text-2xl"></label>
-                        <button>Filter</button>
+                            ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+                            : "bg-white/90"
+                        }`}>
+                        <div className="flex justify-between items-center">
+                            <label htmlFor="transactionRequestChartDoughnut" className="text-2xl">Transaction request Rate</label>
+                            <button>Filter</button>
+                        </div>
+                        <ChartDoughnut
+                            donvi="EUR"
+                            isDark={isDark}
+                            labels={["SANDBOX_TAN", "SEPA", "FREE_FORM", "COUNTERPARTY", "ACCOUNT_OTP", "ACCOUNT", "SIMPLE"]}
+                            data={[
+                                summary_SANDBOX_TAN.total,
+                                summary_SEPA.total,
+                                summary_FREE_FORM.total,
+                                summary_COUNTERPARTY.total,
+                                summary_ACCOUNT_OTP.total,
+                                summary_ACCOUNT.total,
+                                summary_SIMPLE.total
+                            ]}
+                            backgroundColor={["#05df72", "#00BFFF", "#4B0082", "#8A2BE2", "#FF0000", "#FFA500", "#FFFF00"]}
+                            value={valueDoughnutCenter}
+                            cutout="80%"
+                        />
                     </div>
-                </div>
-                <div className={`md:col-span-7 md:col-start-1 md:row-start-3 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+                    <div className={`md:col-span-2 md:col-start-2 md:row-start-2 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
             ${isDark
-                        ? "bg-white/5 text-white border border-white/10 shadow-white/5"
-                        : "bg-white/90"
-                    }`}>
-                    <div className="flex justify-between items-center">
-                        <label htmlFor="transactionRequest" className="text-2xl">Transaction request</label>
-                        <div className="flex gap-5">
-                            <Button onToggle={() => { }} padding="py-2 px-3" radius="rounded-xl" display="flex gap-1 items-center" fontSize="text-md">
-                                <MdAdd />
-                                Add
-                            </Button>
+                            ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+                            : "bg-white/90"
+                        }`}>
+                        <div className="flex justify-between items-center">
+                            <label htmlFor="transactionRequestChartDoughnut" className="text-2xl"></label>
                             <button>Filter</button>
                         </div>
                     </div>
-                    <div className="grid w-full">
-                        <DataTable
-                            id="my-datatable" className='m-2'
-                            key={tableKey}
-                            data={resTransactionRequest}
-                            columns={columns}
-                            options={{
-                                ...options,
-                                rowCallback: (row, data, index) => {
-                                    row.style.cursor = "pointer";
-                                    row.onclick = () => {
-                                        const table = document.getElementById("my-datatable");
-                                        table?.querySelectorAll("tr").forEach((tr) => {
-                                            tr.style.border = ""; // reset border
-                                        });
+                    <div className={`md:col-span-3 md:col-start-1 md:row-start-3 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+            ${isDark
+                            ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+                            : "bg-white/90"
+                        }`}>
+                        <div className="flex justify-between items-center">
+                            <label htmlFor="transactionRequest" className="text-2xl">Transaction request</label>
+                            <div className="flex gap-5">
+                                <Button onToggle={() => { }} padding="py-2 px-3" radius="rounded-xl" display="flex gap-1 items-center" fontSize="text-md">
+                                    <MdAdd />
+                                    Add
+                                </Button>
+                                <button>Filter</button>
+                            </div>
+                        </div>
+                        <div className="grid w-full">
+                            <DataTable
+                                id="my-datatable" className='m-2'
+                                key={tableKey}
+                                data={resTransactionRequest}
+                                columns={columns}
+                                options={{
+                                    ...options,
+                                    rowCallback: (row, data, index) => {
+                                        row.style.cursor = "pointer";
+                                        row.onclick = () => {
+                                            const table = document.getElementById("my-datatable");
+                                            table?.querySelectorAll("tr").forEach((tr) => {
+                                                tr.style.border = ""; // reset border
+                                            });
 
-                                        // Thêm border cho row vừa click
-                                        row.style.border = "2px dashed var(--color-green-500)"; // màu đỏ ví dụ
-                                        row.style.borderRadius = "4px";
-                                    };
-                                },
-                            }}
-                        />
+                                            // Thêm border cho row vừa click
+                                            row.style.border = "2px dashed var(--color-green-500)"; // màu đỏ ví dụ
+                                            row.style.borderRadius = "4px";
+                                        };
+                                    },
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
+                : <div className="flex flex-col gap-5">
+                    <img src="..//NoPng/World_map_green.png" alt="no cerdit" className="w-[600px] opacity-50 mx-auto" />
+                    <div>
+                        <p className="text-center text-gray-500 text-md">There are no transaction requirements</p>
+                        <p className="text-center text-gray-500 text-sm">You will need to create a new delivery request.</p>
+                    </div>
+                    <Button onToggle={() => { }} padding="py-2 px-3" radius="rounded-xl" display="flex gap-1 items-center" fontSize="text-md"><MdAdd /> Add transaction request</Button>
+                </div>
+            }
         </>
     )
 }

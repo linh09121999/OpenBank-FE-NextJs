@@ -139,7 +139,7 @@ const Home: React.FC = () => {
   }
 
   const bankMap = useMemo(() => {
-    const balanceMap = new Map<string, any[]>()
+    const balanceMap = new Map<string, ResAccountBalancesbyBANK_ID[]>()
     const viewMap = new Map<string, any[]>()
 
     resAccountBlancesByBankID.forEach((acc) => {
@@ -202,6 +202,7 @@ const Home: React.FC = () => {
       setResGetUserCurrent(res.data)
       const listView = res.data.views.list
       const listGroup = getUniqueAccounts(listView)
+      console.log(listGroup)
       setBankViewItems(listGroup)
       for (const item of listGroup) {
         await getAccountBalancesByBankID(item.bank_id)
@@ -279,11 +280,10 @@ const Home: React.FC = () => {
             const totalBalance = bank.accounts
               .flatMap(acc => acc.balances)
               .reduce((sum, b) => sum + Number(b.amount || 0), 0)
-
             const currency = bank.accounts?.[0]?.balances?.[0]?.currency ?? ""
 
             return (
-              <CardBank position="md:min-h-[25vh] min-w-[450px] flex flex-col" isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} onToggle={() => { }} />
+              <CardBank position=" min-w-[450px] flex flex-col" isDark={isDark} bank={bank} totalBalance={totalBalance} currency={currency} onToggle={() => { }} />
             )
           })}
         </div>

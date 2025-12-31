@@ -172,60 +172,70 @@ const BranchesPage: React.FC = () => {
 
     return (
         <>
-            <div className="grid md:grid-cols-3 gap-5">
-                <div className={`${resBranch.length > 0 ? "md:col-span-2":"md:col-span-3"}  md:col-start-1 md:row-start-1 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
-            ${isDark
-                        ? "bg-white/5 text-white border border-white/10 shadow-white/5"
-                        : "bg-white/90"
-                    }`}>
-                    <div className="flex justify-between items-center">
-                        <label htmlFor="branch" className="text-2xl">Your Branches</label>
-                        <div className="flex gap-5">
-                            <Button onToggle={() => { }} padding="py-2 px-3" radius="rounded-xl" display="flex gap-1 items-center" fontSize="text-md">
-                                <MdAdd />
-                                Add Branch
-                            </Button>
-                            <button>Filter</button>
-                        </div>
-
-                    </div>
-                    <div className="grid w-full">
-                        <DataTable
-                            id="my-datatable" className='m-2'
-                            key={tableKey}
-                            data={resBranch}
-                            columns={columns}
-                            options={{
-                                ...options,
-                                rowCallback: (row, data, index) => {
-                                    row.style.cursor = "pointer";
-                                    row.onclick = () => {
-                                        const table = document.getElementById("my-datatable");
-                                        table?.querySelectorAll("tr").forEach((tr) => {
-                                            tr.style.border = ""; // reset border
-                                        });
-
-                                        // Thêm border cho row vừa click
-                                        row.style.border = "2px dashed var(--color-green-500)"; // màu đỏ ví dụ
-                                        row.style.borderRadius = "4px";
-                                        setCenterIndexMap(index)
-                                    };
-                                },
-                            }}
-                        />
-                    </div>
-                </div>
-                {resBranch.length > 0 &&
-                    <div className={`md:col-span-1 md:col-start-3 md:row-start-1 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+            {resBranch.length > 0
+                ? <div className="grid md:grid-cols-3 gap-5">
+                    <div className={`${resBranch.length > 0 ? "md:col-span-2" : "md:col-span-3"}  md:col-start-1 md:row-start-1 p-5 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
             ${isDark
                             ? "bg-white/5 text-white border border-white/10 shadow-white/5"
                             : "bg-white/90"
                         }`}>
-                        <GoogleMapComponent height="100%" data={resBranch} index={centerIndexMap} zoom={centerIndexMap === null ? 5 : 15} />
-                    </div>
-                }
+                        <div className="flex justify-between items-center">
+                            <label htmlFor="branch" className="text-2xl">Your Branches</label>
+                            <div className="flex gap-5">
+                                <Button onToggle={() => { }} padding="py-2 px-3" radius="rounded-xl" display="flex gap-1 items-center" fontSize="text-md">
+                                    <MdAdd />
+                                    Add Branch
+                                </Button>
+                                <button>Filter</button>
+                            </div>
 
-            </div>
+                        </div>
+                        <div className="grid w-full">
+                            <DataTable
+                                id="my-datatable" className='m-2'
+                                key={tableKey}
+                                data={resBranch}
+                                columns={columns}
+                                options={{
+                                    ...options,
+                                    rowCallback: (row, data, index) => {
+                                        row.style.cursor = "pointer";
+                                        row.onclick = () => {
+                                            const table = document.getElementById("my-datatable");
+                                            table?.querySelectorAll("tr").forEach((tr) => {
+                                                tr.style.border = ""; // reset border
+                                            });
+
+                                            // Thêm border cho row vừa click
+                                            row.style.border = "2px dashed var(--color-green-500)"; // màu đỏ ví dụ
+                                            row.style.borderRadius = "4px";
+                                            setCenterIndexMap(index)
+                                        };
+                                    },
+                                }}
+                            />
+                        </div>
+                    </div>
+                    {resBranch.length > 0 &&
+                        <div className={`md:col-span-1 md:col-start-3 md:row-start-1 rounded-3xl shadow-lg backdrop-blur-xl flex flex-col gap-5 justify-between gap-5
+            ${isDark
+                                ? "bg-white/5 text-white border border-white/10 shadow-white/5"
+                                : "bg-white/90"
+                            }`}>
+                            <GoogleMapComponent height="100%" data={resBranch} index={centerIndexMap} zoom={centerIndexMap === null ? 5 : 15} />
+                        </div>
+                    }
+
+                </div>
+                : <div className="flex flex-col gap-5">
+                    <img src="..//NoPng/World_map_green.png" alt="no cerdit" className="w-[600px] opacity-50 mx-auto" />
+                    <div>
+                        <p className="text-center text-gray-500 text-md">There are no branches</p>
+                        <p className="text-center text-gray-500 text-sm">You will need to create a new branch.</p>
+                    </div>
+                    <Button onToggle={() => { }} padding="py-2 px-3" radius="rounded-xl" display="flex gap-1 items-center" fontSize="text-md"><MdAdd /> Add branch</Button>
+                </div>
+            }
         </>
     )
 }

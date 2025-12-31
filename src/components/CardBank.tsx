@@ -26,44 +26,34 @@ const CardBank: React.FC<CardBankProps> = ({ isDark, bank, totalBalance, currenc
       `}
         >
             <div className="flex items-center gap-4">
-                <div className={`h-24 w-24 rounded-2xl
+                <div className={`h-36 w-36 rounded-2xl
            flex items-center justify-center shadow-md
           group-hover:scale-105 transition
           ${isDark ? 'bg-white/80' : 'bg-white/80'}`}>
                     <img
                         src={bank.logo}
                         alt={bank.full_name}
-                        className="h-21 w-21 object-contain"
+                        className="h-full w-full object-contain"
                     />
                 </div>
-
-                <div className="flex flex-col gap-1">
-                    <h2 className="text-2xl font-semibold leading-tight">
+                <div className="flex flex-col gap-5">
+                    <h2 className="text-3xl font-semibold leading-tight uppercase">
                         {bank.full_name}
                     </h2>
+                    <div className="">
+                        <p className={`text-sm ${isDark ? "text-white/60" : "text-neutral-500"}`}>
+                            Total Balance
+                        </p>
 
-                    <div className="flex flex-wrap gap-1">
-                        {bank.views.map(view =>
-                            view.view_ids.map((v: string) => (
-                                <Badge key={`${view.account_id}-${v}`} badge={v} isDark={isDark} />
-                            ))
-                        )}
+                        <div className="flex items-end gap-2">
+                            <span className="text-4xl tracking-tight">
+                                {totalBalance.toLocaleString()}
+                            </span>
+                            <span className="text-lg font-medium opacity-70">
+                                {currency}
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div className="">
-                <p className={`text-sm ${isDark ? "text-white/60" : "text-neutral-500"}`}>
-                    Total Balance
-                </p>
-
-                <div className="flex items-end gap-2">
-                    <span className="text-4xl tracking-tight">
-                        {totalBalance.toLocaleString()}
-                    </span>
-                    <span className="text-lg font-medium opacity-70">
-                        {currency}
-                    </span>
                 </div>
             </div>
             <div
